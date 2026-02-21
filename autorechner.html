@@ -239,7 +239,21 @@ header{
   line-height:1;
   margin-bottom:4px;
 }
-.card-title span{color:#e8ff00}
+.card-title .swap-icon{
+  display:inline-block;
+  width:22px;
+  height:16px;
+  vertical-align:middle;
+  margin:0 5px;
+}
+.card-title .swap-icon line,
+.card-title .swap-icon polyline{
+  stroke:#e8ff00;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+}
 .card-subtitle{
   font-family:'Barlow Condensed',sans-serif;
   font-size:clamp(18px,2.2vw,22px);
@@ -256,6 +270,25 @@ header{
   color:rgba(240,240,240,0.22);
   margin-top:14px;
   text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+}
+.fn-arrow{
+  display:inline-block;
+  width:16px;
+  height:11px;
+  vertical-align:middle;
+  margin:0 4px;
+}
+.fn-arrow line,
+.fn-arrow polyline{
+  stroke:rgba(232,255,0,0.3);
+  stroke-width:1.3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
 }
 
 /* ─────────────────────────────────────────
@@ -802,7 +835,7 @@ footer{
 
     <!-- CARD A — kW ↔ PS (Motorenleistung) -->
     <div class="card" data-index="1" aria-label="Leistung kW und PS">
-      <div class="card-title">kW <span>·</span> PS</div>
+      <div class="card-title">kW <svg class="swap-icon" viewBox="0 0 20 14"><line x1="2" y1="4" x2="17" y2="4"/><polyline points="14,1 17,4 14,7"/><line x1="18" y1="10" x2="3" y2="10"/><polyline points="6,7 3,10 6,13"/></svg> PS</div>
       <div class="card-subtitle">Motorenleistung</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -831,12 +864,12 @@ footer{
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')" aria-label="300 PS">300 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')" aria-label="500 PS">500 PS</button>
       </div>
-      <div class="card-footnote">Kilowatt · Pferdestärke</div>
+      <div class="card-footnote">Kilowatt <svg class="fn-arrow" viewBox="0 0 20 14"><line x1="2" y1="4" x2="17" y2="4"/><polyline points="14,1 17,4 14,7"/><line x1="18" y1="10" x2="3" y2="10"/><polyline points="6,7 3,10 6,13"/></svg> Pferdestärke</div>
     </div>
 
     <!-- CARD B — km/h ↔ mph (Geschwindigkeit) -->
     <div class="card" data-index="2" aria-label="Geschwindigkeit km/h und mph">
-      <div class="card-title">km/h <span>·</span> mph</div>
+      <div class="card-title">km/h <svg class="swap-icon" viewBox="0 0 20 14"><line x1="2" y1="4" x2="17" y2="4"/><polyline points="14,1 17,4 14,7"/><line x1="18" y1="10" x2="3" y2="10"/><polyline points="6,7 3,10 6,13"/></svg> mph</div>
       <div class="card-subtitle">Geschwindigkeit</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -865,12 +898,12 @@ footer{
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')" aria-label="100 mph">100 mph</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')" aria-label="200 mph">200 mph</button>
       </div>
-      <div class="card-footnote">Kilometer pro Stunde · Miles per hour</div>
+      <div class="card-footnote">Kilometer pro Stunde <svg class="fn-arrow" viewBox="0 0 20 14"><line x1="2" y1="4" x2="17" y2="4"/><polyline points="14,1 17,4 14,7"/><line x1="18" y1="10" x2="3" y2="10"/><polyline points="6,7 3,10 6,13"/></svg> Miles per hour</div>
     </div>
 
     <!-- CARD C — Nm ↔ lb-ft (Drehmoment) -->
     <div class="card" data-index="3" aria-label="Drehmoment Nm und lb-ft">
-      <div class="card-title">Nm <span>·</span> lb-ft</div>
+      <div class="card-title">Nm <svg class="swap-icon" viewBox="0 0 20 14"><line x1="2" y1="4" x2="17" y2="4"/><polyline points="14,1 17,4 14,7"/><line x1="18" y1="10" x2="3" y2="10"/><polyline points="6,7 3,10 6,13"/></svg> lb-ft</div>
       <div class="card-subtitle">Drehmoment</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -899,7 +932,7 @@ footer{
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
       </div>
-      <div class="card-footnote">Newtonmeter · Pound-Foot</div>
+      <div class="card-footnote">Newtonmeter <svg class="fn-arrow" viewBox="0 0 20 14"><line x1="2" y1="4" x2="17" y2="4"/><polyline points="14,1 17,4 14,7"/><line x1="18" y1="10" x2="3" y2="10"/><polyline points="6,7 3,10 6,13"/></svg> Pound-Foot</div>
     </div>
 
   </div><!-- /pinned-grid -->
