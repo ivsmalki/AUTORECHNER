@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -192,6 +192,10 @@ header{
   border-color:rgba(232,255,0,0.18);
   box-shadow:0 8px 40px rgba(232,255,0,0.06), 0 2px 12px rgba(0,0,0,0.4);
 }
+.card:has(.cdd.open){
+  overflow:visible;
+  z-index:70;
+}
 
 /* SHIMMER SWEEP */
 .card::after{
@@ -242,12 +246,21 @@ header{
 }
 .card-title span{color:#e8ff00}
 .card-subtitle{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.12em;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(18px,2.2vw,22px);
+  font-weight:700;
+  letter-spacing:0.06em;
   text-transform:uppercase;
-  color:rgba(240,240,240,0.35);
+  color:rgba(240,240,240,0.55);
   margin-bottom:22px;
+}
+.card-footnote{
+  font-size:9px;
+  font-weight:400;
+  letter-spacing:0.08em;
+  color:rgba(240,240,240,0.22);
+  margin-top:14px;
+  text-align:center;
 }
 
 /* ─────────────────────────────────────────
@@ -420,11 +433,17 @@ header{
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   overflow:hidden;
-  transition:border-color 0.3s, box-shadow 0.3s;
+  transition:border-color 0.3s, box-shadow 0.3s, overflow 0s 0.5s;
 }
 .accordion-item.open{
   border-color:rgba(232,255,0,0.18);
   box-shadow:0 4px 32px rgba(232,255,0,0.05);
+  overflow:visible;
+  transition:border-color 0.3s, box-shadow 0.3s, overflow 0s 0s;
+}
+.accordion-item:has(.cdd.open){
+  z-index:70;
+  position:relative;
 }
 .accordion-header{
   display:flex;
@@ -484,59 +503,153 @@ header{
 .accordion-body{
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1);
+  transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1), overflow 0s 0.5s;
 }
 .accordion-item.open .accordion-body{
-  max-height:400px;
+  max-height:800px;
+  overflow:visible;
+  transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1), overflow 0s 0s;
 }
 .accordion-inner{
   padding:0 24px 24px;
+  position:relative;
 }
 
 /* SELECT ROW */
 .select-row{
   display:flex;
-  align-items:center;
+  align-items:flex-end;
   gap:10px;
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 .select-wrap{
   flex:1;
   position:relative;
+  z-index:10;
+}
+.select-wrap:has(.cdd.open){
+  z-index:60;
 }
 .select-label-text{
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.14em;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.18em;
   text-transform:uppercase;
-  color:rgba(240,240,240,0.35);
+  color:rgba(240,240,240,0.4);
   margin-bottom:6px;
   display:block;
 }
-.unit-select{
+
+/* CUSTOM DROPDOWN TRIGGER */
+.cdd{position:relative}
+.cdd-trigger{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   width:100%;
-  background:rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.1);
   border-radius:10px;
   color:#f0f0f0;
   font-family:'Barlow',sans-serif;
   font-weight:500;
-  font-size:13px;
-  padding:10px 32px 10px 12px;
-  outline:none;
-  appearance:none;
-  -webkit-appearance:none;
+  font-size:14px;
+  padding:11px 14px;
   cursor:pointer;
-  transition:border-color 0.25s, box-shadow 0.25s;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e8ff00' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 12px center;
+  user-select:none;
+  transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-tap-highlight-color:transparent;
+  outline:none;
 }
-.unit-select:focus{
+.cdd-trigger:hover{
+  border-color:rgba(232,255,0,0.25);
+  background:rgba(232,255,0,0.03);
+}
+.cdd.open .cdd-trigger{
   border-color:rgba(232,255,0,0.5);
-  box-shadow:0 0 0 2px rgba(232,255,0,0.08);
+  box-shadow:0 0 0 2px rgba(232,255,0,0.08), 0 0 16px rgba(232,255,0,0.06);
+  background:rgba(232,255,0,0.04);
 }
-.unit-select option{background:#111116;color:#f0f0f0}
+.cdd-arrow{
+  width:16px;height:16px;
+  flex-shrink:0;
+  margin-left:8px;
+  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  opacity:0.45;
+}
+.cdd-arrow path{stroke:#e8ff00}
+.cdd.open .cdd-arrow{transform:rotate(180deg);opacity:0.9}
+
+/* DROPDOWN PANEL */
+.cdd-panel{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;right:0;
+  background:rgba(18,18,24,0.98);
+  border:1px solid rgba(232,255,0,0.15);
+  border-radius:12px;
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  z-index:100;
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transform:translateY(-6px);
+  transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1),
+             opacity 0.25s ease,
+             transform 0.25s ease;
+  pointer-events:none;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6), 0 0 20px rgba(232,255,0,0.04);
+}
+.cdd.open .cdd-panel{
+  max-height:280px;
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.cdd-list{
+  overflow-y:auto;
+  max-height:280px;
+  padding:4px;
+}
+.cdd-list::-webkit-scrollbar{width:3px}
+.cdd-list::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
+
+/* DROPDOWN OPTION */
+.cdd-opt{
+  padding:10px 14px;
+  font-family:'Barlow',sans-serif;
+  font-weight:400;
+  font-size:13px;
+  color:rgba(240,240,240,0.7);
+  border-radius:8px;
+  cursor:pointer;
+  transition:background 0.15s, color 0.15s;
+  position:relative;
+}
+.cdd-opt:hover{
+  background:rgba(232,255,0,0.08);
+  color:#f0f0f0;
+}
+.cdd-opt.active{
+  background:rgba(232,255,0,0.12);
+  color:#e8ff00;
+  font-weight:600;
+}
+.cdd-opt.active::before{
+  content:'';
+  position:absolute;
+  left:6px;top:50%;
+  transform:translateY(-50%);
+  width:3px;height:14px;
+  background:#e8ff00;
+  border-radius:3px;
+}
+.cdd-opt.active{padding-left:18px}
+
+/* Hide original <select> */
+.unit-select{display:none}
 
 /* ─────────────────────────────────────────
    ACCORDION INPUT ROW
@@ -690,8 +803,12 @@ footer{
 
   /* Select row — STAY ON ONE LINE */
   .select-row{flex-direction:row;align-items:flex-end;gap:6px}
-  .select-row .acc-swap{width:30px;height:30px;font-size:13px;flex-shrink:0;margin-bottom:2px}
-  .unit-select{font-size:11px;padding:8px 26px 8px 8px;background-position:right 6px center}
+  .select-row .acc-swap{width:28px;height:28px;font-size:12px;flex-shrink:0;margin-bottom:2px}
+  .cdd-trigger{font-size:12px;padding:8px 10px;border-radius:8px}
+  .cdd-arrow{width:12px;height:12px;margin-left:4px}
+  .cdd-panel{border-radius:10px}
+  .cdd-opt{font-size:12px;padding:9px 12px}
+  .cdd-opt.active{padding-left:16px}
   .select-label-text{font-size:9px;margin-bottom:4px}
 
   /* Input row — STAY ON ONE LINE */
@@ -745,7 +862,7 @@ footer{
   ══════════════════════════════════════════ -->
   <div class="pinned-grid" role="region" aria-label="Haupt-Umrechner">
 
-    <!-- CARD 1 — kW ↔ PS -->
+    <!-- CARD A — kW ↔ PS (Motorenleistung) -->
     <div class="card" data-index="1" aria-label="Leistung kW und PS">
       <div class="card-title">kW <span>↔</span> PS</div>
       <div class="card-subtitle">Motorenleistung</div>
@@ -771,50 +888,16 @@ footer{
       <div class="quick-pills" aria-label="Schnellwerte kW">
         <button class="pill" onclick="setAndConvert('kw-input','ps-input',50,'kw')" aria-label="50 kW">50 kW</button>
         <button class="pill" onclick="setAndConvert('kw-input','ps-input',100,'kw')" aria-label="100 kW">100 kW</button>
-        <button class="pill" onclick="setAndConvert('kw-input','ps-input',150,'kw')" aria-label="150 kW">150 kW</button>
         <button class="pill" onclick="setAndConvert('kw-input','ps-input',200,'kw')" aria-label="200 kW">200 kW</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',100,'ps')" aria-label="100 PS">100 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')" aria-label="300 PS">300 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')" aria-label="500 PS">500 PS</button>
       </div>
+      <div class="card-footnote">Kilowatt ↔ Pferdestärke</div>
     </div>
 
-    <!-- CARD 2 — Nm ↔ lb-ft -->
-    <div class="card" data-index="2" aria-label="Drehmoment Nm und lb-ft">
-      <div class="card-title">Nm <span>↔</span> lb-ft</div>
-      <div class="card-subtitle">Drehmoment</div>
-      <div class="input-row">
-        <div class="input-wrap">
-          <input
-            class="converter-input" id="nm-input" type="number"
-            placeholder="0" value="200"
-            aria-label="Newtonmeter Eingabe"
-            oninput="convertNmLbft('nm')">
-          <span class="unit-label">Nm</span>
-        </div>
-        <button class="swap-btn" onclick="swapAndRecalc('nm-input','lbft-input','nm')" aria-label="Werte tauschen">⇄</button>
-        <div class="input-wrap">
-          <input
-            class="converter-input" id="lbft-input" type="number"
-            placeholder="0"
-            aria-label="Pound-Foot Eingabe"
-            oninput="convertNmLbft('lbft')">
-          <span class="unit-label">lb-ft</span>
-        </div>
-      </div>
-      <div class="quick-pills" aria-label="Schnellwerte Nm">
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',100,'nm')" aria-label="100 Nm">100 Nm</button>
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',200,'nm')" aria-label="200 Nm">200 Nm</button>
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',400,'nm')" aria-label="400 Nm">400 Nm</button>
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',600,'nm')" aria-label="600 Nm">600 Nm</button>
-        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',100,'lbft')" aria-label="100 lb-ft">100 lb-ft</button>
-        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
-        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
-      </div>
-    </div>
-
-    <!-- CARD 3 — km/h ↔ mph -->
-    <div class="card" data-index="3" aria-label="Geschwindigkeit km/h und mph">
+    <!-- CARD B — km/h ↔ mph (Geschwindigkeit) -->
+    <div class="card" data-index="2" aria-label="Geschwindigkeit km/h und mph">
       <div class="card-title">km/h <span>↔</span> mph</div>
       <div class="card-subtitle">Geschwindigkeit</div>
       <div class="input-row">
@@ -840,11 +923,45 @@ footer{
         <button class="pill" onclick="setAndConvert('kmh-input','mph-input',50,'kmh')" aria-label="50 km/h">50 km/h</button>
         <button class="pill" onclick="setAndConvert('kmh-input','mph-input',100,'kmh')" aria-label="100 km/h">100 km/h</button>
         <button class="pill" onclick="setAndConvert('kmh-input','mph-input',200,'kmh')" aria-label="200 km/h">200 km/h</button>
-        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',300,'kmh')" aria-label="300 km/h">300 km/h</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',60,'mph')" aria-label="60 mph">60 mph</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')" aria-label="100 mph">100 mph</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')" aria-label="200 mph">200 mph</button>
       </div>
+      <div class="card-footnote">Kilometer pro Stunde ↔ Miles per hour</div>
+    </div>
+
+    <!-- CARD C — Nm ↔ lb-ft (Drehmoment) -->
+    <div class="card" data-index="3" aria-label="Drehmoment Nm und lb-ft">
+      <div class="card-title">Nm <span>↔</span> lb-ft</div>
+      <div class="card-subtitle">Drehmoment</div>
+      <div class="input-row">
+        <div class="input-wrap">
+          <input
+            class="converter-input" id="nm-input" type="number"
+            placeholder="0" value="200"
+            aria-label="Newtonmeter Eingabe"
+            oninput="convertNmLbft('nm')">
+          <span class="unit-label">Nm</span>
+        </div>
+        <button class="swap-btn" onclick="swapAndRecalc('nm-input','lbft-input','nm')" aria-label="Werte tauschen">⇄</button>
+        <div class="input-wrap">
+          <input
+            class="converter-input" id="lbft-input" type="number"
+            placeholder="0"
+            aria-label="Pound-Foot Eingabe"
+            oninput="convertNmLbft('lbft')">
+          <span class="unit-label">lb-ft</span>
+        </div>
+      </div>
+      <div class="quick-pills" aria-label="Schnellwerte Nm">
+        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',100,'nm')" aria-label="100 Nm">100 Nm</button>
+        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',200,'nm')" aria-label="200 Nm">200 Nm</button>
+        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',400,'nm')" aria-label="400 Nm">400 Nm</button>
+        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',100,'lbft')" aria-label="100 lb-ft">100 lb-ft</button>
+        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
+        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
+      </div>
+      <div class="card-footnote">Newtonmeter ↔ Pound-Foot</div>
     </div>
 
   </div><!-- /pinned-grid -->
@@ -852,15 +969,375 @@ footer{
   <div class="divider" aria-hidden="true"></div>
 
   <!-- ═══════════════════════════════════════
-       WEITERE EINHEITEN
+       FAHRZEUGSPEZIFISCH
   ══════════════════════════════════════════ -->
-  <div role="region" aria-label="Weitere Einheiten">
-    <div class="section-heading">Weitere <span>Einheiten</span></div>
-    <p class="section-sub">Alle Kategorien — bidirektional &amp; präzise</p>
+  <div role="region" aria-label="Fahrzeugspezifisch">
+    <div class="section-heading">Fahrzeug<span>spezifisch</span></div>
+    <p class="section-sub">Wichtigste Umrechnungen für Kfz-Daten</p>
 
-    <div class="accordion" id="accordion">
+    <div class="accordion" id="accordion-auto">
 
-      <!-- ── 1. LÄNGE ── -->
+      <!-- ── 6. KRAFTSTOFFVERBRAUCH ── -->
+      <div class="accordion-item" id="acc-kraft">
+        <div class="accordion-header" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="body-kraft"
+             onclick="toggleAccordion('acc-kraft')"
+             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-kraft')">
+          
+          <div class="accordion-text">
+            <div class="accordion-title">Kraftstoffverbrauch</div>
+            <div class="accordion-units">L/100km · MPG (US) · km/L</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-kraft" role="region" aria-label="Kraftstoffverbrauch Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="kraft-from" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Von Einheit">
+                  <option value="l100" selected>L/100km</option>
+                  <option value="mpg">MPG (US)</option>
+                  <option value="kml">km/L</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('kraft')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="kraft-to" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Nach Einheit">
+                  <option value="l100">L/100km</option>
+                  <option value="mpg" selected>MPG (US)</option>
+                  <option value="kml">km/L</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="kraft-from-val" type="number" placeholder="0" value="7"
+                     aria-label="Verbrauch Von Wert" oninput="calcAcc('kraft','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="kraft-to-val" type="number" placeholder="0"
+                     aria-label="Verbrauch Nach Wert" oninput="calcAcc('kraft','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GESCHWINDIGKEIT ── -->
+      <div class="accordion-item" id="acc-geschw">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-geschw" onclick="toggleAccordion('acc-geschw')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-geschw')">
+          <div class="accordion-text">
+            <div class="accordion-title">Geschwindigkeit</div>
+            <div class="accordion-units">m/s · km/h · mph · Knoten · ft/s</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-geschw" role="region" aria-label="Geschwindigkeit Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="geschw-from" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Von">
+                  <option value="ms_s">Meter/Sekunde (m/s)</option>
+                  <option value="kmh_s" selected>Kilometer/Stunde (km/h)</option>
+                  <option value="mph_s">Meilen/Stunde (mph)</option>
+                  <option value="kn_s">Knoten (kn)</option>
+                  <option value="fts_s">Fuß/Sekunde (ft/s)</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('geschw')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="geschw-to" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Nach">
+                  <option value="ms_s">Meter/Sekunde (m/s)</option>
+                  <option value="kmh_s">Kilometer/Stunde (km/h)</option>
+                  <option value="mph_s" selected>Meilen/Stunde (mph)</option>
+                  <option value="kn_s">Knoten (kn)</option>
+                  <option value="fts_s">Fuß/Sekunde (ft/s)</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="geschw-from-val" type="number" placeholder="0" value="100" aria-label="Geschwindigkeit Von Wert" oninput="calcAcc('geschw','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="geschw-to-val" type="number" placeholder="0" aria-label="Geschwindigkeit Nach Wert" oninput="calcAcc('geschw','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BESCHLEUNIGUNG LINEAR ── -->
+      <div class="accordion-item" id="acc-beschl">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-beschl" onclick="toggleAccordion('acc-beschl')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-beschl')">
+          <div class="accordion-text">
+            <div class="accordion-title">Beschleunigung — Linear</div>
+            <div class="accordion-units">m/s² · g · ft/s² · Gal</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-beschl" role="region" aria-label="Beschleunigung Linear Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="beschl-from" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Von">
+                  <option value="ms2" selected>m/s²</option>
+                  <option value="g_acc">Erdbeschleunigung (g)</option>
+                  <option value="fts2">ft/s²</option>
+                  <option value="gal_a">Gal (cm/s²)</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('beschl')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="beschl-to" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Nach">
+                  <option value="ms2">m/s²</option>
+                  <option value="g_acc" selected>Erdbeschleunigung (g)</option>
+                  <option value="fts2">ft/s²</option>
+                  <option value="gal_a">Gal (cm/s²)</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="beschl-from-val" type="number" placeholder="0" value="9.81" aria-label="Beschleunigung Von Wert" oninput="calcAcc('beschl','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="beschl-to-val" type="number" placeholder="0" aria-label="Beschleunigung Nach Wert" oninput="calcAcc('beschl','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KRAFT / FORCE ── -->
+      <div class="accordion-item" id="acc-force">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-force" onclick="toggleAccordion('acc-force')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-force')">
+          <div class="accordion-text">
+            <div class="accordion-title">Kraft</div>
+            <div class="accordion-units">Newton · kN · kgf · lbf · dyn</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-force" role="region" aria-label="Kraft Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="force-from" onchange="calcAcc('force','from')" aria-label="Kraft Von">
+                  <option value="n" selected>Newton (N)</option>
+                  <option value="kn_f">Kilonewton (kN)</option>
+                  <option value="kgf">Kilopond (kgf)</option>
+                  <option value="lbf">Pound-force (lbf)</option>
+                  <option value="dyn_f">Dyn</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('force')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="force-to" onchange="calcAcc('force','from')" aria-label="Kraft Nach">
+                  <option value="n">Newton (N)</option>
+                  <option value="kn_f">Kilonewton (kN)</option>
+                  <option value="kgf" selected>Kilopond (kgf)</option>
+                  <option value="lbf">Pound-force (lbf)</option>
+                  <option value="dyn_f">Dyn</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="force-from-val" type="number" placeholder="0" value="1000" aria-label="Kraft Von Wert" oninput="calcAcc('force','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="force-to-val" type="number" placeholder="0" aria-label="Kraft Nach Wert" oninput="calcAcc('force','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LEISTUNG ── -->
+      <div class="accordion-item" id="acc-leist">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-leist" onclick="toggleAccordion('acc-leist')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-leist')">
+          <div class="accordion-text">
+            <div class="accordion-title">Leistung</div>
+            <div class="accordion-units">W · kW · PS · hp · BTU/h · kcal/h · ft·lbf/s</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-leist" role="region" aria-label="Leistung Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="leist-from" onchange="calcAcc('leist','from')" aria-label="Leistung Von">
+                  <option value="w">Watt (W)</option>
+                  <option value="kw_l" selected>Kilowatt (kW)</option>
+                  <option value="ps_l">Pferdestärke (PS)</option>
+                  <option value="hp_l">Horsepower (hp)</option>
+                  <option value="btuh">BTU/h</option>
+                  <option value="kcalh">kcal/h</option>
+                  <option value="ftlbfs">ft·lbf/s</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('leist')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="leist-to" onchange="calcAcc('leist','from')" aria-label="Leistung Nach">
+                  <option value="w">Watt (W)</option>
+                  <option value="kw_l">Kilowatt (kW)</option>
+                  <option value="ps_l" selected>Pferdestärke (PS)</option>
+                  <option value="hp_l">Horsepower (hp)</option>
+                  <option value="btuh">BTU/h</option>
+                  <option value="kcalh">kcal/h</option>
+                  <option value="ftlbfs">ft·lbf/s</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="leist-from-val" type="number" placeholder="0" value="100" aria-label="Leistung Von Wert" oninput="calcAcc('leist','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="leist-to-val" type="number" placeholder="0" aria-label="Leistung Nach Wert" oninput="calcAcc('leist','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DREHMOMENT ── -->
+      <div class="accordion-item" id="acc-drehm">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-drehm" onclick="toggleAccordion('acc-drehm')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-drehm')">
+          <div class="accordion-text">
+            <div class="accordion-title">Drehmoment</div>
+            <div class="accordion-units">Nm · lb-ft · kgf·m · ozf·in · dyn·cm</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-drehm" role="region" aria-label="Drehmoment Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="drehm-from" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Von">
+                  <option value="nm_d" selected>Newtonmeter (Nm)</option>
+                  <option value="lbft_d">Pound-Foot (lb-ft)</option>
+                  <option value="kgfm">kgf·m</option>
+                  <option value="ozfin">ozf·in</option>
+                  <option value="dyncm">dyn·cm</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('drehm')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="drehm-to" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Nach">
+                  <option value="nm_d">Newtonmeter (Nm)</option>
+                  <option value="lbft_d" selected>Pound-Foot (lb-ft)</option>
+                  <option value="kgfm">kgf·m</option>
+                  <option value="ozfin">ozf·in</option>
+                  <option value="dyncm">dyn·cm</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="drehm-from-val" type="number" placeholder="0" value="100" aria-label="Drehmoment Von Wert" oninput="calcAcc('drehm','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="drehm-to-val" type="number" placeholder="0" aria-label="Drehmoment Nach Wert" oninput="calcAcc('drehm','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ZEIT ── -->
+      <div class="accordion-item" id="acc-zeit">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-zeit" onclick="toggleAccordion('acc-zeit')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-zeit')">
+          <div class="accordion-text">
+            <div class="accordion-title">Zeit</div>
+            <div class="accordion-units">s · ms · µs · min · h · Tag · Woche · Monat · Jahr</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-zeit" role="region" aria-label="Zeit Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="zeit-from" onchange="calcAcc('zeit','from')" aria-label="Zeit Von">
+                  <option value="s">Sekunde (s)</option>
+                  <option value="ms_z">Millisekunde (ms)</option>
+                  <option value="us_z">Mikrosekunde (µs)</option>
+                  <option value="min_z">Minute (min)</option>
+                  <option value="h_z" selected>Stunde (h)</option>
+                  <option value="tag">Tag</option>
+                  <option value="woche">Woche</option>
+                  <option value="monat">Monat (30 T.)</option>
+                  <option value="jahr">Jahr (365 T.)</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('zeit')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="zeit-to" onchange="calcAcc('zeit','from')" aria-label="Zeit Nach">
+                  <option value="s">Sekunde (s)</option>
+                  <option value="ms_z">Millisekunde (ms)</option>
+                  <option value="us_z">Mikrosekunde (µs)</option>
+                  <option value="min_z" selected>Minute (min)</option>
+                  <option value="h_z">Stunde (h)</option>
+                  <option value="tag">Tag</option>
+                  <option value="woche">Woche</option>
+                  <option value="monat">Monat (30 T.)</option>
+                  <option value="jahr">Jahr (365 T.)</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="zeit-from-val" type="number" placeholder="0" value="1" aria-label="Zeit Von Wert" oninput="calcAcc('zeit','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="zeit-to-val" type="number" placeholder="0" aria-label="Zeit Nach Wert" oninput="calcAcc('zeit','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ENERGIE ── -->
+      <div class="accordion-item" id="acc-energ">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-energ" onclick="toggleAccordion('acc-energ')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-energ')">
+          <div class="accordion-text">
+            <div class="accordion-title">Energie</div>
+            <div class="accordion-units">Joule · kJ · kWh · kcal · cal · BTU · Wh</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-energ" role="region" aria-label="Energie Umrechner">
+          <div class="accordion-inner">
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="energ-from" onchange="calcAcc('energ','from')" aria-label="Energie Von">
+                  <option value="j">Joule (J)</option>
+                  <option value="kj">Kilojoule (kJ)</option>
+                  <option value="kwh_e" selected>Kilowattstunde (kWh)</option>
+                  <option value="kcal_e">Kilokalorie (kcal)</option>
+                  <option value="cal_e">Kalorie (cal)</option>
+                  <option value="btu_e">BTU</option>
+                  <option value="wh_e">Wattstunde (Wh)</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('energ')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="energ-to" onchange="calcAcc('energ','from')" aria-label="Energie Nach">
+                  <option value="j">Joule (J)</option>
+                  <option value="kj" selected>Kilojoule (kJ)</option>
+                  <option value="kwh_e">Kilowattstunde (kWh)</option>
+                  <option value="kcal_e">Kilokalorie (kcal)</option>
+                  <option value="cal_e">Kalorie (cal)</option>
+                  <option value="btu_e">BTU</option>
+                  <option value="wh_e">Wattstunde (Wh)</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="energ-from-val" type="number" placeholder="0" value="1" aria-label="Energie Von Wert" oninput="calcAcc('energ','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="energ-to-val" type="number" placeholder="0" aria-label="Energie Nach Wert" oninput="calcAcc('energ','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 1. KRAFTSTOFFVERBRAUCH ── -->
       <div class="accordion-item" id="acc-laenge">
         <div class="accordion-header" role="button" tabindex="0"
              aria-expanded="false" aria-controls="body-laenge"
@@ -959,6 +1436,74 @@ footer{
               <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
               <input class="acc-input" id="gewicht-to-val" type="number" placeholder="0"
                      aria-label="Gewicht Nach Wert" oninput="calcAcc('gewicht','to')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion-auto -->
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════
+       WEITERE EINHEITEN
+  ══════════════════════════════════════════ -->
+  <div role="region" aria-label="Weitere Einheiten">
+    <div class="section-heading">Weitere <span>Einheiten</span></div>
+    <p class="section-sub">Alle Kategorien — bidirektional &amp; präzise</p>
+
+    <div class="accordion" id="accordion-weitere">
+
+      <!-- ── WÄHRUNG ── -->
+      <div class="accordion-item" id="acc-waehr">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-waehr" onclick="toggleAccordion('acc-waehr')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-waehr')">
+          <div class="accordion-text">
+            <div class="accordion-title">Währung</div>
+            <div class="accordion-units">EUR · USD · GBP · CHF · JPY · CNY · TRY · INR · AUD · CAD</div>
+          </div>
+          <span class="accordion-chevron" aria-hidden="true">▾</span>
+        </div>
+        <div class="accordion-body" id="body-waehr" role="region" aria-label="Währung Umrechner">
+          <div class="accordion-inner">
+            <div style="font-size:10px;color:rgba(240,240,240,0.35);margin-bottom:10px;letter-spacing:0.06em">⚠ Statische Richtwerte — keine Live-Kurse</div>
+            <div class="select-row">
+              <div class="select-wrap">
+                <span class="select-label-text">Von</span>
+                <select class="unit-select" id="waehr-from" onchange="calcAcc('waehr','from')" aria-label="Währung Von">
+                  <option value="eur" selected>Euro (€)</option>
+                  <option value="usd">US-Dollar ($)</option>
+                  <option value="gbp">Britisches Pfund (£)</option>
+                  <option value="chf">Schweizer Franken (CHF)</option>
+                  <option value="jpy">Japanischer Yen (¥)</option>
+                  <option value="cny">Chin. Yuan (¥)</option>
+                  <option value="try_w">Türkische Lira (₺)</option>
+                  <option value="inr">Indische Rupie (₹)</option>
+                  <option value="aud">Austral. Dollar (A$)</option>
+                  <option value="cad">Kanad. Dollar (C$)</option>
+                </select>
+              </div>
+              <button class="acc-swap" onclick="swapAcc('waehr')" aria-label="Einheiten tauschen">⇄</button>
+              <div class="select-wrap">
+                <span class="select-label-text">Nach</span>
+                <select class="unit-select" id="waehr-to" onchange="calcAcc('waehr','from')" aria-label="Währung Nach">
+                  <option value="eur">Euro (€)</option>
+                  <option value="usd" selected>US-Dollar ($)</option>
+                  <option value="gbp">Britisches Pfund (£)</option>
+                  <option value="chf">Schweizer Franken (CHF)</option>
+                  <option value="jpy">Japanischer Yen (¥)</option>
+                  <option value="cny">Chin. Yuan (¥)</option>
+                  <option value="try_w">Türkische Lira (₺)</option>
+                  <option value="inr">Indische Rupie (₹)</option>
+                  <option value="aud">Austral. Dollar (A$)</option>
+                  <option value="cad">Kanad. Dollar (C$)</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-input-row">
+              <input class="acc-input" id="waehr-from-val" type="number" placeholder="0" value="100" aria-label="Währung Von Wert" oninput="calcAcc('waehr','from')">
+              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
+              <input class="acc-input" id="waehr-to-val" type="number" placeholder="0" aria-label="Währung Nach Wert" oninput="calcAcc('waehr','to')">
             </div>
           </div>
         </div>
@@ -1107,51 +1652,6 @@ footer{
         </div>
       </div>
 
-      <!-- ── 6. KRAFTSTOFFVERBRAUCH ── -->
-      <div class="accordion-item" id="acc-kraft">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-kraft"
-             onclick="toggleAccordion('acc-kraft')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-kraft')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Kraftstoffverbrauch</div>
-            <div class="accordion-units">L/100km · MPG (US) · km/L</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-kraft" role="region" aria-label="Kraftstoffverbrauch Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="kraft-from" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Von Einheit">
-                  <option value="l100" selected>L/100km</option>
-                  <option value="mpg">MPG (US)</option>
-                  <option value="kml">km/L</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('kraft')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="kraft-to" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Nach Einheit">
-                  <option value="l100">L/100km</option>
-                  <option value="mpg" selected>MPG (US)</option>
-                  <option value="kml">km/L</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="kraft-from-val" type="number" placeholder="0" value="7"
-                     aria-label="Verbrauch Von Wert" oninput="calcAcc('kraft','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="kraft-to-val" type="number" placeholder="0"
-                     aria-label="Verbrauch Nach Wert" oninput="calcAcc('kraft','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- ── FLÄCHE ── -->
       <div class="accordion-item" id="acc-flaeche">
         <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-flaeche" onclick="toggleAccordion('acc-flaeche')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-flaeche')">
@@ -1200,90 +1700,6 @@ footer{
               <input class="acc-input" id="flaeche-from-val" type="number" placeholder="0" value="1" aria-label="Fläche Von Wert" oninput="calcAcc('flaeche','from')">
               <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
               <input class="acc-input" id="flaeche-to-val" type="number" placeholder="0" aria-label="Fläche Nach Wert" oninput="calcAcc('flaeche','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── GESCHWINDIGKEIT ── -->
-      <div class="accordion-item" id="acc-geschw">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-geschw" onclick="toggleAccordion('acc-geschw')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-geschw')">
-          <div class="accordion-text">
-            <div class="accordion-title">Geschwindigkeit</div>
-            <div class="accordion-units">m/s · km/h · mph · Knoten · ft/s</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-geschw" role="region" aria-label="Geschwindigkeit Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="geschw-from" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Von">
-                  <option value="ms_s">Meter/Sekunde (m/s)</option>
-                  <option value="kmh_s" selected>Kilometer/Stunde (km/h)</option>
-                  <option value="mph_s">Meilen/Stunde (mph)</option>
-                  <option value="kn_s">Knoten (kn)</option>
-                  <option value="fts_s">Fuß/Sekunde (ft/s)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('geschw')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="geschw-to" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Nach">
-                  <option value="ms_s">Meter/Sekunde (m/s)</option>
-                  <option value="kmh_s">Kilometer/Stunde (km/h)</option>
-                  <option value="mph_s" selected>Meilen/Stunde (mph)</option>
-                  <option value="kn_s">Knoten (kn)</option>
-                  <option value="fts_s">Fuß/Sekunde (ft/s)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="geschw-from-val" type="number" placeholder="0" value="100" aria-label="Geschwindigkeit Von Wert" oninput="calcAcc('geschw','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="geschw-to-val" type="number" placeholder="0" aria-label="Geschwindigkeit Nach Wert" oninput="calcAcc('geschw','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── BESCHLEUNIGUNG LINEAR ── -->
-      <div class="accordion-item" id="acc-beschl">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-beschl" onclick="toggleAccordion('acc-beschl')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-beschl')">
-          <div class="accordion-text">
-            <div class="accordion-title">Beschleunigung — Linear</div>
-            <div class="accordion-units">m/s² · g · ft/s² · Gal</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-beschl" role="region" aria-label="Beschleunigung Linear Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="beschl-from" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Von">
-                  <option value="ms2" selected>m/s²</option>
-                  <option value="g_acc">Erdbeschleunigung (g)</option>
-                  <option value="fts2">ft/s²</option>
-                  <option value="gal_a">Gal (cm/s²)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('beschl')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="beschl-to" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Nach">
-                  <option value="ms2">m/s²</option>
-                  <option value="g_acc" selected>Erdbeschleunigung (g)</option>
-                  <option value="fts2">ft/s²</option>
-                  <option value="gal_a">Gal (cm/s²)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="beschl-from-val" type="number" placeholder="0" value="9.81" aria-label="Beschleunigung Von Wert" oninput="calcAcc('beschl','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="beschl-to-val" type="number" placeholder="0" aria-label="Beschleunigung Nach Wert" oninput="calcAcc('beschl','to')">
             </div>
           </div>
         </div>
@@ -1512,96 +1928,6 @@ footer{
         </div>
       </div>
 
-      <!-- ── ENERGIE ── -->
-      <div class="accordion-item" id="acc-energ">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-energ" onclick="toggleAccordion('acc-energ')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-energ')">
-          <div class="accordion-text">
-            <div class="accordion-title">Energie</div>
-            <div class="accordion-units">Joule · kJ · kWh · kcal · cal · BTU · Wh</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-energ" role="region" aria-label="Energie Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="energ-from" onchange="calcAcc('energ','from')" aria-label="Energie Von">
-                  <option value="j">Joule (J)</option>
-                  <option value="kj">Kilojoule (kJ)</option>
-                  <option value="kwh_e" selected>Kilowattstunde (kWh)</option>
-                  <option value="kcal_e">Kilokalorie (kcal)</option>
-                  <option value="cal_e">Kalorie (cal)</option>
-                  <option value="btu_e">BTU</option>
-                  <option value="wh_e">Wattstunde (Wh)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('energ')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="energ-to" onchange="calcAcc('energ','from')" aria-label="Energie Nach">
-                  <option value="j">Joule (J)</option>
-                  <option value="kj" selected>Kilojoule (kJ)</option>
-                  <option value="kwh_e">Kilowattstunde (kWh)</option>
-                  <option value="kcal_e">Kilokalorie (kcal)</option>
-                  <option value="cal_e">Kalorie (cal)</option>
-                  <option value="btu_e">BTU</option>
-                  <option value="wh_e">Wattstunde (Wh)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="energ-from-val" type="number" placeholder="0" value="1" aria-label="Energie Von Wert" oninput="calcAcc('energ','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="energ-to-val" type="number" placeholder="0" aria-label="Energie Nach Wert" oninput="calcAcc('energ','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── KRAFT / FORCE ── -->
-      <div class="accordion-item" id="acc-force">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-force" onclick="toggleAccordion('acc-force')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-force')">
-          <div class="accordion-text">
-            <div class="accordion-title">Kraft</div>
-            <div class="accordion-units">Newton · kN · kgf · lbf · dyn</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-force" role="region" aria-label="Kraft Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="force-from" onchange="calcAcc('force','from')" aria-label="Kraft Von">
-                  <option value="n" selected>Newton (N)</option>
-                  <option value="kn_f">Kilonewton (kN)</option>
-                  <option value="kgf">Kilopond (kgf)</option>
-                  <option value="lbf">Pound-force (lbf)</option>
-                  <option value="dyn_f">Dyn</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('force')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="force-to" onchange="calcAcc('force','from')" aria-label="Kraft Nach">
-                  <option value="n">Newton (N)</option>
-                  <option value="kn_f">Kilonewton (kN)</option>
-                  <option value="kgf" selected>Kilopond (kgf)</option>
-                  <option value="lbf">Pound-force (lbf)</option>
-                  <option value="dyn_f">Dyn</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="force-from-val" type="number" placeholder="0" value="1000" aria-label="Kraft Von Wert" oninput="calcAcc('force','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="force-to-val" type="number" placeholder="0" aria-label="Kraft Nach Wert" oninput="calcAcc('force','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- ── TRÄGHEITSMOMENT ── -->
       <div class="accordion-item" id="acc-traeg">
         <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-traeg" onclick="toggleAccordion('acc-traeg')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-traeg')">
@@ -1643,53 +1969,6 @@ footer{
         </div>
       </div>
 
-      <!-- ── LEISTUNG ── -->
-      <div class="accordion-item" id="acc-leist">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-leist" onclick="toggleAccordion('acc-leist')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-leist')">
-          <div class="accordion-text">
-            <div class="accordion-title">Leistung</div>
-            <div class="accordion-units">W · kW · PS · hp · BTU/h · kcal/h · ft·lbf/s</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-leist" role="region" aria-label="Leistung Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="leist-from" onchange="calcAcc('leist','from')" aria-label="Leistung Von">
-                  <option value="w">Watt (W)</option>
-                  <option value="kw_l" selected>Kilowatt (kW)</option>
-                  <option value="ps_l">Pferdestärke (PS)</option>
-                  <option value="hp_l">Horsepower (hp)</option>
-                  <option value="btuh">BTU/h</option>
-                  <option value="kcalh">kcal/h</option>
-                  <option value="ftlbfs">ft·lbf/s</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('leist')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="leist-to" onchange="calcAcc('leist','from')" aria-label="Leistung Nach">
-                  <option value="w">Watt (W)</option>
-                  <option value="kw_l">Kilowatt (kW)</option>
-                  <option value="ps_l" selected>Pferdestärke (PS)</option>
-                  <option value="hp_l">Horsepower (hp)</option>
-                  <option value="btuh">BTU/h</option>
-                  <option value="kcalh">kcal/h</option>
-                  <option value="ftlbfs">ft·lbf/s</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="leist-from-val" type="number" placeholder="0" value="100" aria-label="Leistung Von Wert" oninput="calcAcc('leist','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="leist-to-val" type="number" placeholder="0" aria-label="Leistung Nach Wert" oninput="calcAcc('leist','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- ── SPEZIFISCHES VOLUMEN ── -->
       <div class="accordion-item" id="acc-spvol">
         <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-spvol" onclick="toggleAccordion('acc-spvol')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-spvol')">
@@ -1726,100 +2005,6 @@ footer{
               <input class="acc-input" id="spvol-from-val" type="number" placeholder="0" value="1" aria-label="Spez. Volumen Von Wert" oninput="calcAcc('spvol','from')">
               <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
               <input class="acc-input" id="spvol-to-val" type="number" placeholder="0" aria-label="Spez. Volumen Nach Wert" oninput="calcAcc('spvol','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ZEIT ── -->
-      <div class="accordion-item" id="acc-zeit">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-zeit" onclick="toggleAccordion('acc-zeit')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-zeit')">
-          <div class="accordion-text">
-            <div class="accordion-title">Zeit</div>
-            <div class="accordion-units">s · ms · µs · min · h · Tag · Woche · Monat · Jahr</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-zeit" role="region" aria-label="Zeit Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="zeit-from" onchange="calcAcc('zeit','from')" aria-label="Zeit Von">
-                  <option value="s">Sekunde (s)</option>
-                  <option value="ms_z">Millisekunde (ms)</option>
-                  <option value="us_z">Mikrosekunde (µs)</option>
-                  <option value="min_z">Minute (min)</option>
-                  <option value="h_z" selected>Stunde (h)</option>
-                  <option value="tag">Tag</option>
-                  <option value="woche">Woche</option>
-                  <option value="monat">Monat (30 T.)</option>
-                  <option value="jahr">Jahr (365 T.)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('zeit')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="zeit-to" onchange="calcAcc('zeit','from')" aria-label="Zeit Nach">
-                  <option value="s">Sekunde (s)</option>
-                  <option value="ms_z">Millisekunde (ms)</option>
-                  <option value="us_z">Mikrosekunde (µs)</option>
-                  <option value="min_z" selected>Minute (min)</option>
-                  <option value="h_z">Stunde (h)</option>
-                  <option value="tag">Tag</option>
-                  <option value="woche">Woche</option>
-                  <option value="monat">Monat (30 T.)</option>
-                  <option value="jahr">Jahr (365 T.)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="zeit-from-val" type="number" placeholder="0" value="1" aria-label="Zeit Von Wert" oninput="calcAcc('zeit','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="zeit-to-val" type="number" placeholder="0" aria-label="Zeit Nach Wert" oninput="calcAcc('zeit','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── DREHMOMENT ── -->
-      <div class="accordion-item" id="acc-drehm">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-drehm" onclick="toggleAccordion('acc-drehm')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-drehm')">
-          <div class="accordion-text">
-            <div class="accordion-title">Drehmoment</div>
-            <div class="accordion-units">Nm · lb-ft · kgf·m · ozf·in · dyn·cm</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-drehm" role="region" aria-label="Drehmoment Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="drehm-from" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Von">
-                  <option value="nm_d" selected>Newtonmeter (Nm)</option>
-                  <option value="lbft_d">Pound-Foot (lb-ft)</option>
-                  <option value="kgfm">kgf·m</option>
-                  <option value="ozfin">ozf·in</option>
-                  <option value="dyncm">dyn·cm</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('drehm')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="drehm-to" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Nach">
-                  <option value="nm_d">Newtonmeter (Nm)</option>
-                  <option value="lbft_d" selected>Pound-Foot (lb-ft)</option>
-                  <option value="kgfm">kgf·m</option>
-                  <option value="ozfin">ozf·in</option>
-                  <option value="dyncm">dyn·cm</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="drehm-from-val" type="number" placeholder="0" value="100" aria-label="Drehmoment Von Wert" oninput="calcAcc('drehm','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="drehm-to-val" type="number" placeholder="0" aria-label="Drehmoment Nach Wert" oninput="calcAcc('drehm','to')">
             </div>
           </div>
         </div>
@@ -2188,61 +2373,7 @@ footer{
         </div>
       </div>
 
-      <!-- ── WÄHRUNG ── -->
-      <div class="accordion-item" id="acc-waehr">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-waehr" onclick="toggleAccordion('acc-waehr')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-waehr')">
-          <div class="accordion-text">
-            <div class="accordion-title">Währung</div>
-            <div class="accordion-units">EUR · USD · GBP · CHF · JPY · CNY · TRY · INR · AUD · CAD</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-waehr" role="region" aria-label="Währung Umrechner">
-          <div class="accordion-inner">
-            <div style="font-size:10px;color:rgba(240,240,240,0.35);margin-bottom:10px;letter-spacing:0.06em">⚠ Statische Richtwerte — keine Live-Kurse</div>
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="waehr-from" onchange="calcAcc('waehr','from')" aria-label="Währung Von">
-                  <option value="eur" selected>Euro (€)</option>
-                  <option value="usd">US-Dollar ($)</option>
-                  <option value="gbp">Britisches Pfund (£)</option>
-                  <option value="chf">Schweizer Franken (CHF)</option>
-                  <option value="jpy">Japanischer Yen (¥)</option>
-                  <option value="cny">Chin. Yuan (¥)</option>
-                  <option value="try_w">Türkische Lira (₺)</option>
-                  <option value="inr">Indische Rupie (₹)</option>
-                  <option value="aud">Austral. Dollar (A$)</option>
-                  <option value="cad">Kanad. Dollar (C$)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('waehr')" aria-label="Einheiten tauschen">⇄</button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="waehr-to" onchange="calcAcc('waehr','from')" aria-label="Währung Nach">
-                  <option value="eur">Euro (€)</option>
-                  <option value="usd" selected>US-Dollar ($)</option>
-                  <option value="gbp">Britisches Pfund (£)</option>
-                  <option value="chf">Schweizer Franken (CHF)</option>
-                  <option value="jpy">Japanischer Yen (¥)</option>
-                  <option value="cny">Chin. Yuan (¥)</option>
-                  <option value="try_w">Türkische Lira (₺)</option>
-                  <option value="inr">Indische Rupie (₹)</option>
-                  <option value="aud">Austral. Dollar (A$)</option>
-                  <option value="cad">Kanad. Dollar (C$)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="waehr-from-val" type="number" placeholder="0" value="100" aria-label="Währung Von Wert" oninput="calcAcc('waehr','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="waehr-to-val" type="number" placeholder="0" aria-label="Währung Nach Wert" oninput="calcAcc('waehr','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /accordion -->
+    </div><!-- /accordion-weitere -->
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -2559,7 +2690,113 @@ document.addEventListener('DOMContentLoaded',()=>{
   cards.forEach((card,i)=>{
     setTimeout(()=>card.classList.add('visible'), i*120);
   });
+
+  // Build custom dropdowns from all <select class="unit-select">
+  buildCustomDropdowns();
 });
+
+/* ═══════════════════════════════════════════
+   CUSTOM DROPDOWN BUILDER
+════════════════════════════════════════════ */
+function buildCustomDropdowns(){
+  document.querySelectorAll('select.unit-select').forEach(sel=>{
+    const wrap=sel.parentElement;
+    const cdd=document.createElement('div');
+    cdd.className='cdd';
+
+    // Trigger
+    const trigger=document.createElement('div');
+    trigger.className='cdd-trigger';
+    trigger.setAttribute('tabindex','0');
+    trigger.setAttribute('role','listbox');
+
+    const txt=document.createElement('span');
+    txt.className='cdd-txt';
+    const selOpt=sel.options[sel.selectedIndex];
+    txt.textContent=selOpt?selOpt.textContent:'—';
+
+    const arrow=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    arrow.setAttribute('class','cdd-arrow');
+    arrow.setAttribute('viewBox','0 0 10 6');
+    arrow.innerHTML="<path d='M1 1l4 4 4-4' stroke='#e8ff00' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/>";
+
+    trigger.appendChild(txt);
+    trigger.appendChild(arrow);
+
+    // Panel
+    const panel=document.createElement('div');
+    panel.className='cdd-panel';
+    const list=document.createElement('div');
+    list.className='cdd-list';
+
+    Array.from(sel.options).forEach(opt=>{
+      const item=document.createElement('div');
+      item.className='cdd-opt'+(opt.selected?' active':'');
+      item.textContent=opt.textContent;
+      item.dataset.val=opt.value;
+      item.setAttribute('role','option');
+      item.addEventListener('click',()=>{
+        sel.value=opt.value;
+        sel.dispatchEvent(new Event('change'));
+        txt.textContent=opt.textContent;
+        list.querySelectorAll('.cdd-opt').forEach(o=>o.classList.remove('active'));
+        item.classList.add('active');
+        closeCDD(cdd);
+      });
+      list.appendChild(item);
+    });
+    panel.appendChild(list);
+
+    cdd.appendChild(trigger);
+    cdd.appendChild(panel);
+    wrap.appendChild(cdd);
+
+    // Toggle
+    trigger.addEventListener('click',e=>{
+      e.stopPropagation();
+      const isOpen=cdd.classList.contains('open');
+      closeAllCDD();
+      if(!isOpen) cdd.classList.add('open');
+    });
+    trigger.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        trigger.click();
+      }
+    });
+
+    // Keep custom UI in sync if <select> changes programmatically (swap)
+    const observer=new MutationObserver(()=>{syncCDD(sel,cdd)});
+    observer.observe(sel,{attributes:true,childList:true});
+    sel._cdd=cdd;
+  });
+
+  document.addEventListener('click',()=>closeAllCDD());
+}
+
+function syncCDD(sel,cdd){
+  const opt=sel.options[sel.selectedIndex];
+  if(!opt)return;
+  cdd.querySelector('.cdd-txt').textContent=opt.textContent;
+  cdd.querySelectorAll('.cdd-opt').forEach(o=>{
+    o.classList.toggle('active',o.dataset.val===opt.value);
+  });
+}
+
+function closeAllCDD(){
+  document.querySelectorAll('.cdd.open').forEach(d=>d.classList.remove('open'));
+}
+function closeCDD(cdd){cdd.classList.remove('open');}
+
+/* Keep CDD in sync after swapAcc */
+const _origSwapAcc=swapAcc;
+swapAcc=function(cat){
+  _origSwapAcc(cat);
+  const fromSel=document.getElementById(cat+'-from');
+  const toSel=document.getElementById(cat+'-to');
+  if(fromSel._cdd)syncCDD(fromSel,fromSel._cdd);
+  if(toSel._cdd)syncCDD(toSel,toSel._cdd);
+};
 </script>
 </body>
 </html>
