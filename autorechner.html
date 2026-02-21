@@ -192,11 +192,6 @@ header{
   border-color:rgba(232,255,0,0.18);
   box-shadow:0 8px 40px rgba(232,255,0,0.06), 0 2px 12px rgba(0,0,0,0.4);
 }
-.card:has(.cdd.open){
-  overflow:visible;
-  z-index:70;
-}
-
 /* SHIMMER SWEEP */
 .card::after{
   content:'';
@@ -255,7 +250,7 @@ header{
   margin-bottom:22px;
 }
 .card-footnote{
-  font-size:9px;
+  font-size:13px;
   font-weight:400;
   letter-spacing:0.08em;
   color:rgba(240,240,240,0.22);
@@ -296,8 +291,8 @@ header{
   color:#f0f0f0;
   font-family:'Barlow Condensed',sans-serif;
   font-weight:700;
-  font-size:clamp(22px,3vw,30px);
-  padding:14px 12px 24px 12px;
+  font-size:clamp(24px,3.2vw,34px);
+  padding:16px 14px 26px 14px;
   outline:none;
   -moz-appearance:textfield;
   appearance:textfield;
@@ -441,15 +436,11 @@ header{
   overflow:visible;
   transition:border-color 0.3s, box-shadow 0.3s, overflow 0s 0s;
 }
-.accordion-item:has(.cdd.open){
-  z-index:70;
-  position:relative;
-}
 .accordion-header{
   display:flex;
   align-items:center;
   gap:16px;
-  padding:18px 24px;
+  padding:20px 24px;
   cursor:pointer;
   user-select:none;
   -webkit-tap-highlight-color:transparent;
@@ -511,8 +502,12 @@ header{
   transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1), overflow 0s 0s;
 }
 .accordion-inner{
-  padding:0 24px 24px;
+  padding:4px 20px 20px;
   position:relative;
+  margin:0 4px 4px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);
+  border-radius:14px;
 }
 
 /* SELECT ROW */
@@ -520,15 +515,12 @@ header{
   display:flex;
   align-items:flex-end;
   gap:10px;
-  margin-bottom:14px;
+  margin-bottom:0;
 }
 .select-wrap{
   flex:1;
   position:relative;
   z-index:10;
-}
-.select-wrap:has(.cdd.open){
-  z-index:60;
 }
 .select-label-text{
   font-family:'Barlow Condensed',sans-serif;
@@ -541,124 +533,72 @@ header{
   display:block;
 }
 
-/* CUSTOM DROPDOWN TRIGGER */
-.cdd{position:relative}
-.cdd-trigger{
+/* UNIT CYCLER (replaces dropdowns) */
+.unit-select{display:none}
+.unit-cycle{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  width:100%;
-  background:rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.1);
   border-radius:10px;
-  color:#f0f0f0;
+  overflow:hidden;
+  transition:border-color 0.25s;
+  min-height:44px;
+}
+.unit-cycle:hover{
+  border-color:rgba(232,255,0,0.2);
+}
+.unit-cycle-btn{
+  background:none;
+  border:none;
+  color:rgba(232,255,0,0.5);
+  font-size:18px;
+  font-weight:700;
+  font-family:'Barlow Condensed',sans-serif;
+  padding:0 12px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background 0.2s, color 0.2s;
+  height:100%;
+  min-height:44px;
+  outline:none;
+  flex-shrink:0;
+}
+.unit-cycle-btn:hover{
+  background:rgba(232,255,0,0.08);
+  color:#e8ff00;
+}
+.unit-cycle-btn:active{
+  background:rgba(232,255,0,0.15);
+  color:#e8ff00;
+}
+.unit-cycle-txt{
+  flex:1;
+  text-align:center;
   font-family:'Barlow',sans-serif;
   font-weight:500;
-  font-size:14px;
-  padding:11px 14px;
-  cursor:pointer;
-  user-select:none;
-  transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
-  -webkit-tap-highlight-color:transparent;
-  outline:none;
-}
-.cdd-trigger:hover{
-  border-color:rgba(232,255,0,0.25);
-  background:rgba(232,255,0,0.03);
-}
-.cdd.open .cdd-trigger{
-  border-color:rgba(232,255,0,0.5);
-  box-shadow:0 0 0 2px rgba(232,255,0,0.08), 0 0 16px rgba(232,255,0,0.06);
-  background:rgba(232,255,0,0.04);
-}
-.cdd-arrow{
-  width:16px;height:16px;
-  flex-shrink:0;
-  margin-left:8px;
-  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
-  opacity:0.45;
-}
-.cdd-arrow path{stroke:#e8ff00}
-.cdd.open .cdd-arrow{transform:rotate(180deg);opacity:0.9}
-
-/* DROPDOWN PANEL */
-.cdd-panel{
-  position:absolute;
-  top:calc(100% + 6px);
-  left:0;right:0;
-  background:rgba(18,18,24,0.98);
-  border:1px solid rgba(232,255,0,0.15);
-  border-radius:12px;
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  z-index:100;
-  overflow:hidden;
-  max-height:0;
-  opacity:0;
-  transform:translateY(-6px);
-  transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1),
-             opacity 0.25s ease,
-             transform 0.25s ease;
-  pointer-events:none;
-  box-shadow:0 12px 40px rgba(0,0,0,0.6), 0 0 20px rgba(232,255,0,0.04);
-}
-.cdd.open .cdd-panel{
-  max-height:280px;
-  opacity:1;
-  transform:translateY(0);
-  pointer-events:auto;
-}
-.cdd-list{
-  overflow-y:auto;
-  max-height:280px;
-  padding:4px;
-}
-.cdd-list::-webkit-scrollbar{width:3px}
-.cdd-list::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
-
-/* DROPDOWN OPTION */
-.cdd-opt{
-  padding:10px 14px;
-  font-family:'Barlow',sans-serif;
-  font-weight:400;
   font-size:13px;
-  color:rgba(240,240,240,0.7);
-  border-radius:8px;
-  cursor:pointer;
-  transition:background 0.15s, color 0.15s;
-  position:relative;
-}
-.cdd-opt:hover{
-  background:rgba(232,255,0,0.08);
   color:#f0f0f0;
+  padding:10px 2px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  min-width:0;
+  line-height:1.2;
 }
-.cdd-opt.active{
-  background:rgba(232,255,0,0.12);
-  color:#e8ff00;
-  font-weight:600;
-}
-.cdd-opt.active::before{
-  content:'';
-  position:absolute;
-  left:6px;top:50%;
-  transform:translateY(-50%);
-  width:3px;height:14px;
-  background:#e8ff00;
-  border-radius:3px;
-}
-.cdd-opt.active{padding-left:18px}
-
-/* Hide original <select> */
-.unit-select{display:none}
 
 /* ─────────────────────────────────────────
    ACCORDION INPUT ROW
 ───────────────────────────────────────── */
 .acc-input-row{
   display:flex;
-  align-items:flex-end;
+  align-items:center;
   gap:10px;
-  margin-top:4px;
+  margin-top:10px;
 }
 .acc-input{
   flex:1;
@@ -668,8 +608,8 @@ header{
   color:#f0f0f0;
   font-family:'Barlow Condensed',sans-serif;
   font-weight:700;
-  font-size:clamp(20px,2.5vw,26px);
-  padding:12px 14px;
+  font-size:clamp(22px,2.8vw,30px);
+  padding:14px 16px;
   outline:none;
   -moz-appearance:textfield;
   appearance:textfield;
@@ -684,20 +624,20 @@ header{
   background:rgba(232,255,0,0.03);
 }
 .acc-swap{
-  width:36px;height:36px;
+  width:38px;height:38px;
   flex-shrink:0;
   border-radius:50%;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(255,255,255,0.05);
-  color:rgba(240,240,240,0.6);
-  font-size:16px;
+  border:1px solid rgba(232,255,0,0.15);
+  background:rgba(232,255,0,0.05);
+  color:rgba(232,255,0,0.6);
+  font-size:17px;
   cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:background 0.25s, border-color 0.25s, color 0.25s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
   user-select:none;
   outline:none;
   -webkit-tap-highlight-color:transparent;
-  margin-bottom:2px;
+  margin-bottom:0;
 }
 .acc-swap:hover{
   background:rgba(232,255,0,0.12);
@@ -797,24 +737,22 @@ footer{
 
   /* Accordion header */
   .accordion-header{padding:14px 14px;gap:10px}
-  .accordion-inner{padding:0 14px 18px}
+  .accordion-inner{padding:4px 12px 14px;margin:0 3px 3px}
   .accordion-title{font-size:15px}
   .accordion-units{font-size:10px}
 
   /* Select row — STAY ON ONE LINE */
   .select-row{flex-direction:row;align-items:flex-end;gap:6px}
   .select-row .acc-swap{width:28px;height:28px;font-size:12px;flex-shrink:0;margin-bottom:2px}
-  .cdd-trigger{font-size:12px;padding:8px 10px;border-radius:8px}
-  .cdd-arrow{width:12px;height:12px;margin-left:4px}
-  .cdd-panel{border-radius:10px}
-  .cdd-opt{font-size:12px;padding:9px 12px}
-  .cdd-opt.active{padding-left:16px}
+  .unit-cycle{border-radius:8px;min-height:38px}
+  .unit-cycle-btn{font-size:15px;padding:0 8px;min-height:38px}
+  .unit-cycle-txt{font-size:11px;padding:8px 1px}
   .select-label-text{font-size:9px;margin-bottom:4px}
 
   /* Input row — STAY ON ONE LINE */
-  .acc-input-row{flex-direction:row;align-items:center;gap:6px}
+  .acc-input-row{flex-direction:row;align-items:center;gap:6px;margin-top:8px}
   .acc-input-row .acc-swap{visibility:hidden;width:30px;height:0;flex-shrink:0}
-  .acc-input{font-size:clamp(16px,4.5vw,22px);padding:10px 10px;border-radius:10px}
+  .acc-input{font-size:clamp(18px,5vw,24px);padding:12px 10px;border-radius:10px}
 
   /* Section heading */
   .section-heading{font-size:clamp(24px,6vw,36px);text-align:center}
@@ -864,7 +802,7 @@ footer{
 
     <!-- CARD A — kW ↔ PS (Motorenleistung) -->
     <div class="card" data-index="1" aria-label="Leistung kW und PS">
-      <div class="card-title">kW <span>↔</span> PS</div>
+      <div class="card-title">kW <span>·</span> PS</div>
       <div class="card-subtitle">Motorenleistung</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -893,12 +831,12 @@ footer{
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')" aria-label="300 PS">300 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')" aria-label="500 PS">500 PS</button>
       </div>
-      <div class="card-footnote">Kilowatt ↔ Pferdestärke</div>
+      <div class="card-footnote">Kilowatt · Pferdestärke</div>
     </div>
 
     <!-- CARD B — km/h ↔ mph (Geschwindigkeit) -->
     <div class="card" data-index="2" aria-label="Geschwindigkeit km/h und mph">
-      <div class="card-title">km/h <span>↔</span> mph</div>
+      <div class="card-title">km/h <span>·</span> mph</div>
       <div class="card-subtitle">Geschwindigkeit</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -927,12 +865,12 @@ footer{
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')" aria-label="100 mph">100 mph</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')" aria-label="200 mph">200 mph</button>
       </div>
-      <div class="card-footnote">Kilometer pro Stunde ↔ Miles per hour</div>
+      <div class="card-footnote">Kilometer pro Stunde · Miles per hour</div>
     </div>
 
     <!-- CARD C — Nm ↔ lb-ft (Drehmoment) -->
     <div class="card" data-index="3" aria-label="Drehmoment Nm und lb-ft">
-      <div class="card-title">Nm <span>↔</span> lb-ft</div>
+      <div class="card-title">Nm <span>·</span> lb-ft</div>
       <div class="card-subtitle">Drehmoment</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -961,7 +899,7 @@ footer{
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
       </div>
-      <div class="card-footnote">Newtonmeter ↔ Pound-Foot</div>
+      <div class="card-footnote">Newtonmeter · Pound-Foot</div>
     </div>
 
   </div><!-- /pinned-grid -->
@@ -2691,111 +2629,71 @@ document.addEventListener('DOMContentLoaded',()=>{
     setTimeout(()=>card.classList.add('visible'), i*120);
   });
 
-  // Build custom dropdowns from all <select class="unit-select">
-  buildCustomDropdowns();
+  // Build unit cyclers from all <select class="unit-select">
+  buildUnitCyclers();
 });
 
 /* ═══════════════════════════════════════════
-   CUSTOM DROPDOWN BUILDER
+   UNIT CYCLER BUILDER (arrows instead of dropdowns)
 ════════════════════════════════════════════ */
-function buildCustomDropdowns(){
+function buildUnitCyclers(){
   document.querySelectorAll('select.unit-select').forEach(sel=>{
     const wrap=sel.parentElement;
-    const cdd=document.createElement('div');
-    cdd.className='cdd';
+    const cyc=document.createElement('div');
+    cyc.className='unit-cycle';
 
-    // Trigger
-    const trigger=document.createElement('div');
-    trigger.className='cdd-trigger';
-    trigger.setAttribute('tabindex','0');
-    trigger.setAttribute('role','listbox');
+    const btnPrev=document.createElement('button');
+    btnPrev.className='unit-cycle-btn';
+    btnPrev.textContent='\u2039';
+    btnPrev.setAttribute('aria-label','Vorherige Einheit');
 
     const txt=document.createElement('span');
-    txt.className='cdd-txt';
+    txt.className='unit-cycle-txt';
     const selOpt=sel.options[sel.selectedIndex];
-    txt.textContent=selOpt?selOpt.textContent:'—';
+    txt.textContent=selOpt?selOpt.textContent:'\u2014';
 
-    const arrow=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    arrow.setAttribute('class','cdd-arrow');
-    arrow.setAttribute('viewBox','0 0 10 6');
-    arrow.innerHTML="<path d='M1 1l4 4 4-4' stroke='#e8ff00' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/>";
+    const btnNext=document.createElement('button');
+    btnNext.className='unit-cycle-btn';
+    btnNext.textContent='\u203A';
+    btnNext.setAttribute('aria-label','Nächste Einheit');
 
-    trigger.appendChild(txt);
-    trigger.appendChild(arrow);
+    function cycle(dir){
+      const len=sel.options.length;
+      let idx=sel.selectedIndex+dir;
+      if(idx<0) idx=len-1;
+      if(idx>=len) idx=0;
+      sel.selectedIndex=idx;
+      sel.dispatchEvent(new Event('change'));
+      txt.textContent=sel.options[idx].textContent;
+    }
 
-    // Panel
-    const panel=document.createElement('div');
-    panel.className='cdd-panel';
-    const list=document.createElement('div');
-    list.className='cdd-list';
+    btnPrev.addEventListener('click',()=>cycle(-1));
+    btnNext.addEventListener('click',()=>cycle(1));
 
-    Array.from(sel.options).forEach(opt=>{
-      const item=document.createElement('div');
-      item.className='cdd-opt'+(opt.selected?' active':'');
-      item.textContent=opt.textContent;
-      item.dataset.val=opt.value;
-      item.setAttribute('role','option');
-      item.addEventListener('click',()=>{
-        sel.value=opt.value;
-        sel.dispatchEvent(new Event('change'));
-        txt.textContent=opt.textContent;
-        list.querySelectorAll('.cdd-opt').forEach(o=>o.classList.remove('active'));
-        item.classList.add('active');
-        closeCDD(cdd);
-      });
-      list.appendChild(item);
-    });
-    panel.appendChild(list);
+    cyc.appendChild(btnPrev);
+    cyc.appendChild(txt);
+    cyc.appendChild(btnNext);
+    wrap.appendChild(cyc);
 
-    cdd.appendChild(trigger);
-    cdd.appendChild(panel);
-    wrap.appendChild(cdd);
-
-    // Toggle
-    trigger.addEventListener('click',e=>{
-      e.stopPropagation();
-      const isOpen=cdd.classList.contains('open');
-      closeAllCDD();
-      if(!isOpen) cdd.classList.add('open');
-    });
-    trigger.addEventListener('keydown',e=>{
-      if(e.key==='Enter'||e.key===' '){
-        e.preventDefault();
-        trigger.click();
-      }
-    });
-
-    // Keep custom UI in sync if <select> changes programmatically (swap)
-    const observer=new MutationObserver(()=>{syncCDD(sel,cdd)});
-    observer.observe(sel,{attributes:true,childList:true});
-    sel._cdd=cdd;
+    sel._cyc=cyc;
+    sel._cycTxt=txt;
   });
-
-  document.addEventListener('click',()=>closeAllCDD());
 }
 
-function syncCDD(sel,cdd){
+function syncCycler(sel){
+  if(!sel._cycTxt)return;
   const opt=sel.options[sel.selectedIndex];
-  if(!opt)return;
-  cdd.querySelector('.cdd-txt').textContent=opt.textContent;
-  cdd.querySelectorAll('.cdd-opt').forEach(o=>{
-    o.classList.toggle('active',o.dataset.val===opt.value);
-  });
+  if(opt) sel._cycTxt.textContent=opt.textContent;
 }
 
-function closeAllCDD(){
-  document.querySelectorAll('.cdd.open').forEach(d=>d.classList.remove('open'));
-}
-function closeCDD(cdd){cdd.classList.remove('open');}
-
-/* Keep CDD in sync after swapAcc */
+/* Keep cycler in sync after swapAcc */
 const _origSwapAcc=swapAcc;
 swapAcc=function(cat){
   _origSwapAcc(cat);
   const fromSel=document.getElementById(cat+'-from');
   const toSel=document.getElementById(cat+'-to');
-  if(fromSel._cdd)syncCDD(fromSel,fromSel._cdd);
-  if(toSel._cdd)syncCDD(toSel,toSel._cdd);
+  syncCycler(fromSel);
+  syncCycler(toSel);
 };
 </script>
 </body>
