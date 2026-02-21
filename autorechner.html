@@ -244,7 +244,21 @@ header{
   line-height:1;
   margin-bottom:4px;
 }
-.card-title span{color:#e8ff00}
+.card-title .swap-icon{
+  display:inline-block;
+  width:26px;
+  height:12px;
+  vertical-align:middle;
+  margin:0 5px;
+}
+.card-title .swap-icon line,
+.card-title .swap-icon polyline{
+  stroke:#e8ff00;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+}
 .card-subtitle{
   font-family:'Barlow Condensed',sans-serif;
   font-size:clamp(18px,2.2vw,22px);
@@ -261,6 +275,24 @@ header{
   color:rgba(240,240,240,0.22);
   margin-top:14px;
   text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.fn-arrow{
+  display:inline-block;
+  width:20px;
+  height:10px;
+  vertical-align:middle;
+  margin:0 4px;
+}
+.fn-arrow line,
+.fn-arrow polyline{
+  stroke:rgba(232,255,0,0.3);
+  stroke-width:1.3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
 }
 
 /* ─────────────────────────────────────────
@@ -326,7 +358,7 @@ header{
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(255,255,255,0.05);
   color:rgba(240,240,240,0.6);
-  font-size:18px;
+  font-size:0;
   cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:
@@ -690,7 +722,7 @@ header{
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(255,255,255,0.05);
   color:rgba(240,240,240,0.6);
-  font-size:16px;
+  font-size:0;
   cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:background 0.25s, border-color 0.25s, color 0.25s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
@@ -864,7 +896,7 @@ footer{
 
     <!-- CARD A — kW ↔ PS (Motorenleistung) -->
     <div class="card" data-index="1" aria-label="Leistung kW und PS">
-      <div class="card-title">kW <span>↔</span> PS</div>
+      <div class="card-title">kW <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> PS</div>
       <div class="card-subtitle">Motorenleistung</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -875,7 +907,7 @@ footer{
             oninput="convertKwPs('kw')">
           <span class="unit-label">kW</span>
         </div>
-        <button class="swap-btn" onclick="swapAndRecalc('kw-input','ps-input','kw')" aria-label="Werte tauschen">⇄</button>
+        <button class="swap-btn" onclick="swapAndRecalc('kw-input','ps-input','kw')" aria-label="Werte tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
         <div class="input-wrap">
           <input
             class="converter-input" id="ps-input" type="number"
@@ -893,12 +925,12 @@ footer{
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')" aria-label="300 PS">300 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')" aria-label="500 PS">500 PS</button>
       </div>
-      <div class="card-footnote">Kilowatt ↔ Pferdestärke</div>
+      <div class="card-footnote">Kilowatt <svg class="fn-arrow" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pferdestärke</div>
     </div>
 
     <!-- CARD B — km/h ↔ mph (Geschwindigkeit) -->
     <div class="card" data-index="2" aria-label="Geschwindigkeit km/h und mph">
-      <div class="card-title">km/h <span>↔</span> mph</div>
+      <div class="card-title">km/h <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> mph</div>
       <div class="card-subtitle">Geschwindigkeit</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -909,7 +941,7 @@ footer{
             oninput="convertKmhMph('kmh')">
           <span class="unit-label">km/h</span>
         </div>
-        <button class="swap-btn" onclick="swapAndRecalc('kmh-input','mph-input','kmh')" aria-label="Werte tauschen">⇄</button>
+        <button class="swap-btn" onclick="swapAndRecalc('kmh-input','mph-input','kmh')" aria-label="Werte tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
         <div class="input-wrap">
           <input
             class="converter-input" id="mph-input" type="number"
@@ -927,12 +959,12 @@ footer{
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')" aria-label="100 mph">100 mph</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')" aria-label="200 mph">200 mph</button>
       </div>
-      <div class="card-footnote">Kilometer pro Stunde ↔ Miles per hour</div>
+      <div class="card-footnote">Kilometer pro Stunde <svg class="fn-arrow" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Miles per hour</div>
     </div>
 
     <!-- CARD C — Nm ↔ lb-ft (Drehmoment) -->
     <div class="card" data-index="3" aria-label="Drehmoment Nm und lb-ft">
-      <div class="card-title">Nm <span>↔</span> lb-ft</div>
+      <div class="card-title">Nm <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> lb-ft</div>
       <div class="card-subtitle">Drehmoment</div>
       <div class="input-row">
         <div class="input-wrap">
@@ -943,7 +975,7 @@ footer{
             oninput="convertNmLbft('nm')">
           <span class="unit-label">Nm</span>
         </div>
-        <button class="swap-btn" onclick="swapAndRecalc('nm-input','lbft-input','nm')" aria-label="Werte tauschen">⇄</button>
+        <button class="swap-btn" onclick="swapAndRecalc('nm-input','lbft-input','nm')" aria-label="Werte tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
         <div class="input-wrap">
           <input
             class="converter-input" id="lbft-input" type="number"
@@ -961,7 +993,7 @@ footer{
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
       </div>
-      <div class="card-footnote">Newtonmeter ↔ Pound-Foot</div>
+      <div class="card-footnote">Newtonmeter <svg class="fn-arrow" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pound-Foot</div>
     </div>
 
   </div><!-- /pinned-grid -->
@@ -1001,7 +1033,7 @@ footer{
                   <option value="kml">km/L</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('kraft')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('kraft')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="kraft-to" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Nach Einheit">
@@ -1044,7 +1076,7 @@ footer{
                   <option value="fts_s">Fuß/Sekunde (ft/s)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('geschw')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('geschw')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="geschw-to" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Nach">
@@ -1086,7 +1118,7 @@ footer{
                   <option value="gal_a">Gal (cm/s²)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('beschl')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('beschl')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="beschl-to" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Nach">
@@ -1128,7 +1160,7 @@ footer{
                   <option value="dyn_f">Dyn</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('force')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('force')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="force-to" onchange="calcAcc('force','from')" aria-label="Kraft Nach">
@@ -1173,7 +1205,7 @@ footer{
                   <option value="ftlbfs">ft·lbf/s</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('leist')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('leist')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="leist-to" onchange="calcAcc('leist','from')" aria-label="Leistung Nach">
@@ -1218,7 +1250,7 @@ footer{
                   <option value="dyncm">dyn·cm</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('drehm')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('drehm')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="drehm-to" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Nach">
@@ -1265,7 +1297,7 @@ footer{
                   <option value="jahr">Jahr (365 T.)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('zeit')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('zeit')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="zeit-to" onchange="calcAcc('zeit','from')" aria-label="Zeit Nach">
@@ -1314,7 +1346,7 @@ footer{
                   <option value="wh_e">Wattstunde (Wh)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('energ')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('energ')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="energ-to" onchange="calcAcc('energ','from')" aria-label="Energie Nach">
@@ -1366,7 +1398,7 @@ footer{
                   <option value="mi">Meile (mi)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('laenge')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('laenge')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="laenge-to" onchange="calcAcc('laenge','from')" aria-label="Länge Nach Einheit">
@@ -1418,7 +1450,7 @@ footer{
                   <option value="t">Tonne (t)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('gewicht')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('gewicht')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="gewicht-to" onchange="calcAcc('gewicht','from')" aria-label="Gewicht Nach Einheit">
@@ -1483,7 +1515,7 @@ footer{
                   <option value="cad">Kanad. Dollar (C$)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('waehr')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('waehr')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="waehr-to" onchange="calcAcc('waehr','from')" aria-label="Währung Nach">
@@ -1533,7 +1565,7 @@ footer{
                   <option value="K">Kelvin (K)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('temp')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('temp')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="temp-to" onchange="calcAcc('temp','from')" aria-label="Temperatur Nach Einheit">
@@ -1580,7 +1612,7 @@ footer{
                   <option value="m3">Kubikmeter (m³)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('volumen')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('volumen')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="volumen-to" onchange="calcAcc('volumen','from')" aria-label="Volumen Nach Einheit">
@@ -1629,7 +1661,7 @@ footer{
                   <option value="atm">Atmosphäre (atm)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('druck')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('druck')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="druck-to" onchange="calcAcc('druck','from')" aria-label="Druck Nach Einheit">
@@ -1679,7 +1711,7 @@ footer{
                   <option value="mi2">Quadratmeile (mi²)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('flaeche')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('flaeche')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="flaeche-to" onchange="calcAcc('flaeche','from')" aria-label="Fläche Nach">
@@ -1725,7 +1757,7 @@ footer{
                   <option value="revs2">Umdrehung/s²</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wbeschl')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wbeschl')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wbeschl-to" onchange="calcAcc('wbeschl','from')" aria-label="Winkelbeschleunigung Nach">
@@ -1767,7 +1799,7 @@ footer{
                   <option value="rev">Umdrehung</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wink')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wink')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wink-to" onchange="calcAcc('wink','from')" aria-label="Winkel Nach">
@@ -1813,7 +1845,7 @@ footer{
                   <option value="pb">Petabyte (PB)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('dspeicher')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('dspeicher')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="dspeicher-to" onchange="calcAcc('dspeicher','from')" aria-label="Datenspeicher Nach">
@@ -1860,7 +1892,7 @@ footer{
                   <option value="mbyps">MB/s</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('dtransfer')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('dtransfer')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="dtransfer-to" onchange="calcAcc('dtransfer','from')" aria-label="Datenübertragung Nach">
@@ -1906,7 +1938,7 @@ footer{
                   <option value="lbin3">lb/in³</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('dicht')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('dicht')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="dicht-to" onchange="calcAcc('dicht','from')" aria-label="Dichte Nach">
@@ -1949,7 +1981,7 @@ footer{
                   <option value="lbin2">lb·in²</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('traeg')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('traeg')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="traeg-to" onchange="calcAcc('traeg','from')" aria-label="Trägheitsmoment Nach">
@@ -1990,7 +2022,7 @@ footer{
                   <option value="gallb">gal/lb</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('spvol')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('spvol')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="spvol-to" onchange="calcAcc('spvol','from')" aria-label="Spez. Volumen Nach">
@@ -2031,7 +2063,7 @@ footer{
                   <option value="hz_w">Hertz (Hz)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wgeschw')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wgeschw')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wgeschw-to" onchange="calcAcc('wgeschw','from')" aria-label="Winkelgeschwindigkeit Nach">
@@ -2072,7 +2104,7 @@ footer{
                   <option value="btuf_w">BTU/°F</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wkap')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wkap')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wkap-to" onchange="calcAcc('wkap','from')" aria-label="Wärmekapazität Nach">
@@ -2112,7 +2144,7 @@ footer{
                   <option value="kcalhm2_s">kcal/(h·m²)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wstr')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wstr')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wstr-to" onchange="calcAcc('wstr','from')" aria-label="Wärmestromdichte Nach">
@@ -2151,7 +2183,7 @@ footer{
                   <option value="kcalhm2c">kcal/(h·m²·°C)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wuebergang')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wuebergang')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wuebergang-to" onchange="calcAcc('wuebergang','from')" aria-label="Wärmeübergangskoeff. Nach">
@@ -2191,7 +2223,7 @@ footer{
                   <option value="btulbf">BTU/(lb·°F)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('spw')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('spw')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="spw-to" onchange="calcAcc('spw','from')" aria-label="Spez. Wärme Nach">
@@ -2231,7 +2263,7 @@ footer{
                   <option value="k_ti">Δ K</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('tempint')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('tempint')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="tempint-to" onchange="calcAcc('tempint','from')" aria-label="Temperaturintervall Nach">
@@ -2270,7 +2302,7 @@ footer{
                   <option value="kcalhmc">kcal/(h·m·°C)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wleit')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wleit')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wleit-to" onchange="calcAcc('wleit','from')" aria-label="Wärmeleitfähigkeit Nach">
@@ -2310,7 +2342,7 @@ footer{
                   <option value="ummk">µm/(m·K)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('wdehn')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('wdehn')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="wdehn-to" onchange="calcAcc('wdehn','from')" aria-label="Wärmeausdehnung Nach">
@@ -2352,7 +2384,7 @@ footer{
                   <option value="rpm_f">Umdrehung/min (rpm)</option>
                 </select>
               </div>
-              <button class="acc-swap" onclick="swapAcc('freq')" aria-label="Einheiten tauschen">⇄</button>
+              <button class="acc-swap" onclick="swapAcc('freq')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
               <div class="select-wrap">
                 <span class="select-label-text">Nach</span>
                 <select class="unit-select" id="freq-to" onchange="calcAcc('freq','from')" aria-label="Frequenz Nach">
@@ -2383,12 +2415,12 @@ footer{
     <div class="footer-brand">AUTO<span>RECHNER</span></div>
     <div class="footer-desc">ALLE UMRECHNUNGEN FÜR FAHRZEUGDATEN</div>
     <div class="footer-units">
-      <span class="footer-tag">kW ↔ PS</span>
-      <span class="footer-tag">Nm ↔ lb-ft</span>
-      <span class="footer-tag">km/h ↔ mph</span>
-      <span class="footer-tag">L/100km ↔ MPG</span>
-      <span class="footer-tag">bar ↔ PSI</span>
-      <span class="footer-tag">°C ↔ °F ↔ K</span>
+      <span class="footer-tag">kW · PS</span>
+      <span class="footer-tag">Nm · lb-ft</span>
+      <span class="footer-tag">km/h · mph</span>
+      <span class="footer-tag">L/100km · MPG</span>
+      <span class="footer-tag">bar · PSI</span>
+      <span class="footer-tag">°C · °F · K</span>
       <span class="footer-tag">Länge</span>
       <span class="footer-tag">Gewicht</span>
       <span class="footer-tag">Volumen</span>
