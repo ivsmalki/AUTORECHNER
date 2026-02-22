@@ -12,7 +12,11 @@
    RESET & BASE
 ───────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overflow-x:clip;
+}
 body{
   font-family:'Barlow',sans-serif;
   font-weight:400;
@@ -20,6 +24,8 @@ body{
   background:#0a0a0d;
   min-height:100vh;
   overflow-x:hidden;
+  overflow-x:clip;
+  width:100%;
   position:relative;
 }
 
@@ -29,7 +35,8 @@ body{
 body::before{
   content:'';
   position:fixed;
-  inset:0;
+  top:0;left:0;right:0;bottom:0;
+  width:100%;
   z-index:0;
   background:
     radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,255,0,0.04) 0%, transparent 60%),
@@ -47,7 +54,8 @@ body::before{
 body::after{
   content:'';
   position:fixed;
-  inset:0;
+  top:0;left:0;right:0;bottom:0;
+  width:100%;
   z-index:1;
   pointer-events:none;
   background:repeating-linear-gradient(
@@ -92,6 +100,7 @@ body::after{
   max-width:1200px;
   margin:0 auto;
   padding:0 clamp(16px,4vw,48px) 80px;
+  overflow-x:hidden;
 }
 
 /* ─────────────────────────────────────────
@@ -101,6 +110,7 @@ header{
   text-align:center;
   padding:clamp(60px,10vh,120px) 0 clamp(40px,6vh,70px);
   position:relative;
+  overflow:hidden;
 }
 .header-glow{
   position:absolute;
@@ -279,15 +289,15 @@ header{
   align-items:center;
   justify-content:center;
 }
-.fn-arrow{
+.swap-icon{
   display:inline-block;
   width:20px;
   height:10px;
   vertical-align:middle;
   margin:0 4px;
 }
-.fn-arrow line,
-.fn-arrow polyline{
+.swap-icon line,
+.swap-icon polyline{
   stroke:rgba(232,255,0,0.3);
   stroke-width:1.3;
   stroke-linecap:round;
@@ -379,6 +389,17 @@ header{
   box-shadow:0 0 16px rgba(232,255,0,0.2);
 }
 .swap-btn:active{transform:rotate(180deg) scale(0.9)}
+.swap-btn svg{
+  width:18px;height:12px;
+  stroke:#e8ff00;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+  opacity:0.6;
+  transition:opacity 0.25s;
+}
+.swap-btn:hover svg{opacity:1}
 
 /* ─────────────────────────────────────────
    QUICK PILLS
@@ -738,6 +759,17 @@ header{
   transform:rotate(180deg);
   box-shadow:0 0 14px rgba(232,255,0,0.18);
 }
+.acc-swap svg{
+  width:16px;height:10px;
+  stroke:#e8ff00;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+  opacity:0.5;
+  transition:opacity 0.25s;
+}
+.acc-swap:hover svg{opacity:1}
 
 /* ─────────────────────────────────────────
    FOOTER
@@ -925,7 +957,7 @@ footer{
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')" aria-label="300 PS">300 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')" aria-label="500 PS">500 PS</button>
       </div>
-      <div class="card-footnote">Kilowatt <svg class="fn-arrow" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pferdestärke</div>
+      <div class="card-footnote">Kilowatt <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pferdestärke</div>
     </div>
 
     <!-- CARD B — km/h ↔ mph (Geschwindigkeit) -->
@@ -959,7 +991,7 @@ footer{
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')" aria-label="100 mph">100 mph</button>
         <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')" aria-label="200 mph">200 mph</button>
       </div>
-      <div class="card-footnote">Kilometer pro Stunde <svg class="fn-arrow" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Miles per hour</div>
+      <div class="card-footnote">Kilometer pro Stunde <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Miles per hour</div>
     </div>
 
     <!-- CARD C — Nm ↔ lb-ft (Drehmoment) -->
@@ -993,7 +1025,7 @@ footer{
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
         <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
       </div>
-      <div class="card-footnote">Newtonmeter <svg class="fn-arrow" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pound-Foot</div>
+      <div class="card-footnote">Newtonmeter <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pound-Foot</div>
     </div>
 
   </div><!-- /pinned-grid -->
