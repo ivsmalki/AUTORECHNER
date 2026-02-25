@@ -8,15 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ─────────────────────────────────────────
-   RESET & BASE
-───────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-  overflow-x:clip;
-}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   font-family:'Barlow',sans-serif;
   font-weight:400;
@@ -24,19 +17,13 @@ body{
   background:#0a0a0d;
   min-height:100vh;
   overflow-x:hidden;
-  overflow-x:clip;
   width:100%;
   position:relative;
 }
-
-/* ─────────────────────────────────────────
-   ANIMATED GRADIENT MESH BACKGROUND
-───────────────────────────────────────── */
 body::before{
   content:'';
   position:fixed;
   top:0;left:0;right:0;bottom:0;
-  width:100%;
   z-index:0;
   background:
     radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,255,0,0.04) 0%, transparent 60%),
@@ -46,869 +33,445 @@ body::before{
   pointer-events:none;
 }
 @keyframes meshMove{
-  0%{background-position:0% 0%, 100% 100%, 50% 50%}
-  100%{background-position:10% 20%, 90% 70%, 60% 40%}
+  0%{background-position:0% 0%,100% 100%,50% 50%}
+  100%{background-position:10% 20%,90% 70%,60% 40%}
 }
-
-/* SCANLINE OVERLAY */
 body::after{
   content:'';
   position:fixed;
   top:0;left:0;right:0;bottom:0;
-  width:100%;
   z-index:1;
   pointer-events:none;
-  background:repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.07) 2px,
-    rgba(0,0,0,0.07) 4px
-  );
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);
 }
-
-/* ─────────────────────────────────────────
-   TOP PROGRESS BAR
-───────────────────────────────────────── */
 .progress-bar{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:3px;
-  z-index:999;
-  background:rgba(232,255,0,0.12);
-  overflow:hidden;
+  position:fixed;top:0;left:0;width:100%;height:3px;z-index:999;
+  background:rgba(232,255,0,0.12);overflow:hidden;
 }
 .progress-bar::after{
-  content:'';
-  position:absolute;
-  top:0;left:-40%;
-  width:40%;height:100%;
+  content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;
   background:linear-gradient(90deg,transparent,#e8ff00,#ff6b00,transparent);
   animation:progressSweep 2.4s ease-in-out infinite;
 }
-@keyframes progressSweep{
-  0%{left:-40%}
-  100%{left:140%}
-}
-
-/* ─────────────────────────────────────────
-   WRAPPER
-───────────────────────────────────────── */
+@keyframes progressSweep{0%{left:-40%}100%{left:140%}}
 .wrapper{
-  position:relative;
-  z-index:2;
-  max-width:1200px;
-  margin:0 auto;
+  position:relative;z-index:2;
+  max-width:1200px;margin:0 auto;
   padding:0 clamp(16px,4vw,48px) 80px;
-  overflow-x:hidden;
+  overflow:visible;
 }
-
-/* ─────────────────────────────────────────
-   HEADER
-───────────────────────────────────────── */
 header{
   text-align:center;
   padding:clamp(60px,10vh,120px) 0 clamp(40px,6vh,70px);
-  position:relative;
-  overflow:hidden;
+  position:relative;overflow:hidden;
 }
 .header-glow{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:600px;height:300px;
-  background:radial-gradient(ellipse, rgba(232,255,0,0.08) 0%, transparent 70%);
-  pointer-events:none;
-  z-index:0;
+  background:radial-gradient(ellipse,rgba(232,255,0,0.08) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
 }
 .badge{
-  display:inline-block;
-  font-family:'Barlow',sans-serif;
-  font-size:clamp(10px,1.2vw,13px);
-  font-weight:600;
-  letter-spacing:0.3em;
-  color:#e8ff00;
-  text-transform:uppercase;
-  border:1px solid rgba(232,255,0,0.25);
-  padding:5px 18px;
-  border-radius:100px;
-  margin-bottom:22px;
-  position:relative;
-  z-index:1;
-  backdrop-filter:blur(8px);
-  background:rgba(232,255,0,0.04);
+  display:inline-block;font-family:'Barlow',sans-serif;
+  font-size:clamp(10px,1.2vw,13px);font-weight:600;letter-spacing:0.3em;
+  color:#e8ff00;text-transform:uppercase;border:1px solid rgba(232,255,0,0.25);
+  padding:5px 18px;border-radius:100px;margin-bottom:22px;position:relative;z-index:1;
+  backdrop-filter:blur(8px);background:rgba(232,255,0,0.04);
 }
 .headline{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;
-  font-size:clamp(52px,10vw,130px);
-  line-height:0.88;
-  letter-spacing:-0.02em;
-  position:relative;
-  z-index:1;
-  margin-bottom:20px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(52px,10vw,130px);line-height:0.88;letter-spacing:-0.02em;
+  position:relative;z-index:1;margin-bottom:20px;
 }
 .headline .white{color:#f0f0f0}
 .headline .yellow{color:#e8ff00}
 .subtitle{
-  font-family:'Barlow',sans-serif;
-  font-weight:300;
-  font-size:clamp(13px,1.5vw,16px);
-  color:rgba(240,240,240,0.5);
-  max-width:560px;
-  margin:0 auto;
-  line-height:1.6;
-  position:relative;
-  z-index:1;
-  letter-spacing:0.01em;
+  font-family:'Barlow',sans-serif;font-weight:300;
+  font-size:clamp(13px,1.5vw,16px);color:rgba(240,240,240,0.5);
+  max-width:560px;margin:0 auto;line-height:1.6;position:relative;z-index:1;letter-spacing:0.01em;
 }
 
-/* ─────────────────────────────────────────
-   PINNED CARDS GRID
-───────────────────────────────────────── */
-.pinned-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin-bottom:48px;
-}
+/* PINNED CARDS */
+.pinned-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px;}
 @media(max-width:900px){.pinned-grid{grid-template-columns:1fr}}
-
-/* ─────────────────────────────────────────
-   GLASSMORPHISM CARD
-───────────────────────────────────────── */
 .card{
-  background:rgba(17,17,22,0.85);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:20px;
-  padding:28px 24px 22px;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  position:relative;
-  overflow:hidden;
-  opacity:0;
-  transform:translateY(28px);
-  transition:
-    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
-    transform 0.6s cubic-bezier(0.22,1,0.36,1),
-    border-color 0.3s,
-    box-shadow 0.3s;
+  background:rgba(17,17,22,0.85);border:1px solid rgba(255,255,255,0.06);
+  border-radius:20px;padding:28px 24px 22px;backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);position:relative;overflow:hidden;
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.6s cubic-bezier(0.22,1,0.36,1),transform 0.6s cubic-bezier(0.22,1,0.36,1),border-color 0.3s,box-shadow 0.3s;
 }
-.card.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-.card:hover{
-  border-color:rgba(232,255,0,0.18);
-  box-shadow:0 8px 40px rgba(232,255,0,0.06), 0 2px 12px rgba(0,0,0,0.4);
-}
-.card:has(.cdd.open){
-  overflow:visible;
-  z-index:70;
-}
-
-/* SHIMMER SWEEP */
+.card.visible{opacity:1;transform:translateY(0)}
+.card:hover{border-color:rgba(232,255,0,0.18);box-shadow:0 8px 40px rgba(232,255,0,0.06),0 2px 12px rgba(0,0,0,0.4)}
 .card::after{
-  content:'';
-  position:absolute;
-  top:0;left:-100%;
-  width:60%;height:100%;
-  background:linear-gradient(
-    100deg,
-    transparent 0%,
-    rgba(255,255,255,0.03) 50%,
-    transparent 100%
-  );
-  transition:left 0.6s ease;
-  pointer-events:none;
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,0.03) 50%,transparent 100%);
+  transition:left 0.6s ease;pointer-events:none;
 }
 .card:hover::after{left:160%}
-
-/* TOP ACCENT LINE */
 .card::before{
-  content:'';
-  position:absolute;
-  top:0;left:24px;right:24px;
-  height:2px;
+  content:'';position:absolute;top:0;left:24px;right:24px;height:2px;
   background:linear-gradient(90deg,transparent,rgba(232,255,0,0.5),transparent);
-  border-radius:0 0 2px 2px;
-  opacity:0;
-  transition:opacity 0.3s;
+  border-radius:0 0 2px 2px;opacity:0;transition:opacity 0.3s;
 }
 .card:hover::before{opacity:1}
-
-/* ─────────────────────────────────────────
-   CARD HEADER
-───────────────────────────────────────── */
-.card-icon{
-  font-size:22px;
-  margin-bottom:6px;
-  display:block;
-}
 .card-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;
-  font-size:clamp(22px,2.5vw,28px);
-  letter-spacing:0.02em;
-  color:#f0f0f0;
-  line-height:1;
-  margin-bottom:4px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(22px,2.5vw,28px);letter-spacing:0.02em;color:#f0f0f0;
+  line-height:1;margin-bottom:4px;
 }
-.card-title .swap-icon{
-  display:inline-block;
-  width:26px;
-  height:12px;
-  vertical-align:middle;
-  margin:0 5px;
-}
-.card-title .swap-icon line,
-.card-title .swap-icon polyline{
-  stroke:#e8ff00;
-  stroke-width:1.6;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  fill:none;
-}
+.card-title .swap-icon{display:inline-block;width:26px;height:12px;vertical-align:middle;margin:0 5px;}
+.card-title .swap-icon line,.card-title .swap-icon polyline{stroke:#e8ff00;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;fill:none;}
 .card-subtitle{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(18px,2.2vw,22px);
-  font-weight:700;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  color:rgba(240,240,240,0.55);
-  margin-bottom:22px;
+  font-family:'Barlow Condensed',sans-serif;font-size:clamp(18px,2.2vw,22px);font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;color:rgba(240,240,240,0.55);margin-bottom:22px;
 }
 .card-footnote{
-  font-size:14px;
-  font-weight:400;
-  letter-spacing:0.08em;
-  color:rgba(240,240,240,0.22);
-  margin-top:14px;
-  text-align:center;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  font-size:14px;font-weight:400;letter-spacing:0.08em;color:rgba(240,240,240,0.22);
+  margin-top:14px;text-align:center;display:flex;align-items:center;justify-content:center;
 }
-.swap-icon{
-  display:inline-block;
-  width:20px;
-  height:10px;
-  vertical-align:middle;
-  margin:0 4px;
-}
-.swap-icon line,
-.swap-icon polyline{
-  stroke:rgba(232,255,0,0.3);
-  stroke-width:1.3;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  fill:none;
-}
-
-/* ─────────────────────────────────────────
-   INPUT ROW
-───────────────────────────────────────── */
-.input-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-}
-.input-wrap{
-  flex:1;
-  position:relative;
-}
+.swap-icon{display:inline-block;width:20px;height:10px;vertical-align:middle;margin:0 4px;}
+.swap-icon line,.swap-icon polyline{stroke:rgba(232,255,0,0.3);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.input-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.input-wrap{flex:1;position:relative;}
 .unit-label{
-  position:absolute;
-  bottom:8px;left:12px;
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:rgba(232,255,0,0.55);
-  pointer-events:none;
-  z-index:2;
-  transition:color 0.2s;
+  position:absolute;bottom:8px;left:12px;font-size:10px;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,255,0,0.55);
+  pointer-events:none;z-index:2;transition:color 0.2s;
 }
 .converter-input{
-  width:100%;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px;
-  color:#f0f0f0;
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;
-  font-size:clamp(22px,3vw,30px);
-  padding:14px 12px 24px 12px;
-  outline:none;
-  -moz-appearance:textfield;
-  appearance:textfield;
-  transition:
-    border-color 0.25s,
-    box-shadow 0.25s,
-    background 0.25s;
-  width:100%;
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;color:#f0f0f0;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:clamp(22px,3vw,30px);padding:14px 12px 24px 12px;outline:none;
+  -moz-appearance:textfield;appearance:textfield;
+  transition:border-color 0.25s,box-shadow 0.25s,background 0.25s;
 }
-.converter-input::-webkit-outer-spin-button,
-.converter-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.converter-input::-webkit-outer-spin-button,.converter-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .converter-input:focus{
   border-color:rgba(232,255,0,0.6);
-  box-shadow:0 0 0 3px rgba(232,255,0,0.1), 0 0 20px rgba(232,255,0,0.12);
+  box-shadow:0 0 0 3px rgba(232,255,0,0.1),0 0 20px rgba(232,255,0,0.12);
   background:rgba(232,255,0,0.03);
 }
 .converter-input:focus + .unit-label{color:rgba(232,255,0,0.9)}
-
-/* ─────────────────────────────────────────
-   SWAP BUTTON
-───────────────────────────────────────── */
 .swap-btn{
-  width:38px;height:38px;
-  flex-shrink:0;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(255,255,255,0.05);
-  color:rgba(240,240,240,0.6);
-  font-size:0;
-  cursor:pointer;
+  width:38px;height:38px;flex-shrink:0;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);
+  color:rgba(240,240,240,0.6);font-size:0;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:
-    background 0.25s,
-    border-color 0.25s,
-    color 0.25s,
-    transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
-    box-shadow 0.25s;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  outline:none;
+  transition:background 0.25s,border-color 0.25s,color 0.25s,transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s;
+  user-select:none;-webkit-tap-highlight-color:transparent;outline:none;
 }
 .swap-btn:hover{
-  background:rgba(232,255,0,0.12);
-  border-color:rgba(232,255,0,0.5);
-  color:#e8ff00;
-  transform:rotate(180deg);
-  box-shadow:0 0 16px rgba(232,255,0,0.2);
+  background:rgba(232,255,0,0.12);border-color:rgba(232,255,0,0.5);color:#e8ff00;
+  transform:rotate(180deg);box-shadow:0 0 16px rgba(232,255,0,0.2);
 }
 .swap-btn:active{transform:rotate(180deg) scale(0.9)}
-.swap-btn svg{
-  width:18px;height:12px;
-  stroke:#e8ff00;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  fill:none;
-  opacity:0.6;
-  transition:opacity 0.25s;
-}
+.swap-btn svg{width:18px;height:12px;stroke:#e8ff00;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:0.6;transition:opacity 0.25s;}
 .swap-btn:hover svg{opacity:1}
-
-/* ─────────────────────────────────────────
-   QUICK PILLS
-───────────────────────────────────────── */
-.quick-pills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
+.quick-pills{display:flex;flex-wrap:wrap;gap:7px;}
 .pill{
-  position:relative;
-  overflow:hidden;
-  font-family:'Barlow',sans-serif;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:0.04em;
-  color:rgba(240,240,240,0.6);
-  border:1px solid rgba(255,255,255,0.1);
-  background:rgba(255,255,255,0.04);
-  border-radius:100px;
-  padding:5px 13px;
-  cursor:pointer;
-  transition:
-    color 0.2s,
-    border-color 0.2s,
-    background 0.2s,
-    box-shadow 0.2s;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  outline:none;
+  position:relative;overflow:hidden;font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:0.04em;color:rgba(240,240,240,0.6);border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);border-radius:100px;padding:5px 13px;cursor:pointer;
+  transition:color 0.2s,border-color 0.2s,background 0.2s,box-shadow 0.2s;
+  user-select:none;-webkit-tap-highlight-color:transparent;outline:none;
 }
 .pill::after{
-  content:'';
-  position:absolute;
-  bottom:0;left:50%;
-  transform:translateX(-50%);
-  width:0;height:2px;
-  background:#e8ff00;
-  border-radius:2px;
-  transition:width 0.25s ease;
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:2px;background:#e8ff00;border-radius:2px;transition:width 0.25s ease;
 }
-.pill:hover{
-  color:#e8ff00;
-  border-color:rgba(232,255,0,0.35);
-  background:rgba(232,255,0,0.07);
-  box-shadow:0 2px 12px rgba(232,255,0,0.1);
-}
+.pill:hover{color:#e8ff00;border-color:rgba(232,255,0,0.35);background:rgba(232,255,0,0.07);box-shadow:0 2px 12px rgba(232,255,0,0.1);}
 .pill:hover::after{width:60%}
 .pill:active{transform:scale(0.95)}
 
-/* ─────────────────────────────────────────
-   SECTION HEADING
-───────────────────────────────────────── */
+/* SECTION HEADING */
 .section-heading{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;
-  font-size:clamp(28px,4vw,42px);
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-  color:#f0f0f0;
-  margin-bottom:6px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(28px,4vw,42px);letter-spacing:0.04em;text-transform:uppercase;
+  color:#f0f0f0;margin-bottom:6px;
 }
 .section-heading span{color:#e8ff00}
-.section-sub{
-  font-size:13px;
-  font-weight:400;
-  color:rgba(240,240,240,0.4);
-  margin-bottom:28px;
-  letter-spacing:0.04em;
-}
+.section-sub{font-size:13px;font-weight:400;color:rgba(240,240,240,0.4);margin-bottom:28px;letter-spacing:0.04em;}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(232,255,0,0.15),transparent);margin:48px 0 36px;}
 
 /* ─────────────────────────────────────────
-   ACCORDION
+   GOOGLE-STYLE UNIT CONVERTER
 ───────────────────────────────────────── */
-.accordion{
+
+/* Outer card */
+.unit-selector-box{
+  background:rgba(17,17,22,0.85);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:32px 28px 28px;
+  position:relative;
+  overflow:visible;
+}
+.unit-selector-box::before{
+  content:'';position:absolute;top:0;left:28px;right:28px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(232,255,0,0.4),transparent);
+  border-radius:0 0 2px 2px;pointer-events:none;
+}
+
+/* ── ROW 1: Category dropdown (full-width) ── */
+.gc-cat-row{
+  position:relative;
+  z-index:20;
+  margin-bottom:16px;
+}
+
+/* ── ROW 2: [value] [unit▾] = [value] [unit▾] ── */
+.gc-converter-row{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;
+  overflow:visible;
+  background:rgba(255,255,255,0.03);
+}
+
+/* Each half */
+.gc-side{
+  flex:1;
   display:flex;
   flex-direction:column;
-  gap:12px;
-}
-.accordion-item{
-  background:rgba(17,17,22,0.8);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:16px;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  overflow:hidden;
-  transition:border-color 0.3s, box-shadow 0.3s, overflow 0s 0.5s;
-}
-.accordion-item.open{
-  border-color:rgba(232,255,0,0.18);
-  box-shadow:0 4px 32px rgba(232,255,0,0.05);
+  position:relative;
   overflow:visible;
-  transition:border-color 0.3s, box-shadow 0.3s, overflow 0s 0s;
 }
-.accordion-item:has(.cdd.open){
-  z-index:70;
-  position:relative;
-}
-.accordion-header{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:18px 24px;
-  cursor:pointer;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  transition:background 0.2s;
-  position:relative;
-}
-.accordion-header:hover{background:rgba(232,255,0,0.03)}
-.accordion-icon-wrap{
-  width:42px;height:42px;
-  border-radius:12px;
-  background:rgba(232,255,0,0.07);
-  border:1px solid rgba(232,255,0,0.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;
-  flex-shrink:0;
-  transition:background 0.3s, border-color 0.3s;
-}
-.accordion-item.open .accordion-icon-wrap{
-  background:rgba(232,255,0,0.14);
-  border-color:rgba(232,255,0,0.35);
-}
-.accordion-text{flex:1}
-.accordion-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;
-  font-size:clamp(16px,2vw,20px);
-  color:#f0f0f0;
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-}
-.accordion-units{
-  font-size:11px;
-  font-weight:500;
-  color:rgba(240,240,240,0.35);
-  letter-spacing:0.08em;
-  margin-top:2px;
-}
-.accordion-chevron{
-  font-size:18px;
-  color:rgba(240,240,240,0.35);
-  transition:transform 0.4s cubic-bezier(0.22,1,0.36,1), color 0.3s;
-}
-.accordion-item.open .accordion-chevron{
-  transform:rotate(180deg);
-  color:#e8ff00;
+.gc-side:first-child{
+  border-right:1px solid rgba(255,255,255,0.08);
 }
 
-/* ─────────────────────────────────────────
-   ACCORDION BODY (smooth max-height)
-───────────────────────────────────────── */
-.accordion-body{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1), overflow 0s 0.5s;
-}
-.accordion-item.open .accordion-body{
-  max-height:800px;
-  overflow:visible;
-  transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1), overflow 0s 0s;
-}
-.accordion-inner{
-  padding:0 24px 24px;
-  position:relative;
-}
-
-/* SELECT ROW */
-.select-row{
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  margin-bottom:14px;
-}
-.select-wrap{
-  flex:1;
-  position:relative;
-  z-index:10;
-}
-.select-wrap:has(.cdd.open){
-  z-index:60;
-}
-.select-label-text{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:rgba(240,240,240,0.4);
-  margin-bottom:6px;
-  display:block;
-}
-
-/* CUSTOM DROPDOWN TRIGGER */
-.cdd{position:relative}
-.cdd-trigger{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+/* Number input */
+.gc-value-input{
   width:100%;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:10px;
-  color:#f0f0f0;
-  font-family:'Barlow',sans-serif;
-  font-weight:500;
-  font-size:14px;
-  padding:11px 14px;
-  cursor:pointer;
-  user-select:none;
-  transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
-  -webkit-tap-highlight-color:transparent;
+  background:transparent;
+  border:none;
   outline:none;
+  color:#f0f0f0;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:clamp(28px,4vw,40px);
+  padding:18px 18px 8px 18px;
+  -moz-appearance:textfield;appearance:textfield;
+  letter-spacing:0.01em;
 }
-.cdd-trigger:hover{
-  border-color:rgba(232,255,0,0.25);
-  background:rgba(232,255,0,0.03);
-}
-.cdd.open .cdd-trigger{
-  border-color:rgba(232,255,0,0.5);
-  box-shadow:0 0 0 2px rgba(232,255,0,0.08), 0 0 16px rgba(232,255,0,0.06);
-  background:rgba(232,255,0,0.04);
-}
-.cdd-arrow{
-  width:16px;height:16px;
-  flex-shrink:0;
-  margin-left:8px;
-  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
-  opacity:0.45;
-}
-.cdd-arrow path{stroke:#e8ff00}
-.cdd.open .cdd-arrow{transform:rotate(180deg);opacity:0.9}
+.gc-value-input::-webkit-outer-spin-button,
+.gc-value-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.gc-value-input::placeholder{color:rgba(240,240,240,0.2)}
 
-/* DROPDOWN PANEL */
-.cdd-panel{
-  position:absolute;
-  top:calc(100% + 6px);
-  left:0;right:0;
-  background:rgba(18,18,24,0.98);
-  border:1px solid rgba(232,255,0,0.15);
+/* Unit dropdown inside the row */
+.gc-unit-dd{
+  position:relative;
+  z-index:1;
+  overflow:visible;
+}
+.gc-unit-dd.open{z-index:9000;}
+
+.gc-unit-trigger{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:8px 18px 14px;
+  background:transparent;border:none;cursor:pointer;
+  font-family:'Barlow',sans-serif;font-size:14px;font-weight:500;
+  color:rgba(232,255,0,0.8);
+  user-select:none;outline:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:color 0.2s;
+  text-align:left;
+}
+.gc-unit-trigger:hover{color:#e8ff00;}
+.gc-unit-dd.open .gc-unit-trigger{color:#e8ff00;}
+.gc-unit-trigger-name{flex:1;}
+.gc-unit-trigger-arrow{
+  width:14px;height:14px;flex-shrink:0;margin-left:6px;
+  transition:transform 0.25s cubic-bezier(0.22,1,0.36,1);opacity:0.6;
+}
+.gc-unit-dd.open .gc-unit-trigger-arrow{transform:rotate(180deg);opacity:1;}
+
+/* Unit dropdown panel */
+.gc-unit-panel{
+  position:absolute;top:calc(100% + 4px);left:0;
+  min-width:220px;width:max-content;
+  background:rgba(13,13,18,0.99);
+  border:1px solid rgba(232,255,0,0.18);
   border-radius:12px;
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  z-index:100;
+  z-index:9999;
   overflow:hidden;
-  max-height:0;
-  opacity:0;
-  transform:translateY(-6px);
-  transition:max-height 0.35s cubic-bezier(0.22,1,0.36,1),
-             opacity 0.25s ease,
-             transform 0.25s ease;
-  pointer-events:none;
-  box-shadow:0 12px 40px rgba(0,0,0,0.6), 0 0 20px rgba(232,255,0,0.04);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity 0.2s ease,transform 0.2s ease,visibility 0s 0.2s;
+  box-shadow:0 16px 48px rgba(0,0,0,0.85),0 0 20px rgba(232,255,0,0.04);
 }
-.cdd.open .cdd-panel{
-  max-height:280px;
-  opacity:1;
-  transform:translateY(0);
-  pointer-events:auto;
+.gc-unit-dd.open .gc-unit-panel{
+  opacity:1;visibility:visible;transform:translateY(0);
+  transition:opacity 0.2s ease,transform 0.2s ease,visibility 0s 0s;
 }
-.cdd-list{
-  overflow-y:auto;
-  max-height:280px;
-  padding:4px;
-}
-.cdd-list::-webkit-scrollbar{width:3px}
-.cdd-list::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
+.gc-unit-scroll{overflow-y:auto;max-height:320px;padding:4px;}
+.gc-unit-scroll::-webkit-scrollbar{width:3px}
+.gc-unit-scroll::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
 
-/* DROPDOWN OPTION */
-.cdd-opt{
-  padding:10px 14px;
-  font-family:'Barlow',sans-serif;
-  font-weight:400;
-  font-size:13px;
+/* Unit option */
+.gc-unit-opt{
+  padding:9px 16px 9px 22px;
+  border-radius:7px;cursor:pointer;
+  font-family:'Barlow',sans-serif;font-size:13px;font-weight:400;
   color:rgba(240,240,240,0.7);
-  border-radius:8px;
-  cursor:pointer;
-  transition:background 0.15s, color 0.15s;
-  position:relative;
+  transition:background 0.12s,color 0.12s;
+  position:relative;white-space:nowrap;
 }
-.cdd-opt:hover{
-  background:rgba(232,255,0,0.08);
-  color:#f0f0f0;
+.gc-unit-opt:hover{background:rgba(232,255,0,0.08);color:#f0f0f0;}
+.gc-unit-opt.active{
+  background:rgba(232,255,0,0.14);color:#e8ff00;font-weight:600;
+  padding-left:28px;
 }
-.cdd-opt.active{
-  background:rgba(232,255,0,0.12);
-  color:#e8ff00;
-  font-weight:600;
+.gc-unit-opt.active::before{
+  content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  width:3px;height:13px;background:#e8ff00;border-radius:3px;
 }
-.cdd-opt.active::before{
-  content:'';
-  position:absolute;
-  left:6px;top:50%;
-  transform:translateY(-50%);
-  width:3px;height:14px;
-  background:#e8ff00;
-  border-radius:3px;
-}
-.cdd-opt.active{padding-left:18px}
 
-/* Hide original <select> */
-.unit-select{display:none}
-
-/* ─────────────────────────────────────────
-   ACCORDION INPUT ROW
-───────────────────────────────────────── */
-.acc-input-row{
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  margin-top:4px;
+/* EQUALS divider between the two sides */
+.gc-equals{
+  display:flex;align-items:center;justify-content:center;
+  padding:0 4px;
+  color:rgba(240,240,240,0.25);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:300;
+  flex-shrink:0;
+  user-select:none;
 }
-.acc-input{
-  flex:1;
+
+/* Category dropdown (top full-width) */
+.gc-cat-dd{position:relative;z-index:20;overflow:visible;}
+.gc-cat-dd.open{z-index:9100;}
+
+.gc-cat-trigger{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:13px 18px;
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px;
+  border-radius:12px;cursor:pointer;
+  font-family:'Barlow',sans-serif;font-size:15px;font-weight:500;
   color:#f0f0f0;
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;
-  font-size:clamp(20px,2.5vw,26px);
-  padding:12px 14px;
-  outline:none;
-  -moz-appearance:textfield;
-  appearance:textfield;
-  width:100%;
-  transition:border-color 0.25s, box-shadow 0.25s, background 0.25s;
-}
-.acc-input::-webkit-outer-spin-button,
-.acc-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.acc-input:focus{
-  border-color:rgba(232,255,0,0.6);
-  box-shadow:0 0 0 3px rgba(232,255,0,0.1), 0 0 20px rgba(232,255,0,0.1);
-  background:rgba(232,255,0,0.03);
-}
-.acc-swap{
-  width:36px;height:36px;
-  flex-shrink:0;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(255,255,255,0.05);
-  color:rgba(240,240,240,0.6);
-  font-size:0;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background 0.25s, border-color 0.25s, color 0.25s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
-  user-select:none;
-  outline:none;
+  user-select:none;outline:none;
   -webkit-tap-highlight-color:transparent;
-  margin-bottom:2px;
+  transition:border-color 0.2s,background 0.2s;
 }
-.acc-swap:hover{
-  background:rgba(232,255,0,0.12);
+.gc-cat-trigger:hover{border-color:rgba(232,255,0,0.3);background:rgba(232,255,0,0.03);}
+.gc-cat-dd.open .gc-cat-trigger{
   border-color:rgba(232,255,0,0.5);
-  color:#e8ff00;
-  transform:rotate(180deg);
-  box-shadow:0 0 14px rgba(232,255,0,0.18);
+  background:rgba(232,255,0,0.04);
+  box-shadow:0 0 0 3px rgba(232,255,0,0.07);
 }
-.acc-swap svg{
-  width:16px;height:10px;
-  stroke:#e8ff00;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  fill:none;
-  opacity:0.5;
-  transition:opacity 0.25s;
+.gc-cat-trigger-arrow{
+  width:16px;height:16px;flex-shrink:0;margin-left:10px;
+  transition:transform 0.25s cubic-bezier(0.22,1,0.36,1);opacity:0.5;
 }
-.acc-swap:hover svg{opacity:1}
+.gc-cat-dd.open .gc-cat-trigger-arrow{transform:rotate(180deg);opacity:1;}
 
-/* ─────────────────────────────────────────
-   FOOTER
-───────────────────────────────────────── */
+.gc-cat-panel{
+  position:absolute;top:calc(100% + 6px);left:0;right:0;
+  background:rgba(13,13,18,0.99);
+  border:1px solid rgba(232,255,0,0.15);
+  border-radius:12px;
+  z-index:9999;overflow:hidden;
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity 0.2s ease,transform 0.2s ease,visibility 0s 0.2s;
+  box-shadow:0 16px 48px rgba(0,0,0,0.85);
+}
+.gc-cat-dd.open .gc-cat-panel{
+  opacity:1;visibility:visible;transform:translateY(0);
+  transition:opacity 0.2s ease,transform 0.2s ease,visibility 0s 0s;
+}
+.gc-cat-scroll{overflow-y:auto;max-height:280px;padding:4px;}
+.gc-cat-scroll::-webkit-scrollbar{width:3px}
+.gc-cat-scroll::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
+
+.gc-cat-opt{
+  padding:10px 16px;border-radius:7px;cursor:pointer;
+  font-family:'Barlow',sans-serif;font-size:14px;font-weight:400;
+  color:rgba(240,240,240,0.7);
+  transition:background 0.12s,color 0.12s;position:relative;
+}
+.gc-cat-opt:hover{background:rgba(232,255,0,0.08);color:#f0f0f0;}
+.gc-cat-opt.active{
+  background:rgba(232,255,0,0.12);color:#e8ff00;font-weight:600;
+  padding-left:26px;
+}
+.gc-cat-opt.active::before{
+  content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  width:3px;height:13px;background:#e8ff00;border-radius:3px;
+}
+
+@media(max-width:600px){
+  .gc-value-input{font-size:clamp(22px,6vw,32px);padding:14px 12px 6px;}
+  .gc-unit-trigger{padding:6px 12px 10px;font-size:12px;}
+  .gc-equals{padding:0 2px;font-size:18px;}
+}
+
+/* Section divider within selector */
+.selector-divider{
+  height:1px;background:rgba(255,255,255,0.05);margin:20px 0 0;
+}
+.selector-section-title{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(18px,2.5vw,24px);letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(240,240,240,0.5);margin-bottom:16px;margin-top:28px;
+  padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.selector-section-title span{color:#e8ff00}
+
+/* FOOTER */
 footer{
-  margin-top:80px;
-  padding:40px 0 50px;
+  margin-top:80px;padding:40px 0 50px;
   border-top:1px solid rgba(255,255,255,0.06);
-  text-align:center;
-  position:relative;
-  z-index:2;
+  text-align:center;position:relative;z-index:2;
 }
-.footer-brand{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;
-  font-size:clamp(20px,3vw,28px);
-  letter-spacing:0.1em;
-  margin-bottom:8px;
-}
+.footer-brand{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(20px,3vw,28px);letter-spacing:0.1em;margin-bottom:8px;}
 .footer-brand span{color:#e8ff00}
-.footer-desc{
-  font-size:12px;
-  font-weight:400;
-  color:rgba(240,240,240,0.3);
-  margin-bottom:20px;
-  letter-spacing:0.08em;
-}
-.footer-units{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-}
-.footer-tag{
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.06em;
-  color:rgba(240,240,240,0.25);
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:100px;
-  padding:4px 12px;
-}
-.footer-copy{
-  margin-top:28px;
-  font-size:11px;
-  color:rgba(240,240,240,0.18);
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-}
+.footer-desc{font-size:12px;font-weight:400;color:rgba(240,240,240,0.3);margin-bottom:20px;letter-spacing:0.08em;}
+.footer-units{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+.footer-tag{font-size:11px;font-weight:500;letter-spacing:0.06em;color:rgba(240,240,240,0.25);border:1px solid rgba(255,255,255,0.07);border-radius:100px;padding:4px 12px;}
+.footer-copy{margin-top:28px;font-size:11px;color:rgba(240,240,240,0.18);letter-spacing:0.1em;text-transform:uppercase;}
 
-/* ─────────────────────────────────────────
-   COUNTER ANIMATION
-───────────────────────────────────────── */
-@keyframes inputPulse{
-  0%{box-shadow:0 0 0 0 rgba(232,255,0,0.4)}
-  70%{box-shadow:0 0 0 10px rgba(232,255,0,0)}
-  100%{box-shadow:0 0 0 0 rgba(232,255,0,0)}
-}
+/* ANIMATIONS */
+@keyframes inputPulse{0%{box-shadow:0 0 0 0 rgba(232,255,0,0.4)}70%{box-shadow:0 0 0 10px rgba(232,255,0,0)}100%{box-shadow:0 0 0 0 rgba(232,255,0,0)}}
 .pulse{animation:inputPulse 0.5s ease-out}
 
-/* ─────────────────────────────────────────
-   DIVIDER
-───────────────────────────────────────── */
-.divider{
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(232,255,0,0.15),transparent);
-  margin:48px 0 36px;
-}
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#0a0a0d}
+::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(232,255,0,0.4)}
 
-/* ─────────────────────────────────────────
-   RESPONSIVE TWEAKS
-───────────────────────────────────────── */
 @media(max-width:600px){
-  /* Center wrapper properly */
   .wrapper{padding:0 16px 60px}
-
-  /* Header centering */
   header{padding:50px 0 30px}
   .subtitle{padding:0 8px}
-
-  /* Pinned cards */
   .input-row{flex-direction:row;align-items:center;gap:6px}
-  .input-row .swap-btn{width:30px;height:30px;font-size:13px;flex-shrink:0}
+  .swap-btn{width:30px;height:30px;flex-shrink:0}
   .converter-input{font-size:clamp(16px,4.5vw,22px);padding:10px 8px 20px 8px}
   .unit-label{font-size:8px;bottom:6px;left:8px}
   .card{padding:20px 16px 18px}
   .quick-pills{gap:5px}
   .pill{font-size:11px;padding:4px 10px}
-
-  /* Accordion header */
-  .accordion-header{padding:14px 14px;gap:10px}
-  .accordion-inner{padding:0 14px 18px}
-  .accordion-title{font-size:15px}
-  .accordion-units{font-size:10px}
-
-  /* Select row — STAY ON ONE LINE */
-  .select-row{flex-direction:row;align-items:flex-end;gap:6px}
-  .select-row .acc-swap{width:28px;height:28px;font-size:12px;flex-shrink:0;margin-bottom:2px}
-  .cdd-trigger{font-size:12px;padding:8px 10px;border-radius:8px}
-  .cdd-arrow{width:12px;height:12px;margin-left:4px}
-  .cdd-panel{border-radius:10px}
-  .cdd-opt{font-size:12px;padding:9px 12px}
-  .cdd-opt.active{padding-left:16px}
-  .select-label-text{font-size:9px;margin-bottom:4px}
-
-  /* Input row — STAY ON ONE LINE */
-  .acc-input-row{flex-direction:row;align-items:center;gap:6px}
-  .acc-input-row .acc-swap{visibility:hidden;width:30px;height:0;flex-shrink:0}
-  .acc-input{font-size:clamp(16px,4.5vw,22px);padding:10px 10px;border-radius:10px}
-
-  /* Section heading */
+  .unit-selector-box{padding:20px 16px}
   .section-heading{font-size:clamp(24px,6vw,36px);text-align:center}
   .section-sub{text-align:center}
-
-  /* Footer */
   footer{margin-top:50px;padding:30px 0 40px}
   .footer-units{gap:5px}
   .footer-tag{font-size:10px;padding:3px 9px}
 }
-
-/* ─────────────────────────────────────────
-   SCROLLBAR STYLING
-───────────────────────────────────────── */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:#0a0a0d}
-::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:rgba(232,255,0,0.4)}
 </style>
 </head>
 <body>
 
-<!-- TOP PROGRESS BAR -->
 <div class="progress-bar" role="progressbar" aria-label="Dekorationsbalken"></div>
 
 <div class="wrapper">
 
-  <!-- ═══════════════════════════════════════
-       HEADER
-  ══════════════════════════════════════════ -->
+  <!-- HEADER -->
   <header>
     <div class="header-glow" aria-hidden="true"></div>
     <div class="badge">FAHRZEUG · UMRECHNER</div>
@@ -921,1946 +484,499 @@ footer{
     </p>
   </header>
 
-  <!-- ═══════════════════════════════════════
-       PINNED CARDS
-  ══════════════════════════════════════════ -->
+  <!-- PINNED CARDS -->
   <div class="pinned-grid" role="region" aria-label="Haupt-Umrechner">
 
-    <!-- CARD A — kW ↔ PS (Motorenleistung) -->
-    <div class="card" data-index="1" aria-label="Leistung kW und PS">
+    <!-- CARD A — kW ↔ PS -->
+    <div class="card" data-index="1">
       <div class="card-title">kW <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> PS</div>
       <div class="card-subtitle">Motorenleistung</div>
       <div class="input-row">
         <div class="input-wrap">
-          <input
-            class="converter-input" id="kw-input" type="number"
-            placeholder="0" value="100"
-            aria-label="Kilowatt Eingabe"
-            oninput="convertKwPs('kw')">
+          <input class="converter-input" id="kw-input" type="number" placeholder="0" value="100" oninput="convertKwPs('kw')">
           <span class="unit-label">kW</span>
         </div>
-        <button class="swap-btn" onclick="swapAndRecalc('kw-input','ps-input','kw')" aria-label="Werte tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
+        <button class="swap-btn" onclick="swapAndRecalc('kw-input','ps-input','kw')"><svg viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
         <div class="input-wrap">
-          <input
-            class="converter-input" id="ps-input" type="number"
-            placeholder="0"
-            aria-label="PS Eingabe"
-            oninput="convertKwPs('ps')">
+          <input class="converter-input" id="ps-input" type="number" placeholder="0" oninput="convertKwPs('ps')">
           <span class="unit-label">PS</span>
         </div>
       </div>
-      <div class="quick-pills" aria-label="Schnellwerte kW">
-        <button class="pill" onclick="setAndConvert('kw-input','ps-input',50,'kw')" aria-label="50 kW">50 kW</button>
-        <button class="pill" onclick="setAndConvert('kw-input','ps-input',100,'kw')" aria-label="100 kW">100 kW</button>
-        <button class="pill" onclick="setAndConvert('kw-input','ps-input',200,'kw')" aria-label="200 kW">200 kW</button>
-        <button class="pill" onclick="setAndConvert('ps-input','kw-input',100,'ps')" aria-label="100 PS">100 PS</button>
-        <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')" aria-label="300 PS">300 PS</button>
-        <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')" aria-label="500 PS">500 PS</button>
+      <div class="quick-pills">
+        <button class="pill" onclick="setAndConvert('kw-input','ps-input',50,'kw')">50 kW</button>
+        <button class="pill" onclick="setAndConvert('kw-input','ps-input',100,'kw')">100 kW</button>
+        <button class="pill" onclick="setAndConvert('kw-input','ps-input',200,'kw')">200 kW</button>
+        <button class="pill" onclick="setAndConvert('ps-input','kw-input',100,'ps')">100 PS</button>
+        <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')">300 PS</button>
+        <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')">500 PS</button>
       </div>
       <div class="card-footnote">Kilowatt <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pferdestärke</div>
     </div>
 
-    <!-- CARD B — km/h ↔ mph (Geschwindigkeit) -->
-    <div class="card" data-index="2" aria-label="Geschwindigkeit km/h und mph">
+    <!-- CARD B — km/h ↔ mph -->
+    <div class="card" data-index="2">
       <div class="card-title">km/h <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> mph</div>
       <div class="card-subtitle">Geschwindigkeit</div>
       <div class="input-row">
         <div class="input-wrap">
-          <input
-            class="converter-input" id="kmh-input" type="number"
-            placeholder="0" value="100"
-            aria-label="Kilometer pro Stunde Eingabe"
-            oninput="convertKmhMph('kmh')">
+          <input class="converter-input" id="kmh-input" type="number" placeholder="0" value="100" oninput="convertKmhMph('kmh')">
           <span class="unit-label">km/h</span>
         </div>
-        <button class="swap-btn" onclick="swapAndRecalc('kmh-input','mph-input','kmh')" aria-label="Werte tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
+        <button class="swap-btn" onclick="swapAndRecalc('kmh-input','mph-input','kmh')"><svg viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
         <div class="input-wrap">
-          <input
-            class="converter-input" id="mph-input" type="number"
-            placeholder="0"
-            aria-label="Miles per Hour Eingabe"
-            oninput="convertKmhMph('mph')">
+          <input class="converter-input" id="mph-input" type="number" placeholder="0" oninput="convertKmhMph('mph')">
           <span class="unit-label">mph</span>
         </div>
       </div>
-      <div class="quick-pills" aria-label="Schnellwerte Geschwindigkeit">
-        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',50,'kmh')" aria-label="50 km/h">50 km/h</button>
-        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',100,'kmh')" aria-label="100 km/h">100 km/h</button>
-        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',200,'kmh')" aria-label="200 km/h">200 km/h</button>
-        <button class="pill" onclick="setAndConvert('mph-input','kmh-input',60,'mph')" aria-label="60 mph">60 mph</button>
-        <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')" aria-label="100 mph">100 mph</button>
-        <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')" aria-label="200 mph">200 mph</button>
+      <div class="quick-pills">
+        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',50,'kmh')">50 km/h</button>
+        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',100,'kmh')">100 km/h</button>
+        <button class="pill" onclick="setAndConvert('kmh-input','mph-input',200,'kmh')">200 km/h</button>
+        <button class="pill" onclick="setAndConvert('mph-input','kmh-input',60,'mph')">60 mph</button>
+        <button class="pill" onclick="setAndConvert('mph-input','kmh-input',100,'mph')">100 mph</button>
+        <button class="pill" onclick="setAndConvert('mph-input','kmh-input',200,'mph')">200 mph</button>
       </div>
       <div class="card-footnote">Kilometer pro Stunde <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Miles per hour</div>
     </div>
 
-    <!-- CARD C — Nm ↔ lb-ft (Drehmoment) -->
-    <div class="card" data-index="3" aria-label="Drehmoment Nm und lb-ft">
+    <!-- CARD C — Nm ↔ lb-ft -->
+    <div class="card" data-index="3">
       <div class="card-title">Nm <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> lb-ft</div>
       <div class="card-subtitle">Drehmoment</div>
       <div class="input-row">
         <div class="input-wrap">
-          <input
-            class="converter-input" id="nm-input" type="number"
-            placeholder="0" value="200"
-            aria-label="Newtonmeter Eingabe"
-            oninput="convertNmLbft('nm')">
+          <input class="converter-input" id="nm-input" type="number" placeholder="0" value="200" oninput="convertNmLbft('nm')">
           <span class="unit-label">Nm</span>
         </div>
-        <button class="swap-btn" onclick="swapAndRecalc('nm-input','lbft-input','nm')" aria-label="Werte tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
+        <button class="swap-btn" onclick="swapAndRecalc('nm-input','lbft-input','nm')"><svg viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
         <div class="input-wrap">
-          <input
-            class="converter-input" id="lbft-input" type="number"
-            placeholder="0"
-            aria-label="Pound-Foot Eingabe"
-            oninput="convertNmLbft('lbft')">
+          <input class="converter-input" id="lbft-input" type="number" placeholder="0" oninput="convertNmLbft('lbft')">
           <span class="unit-label">lb-ft</span>
         </div>
       </div>
-      <div class="quick-pills" aria-label="Schnellwerte Nm">
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',100,'nm')" aria-label="100 Nm">100 Nm</button>
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',200,'nm')" aria-label="200 Nm">200 Nm</button>
-        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',400,'nm')" aria-label="400 Nm">400 Nm</button>
-        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',100,'lbft')" aria-label="100 lb-ft">100 lb-ft</button>
-        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')" aria-label="300 lb-ft">300 lb-ft</button>
-        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')" aria-label="500 lb-ft">500 lb-ft</button>
+      <div class="quick-pills">
+        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',100,'nm')">100 Nm</button>
+        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',200,'nm')">200 Nm</button>
+        <button class="pill" onclick="setAndConvert('nm-input','lbft-input',400,'nm')">400 Nm</button>
+        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',100,'lbft')">100 lb-ft</button>
+        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',300,'lbft')">300 lb-ft</button>
+        <button class="pill" onclick="setAndConvert('lbft-input','nm-input',500,'lbft')">500 lb-ft</button>
       </div>
       <div class="card-footnote">Newtonmeter <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pound-Foot</div>
     </div>
 
-  </div><!-- /pinned-grid -->
-
-  <div class="divider" aria-hidden="true"></div>
-
-  <!-- ═══════════════════════════════════════
-       FAHRZEUGSPEZIFISCH
-  ══════════════════════════════════════════ -->
-  <div role="region" aria-label="Fahrzeugspezifisch">
-    <div class="section-heading">Fahrzeug<span>spezifisch</span></div>
-    <p class="section-sub">Wichtigste Umrechnungen für Kfz-Daten</p>
-
-    <div class="accordion" id="accordion-auto">
-
-      <!-- ── 6. KRAFTSTOFFVERBRAUCH ── -->
-      <div class="accordion-item" id="acc-kraft">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-kraft"
-             onclick="toggleAccordion('acc-kraft')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-kraft')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Kraftstoffverbrauch</div>
-            <div class="accordion-units">L/100km · MPG (US) · km/L</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-kraft" role="region" aria-label="Kraftstoffverbrauch Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="kraft-from" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Von Einheit">
-                  <option value="l100" selected>L/100km</option>
-                  <option value="mpg">MPG (US)</option>
-                  <option value="kml">km/L</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('kraft')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="kraft-to" onchange="calcAcc('kraft','from')" aria-label="Verbrauch Nach Einheit">
-                  <option value="l100">L/100km</option>
-                  <option value="mpg" selected>MPG (US)</option>
-                  <option value="kml">km/L</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="kraft-from-val" type="number" placeholder="0" value="7"
-                     aria-label="Verbrauch Von Wert" oninput="calcAcc('kraft','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="kraft-to-val" type="number" placeholder="0"
-                     aria-label="Verbrauch Nach Wert" oninput="calcAcc('kraft','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── GESCHWINDIGKEIT ── -->
-      <div class="accordion-item" id="acc-geschw">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-geschw" onclick="toggleAccordion('acc-geschw')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-geschw')">
-          <div class="accordion-text">
-            <div class="accordion-title">Geschwindigkeit</div>
-            <div class="accordion-units">m/s · km/h · mph · Knoten · ft/s</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-geschw" role="region" aria-label="Geschwindigkeit Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="geschw-from" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Von">
-                  <option value="ms_s">Meter/Sekunde (m/s)</option>
-                  <option value="kmh_s" selected>Kilometer/Stunde (km/h)</option>
-                  <option value="mph_s">Meilen/Stunde (mph)</option>
-                  <option value="kn_s">Knoten (kn)</option>
-                  <option value="fts_s">Fuß/Sekunde (ft/s)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('geschw')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="geschw-to" onchange="calcAcc('geschw','from')" aria-label="Geschwindigkeit Nach">
-                  <option value="ms_s">Meter/Sekunde (m/s)</option>
-                  <option value="kmh_s">Kilometer/Stunde (km/h)</option>
-                  <option value="mph_s" selected>Meilen/Stunde (mph)</option>
-                  <option value="kn_s">Knoten (kn)</option>
-                  <option value="fts_s">Fuß/Sekunde (ft/s)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="geschw-from-val" type="number" placeholder="0" value="100" aria-label="Geschwindigkeit Von Wert" oninput="calcAcc('geschw','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="geschw-to-val" type="number" placeholder="0" aria-label="Geschwindigkeit Nach Wert" oninput="calcAcc('geschw','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── BESCHLEUNIGUNG LINEAR ── -->
-      <div class="accordion-item" id="acc-beschl">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-beschl" onclick="toggleAccordion('acc-beschl')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-beschl')">
-          <div class="accordion-text">
-            <div class="accordion-title">Beschleunigung — Linear</div>
-            <div class="accordion-units">m/s² · g · ft/s² · Gal</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-beschl" role="region" aria-label="Beschleunigung Linear Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="beschl-from" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Von">
-                  <option value="ms2" selected>m/s²</option>
-                  <option value="g_acc">Erdbeschleunigung (g)</option>
-                  <option value="fts2">ft/s²</option>
-                  <option value="gal_a">Gal (cm/s²)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('beschl')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="beschl-to" onchange="calcAcc('beschl','from')" aria-label="Beschleunigung Nach">
-                  <option value="ms2">m/s²</option>
-                  <option value="g_acc" selected>Erdbeschleunigung (g)</option>
-                  <option value="fts2">ft/s²</option>
-                  <option value="gal_a">Gal (cm/s²)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="beschl-from-val" type="number" placeholder="0" value="9.81" aria-label="Beschleunigung Von Wert" oninput="calcAcc('beschl','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="beschl-to-val" type="number" placeholder="0" aria-label="Beschleunigung Nach Wert" oninput="calcAcc('beschl','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── KRAFT / FORCE ── -->
-      <div class="accordion-item" id="acc-force">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-force" onclick="toggleAccordion('acc-force')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-force')">
-          <div class="accordion-text">
-            <div class="accordion-title">Kraft</div>
-            <div class="accordion-units">Newton · kN · kgf · lbf · dyn</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-force" role="region" aria-label="Kraft Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="force-from" onchange="calcAcc('force','from')" aria-label="Kraft Von">
-                  <option value="n" selected>Newton (N)</option>
-                  <option value="kn_f">Kilonewton (kN)</option>
-                  <option value="kgf">Kilopond (kgf)</option>
-                  <option value="lbf">Pound-force (lbf)</option>
-                  <option value="dyn_f">Dyn</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('force')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="force-to" onchange="calcAcc('force','from')" aria-label="Kraft Nach">
-                  <option value="n">Newton (N)</option>
-                  <option value="kn_f">Kilonewton (kN)</option>
-                  <option value="kgf" selected>Kilopond (kgf)</option>
-                  <option value="lbf">Pound-force (lbf)</option>
-                  <option value="dyn_f">Dyn</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="force-from-val" type="number" placeholder="0" value="1000" aria-label="Kraft Von Wert" oninput="calcAcc('force','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="force-to-val" type="number" placeholder="0" aria-label="Kraft Nach Wert" oninput="calcAcc('force','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── LEISTUNG ── -->
-      <div class="accordion-item" id="acc-leist">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-leist" onclick="toggleAccordion('acc-leist')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-leist')">
-          <div class="accordion-text">
-            <div class="accordion-title">Leistung</div>
-            <div class="accordion-units">W · kW · PS · hp · BTU/h · kcal/h · ft·lbf/s</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-leist" role="region" aria-label="Leistung Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="leist-from" onchange="calcAcc('leist','from')" aria-label="Leistung Von">
-                  <option value="w">Watt (W)</option>
-                  <option value="kw_l" selected>Kilowatt (kW)</option>
-                  <option value="ps_l">Pferdestärke (PS)</option>
-                  <option value="hp_l">Horsepower (hp)</option>
-                  <option value="btuh">BTU/h</option>
-                  <option value="kcalh">kcal/h</option>
-                  <option value="ftlbfs">ft·lbf/s</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('leist')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="leist-to" onchange="calcAcc('leist','from')" aria-label="Leistung Nach">
-                  <option value="w">Watt (W)</option>
-                  <option value="kw_l">Kilowatt (kW)</option>
-                  <option value="ps_l" selected>Pferdestärke (PS)</option>
-                  <option value="hp_l">Horsepower (hp)</option>
-                  <option value="btuh">BTU/h</option>
-                  <option value="kcalh">kcal/h</option>
-                  <option value="ftlbfs">ft·lbf/s</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="leist-from-val" type="number" placeholder="0" value="100" aria-label="Leistung Von Wert" oninput="calcAcc('leist','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="leist-to-val" type="number" placeholder="0" aria-label="Leistung Nach Wert" oninput="calcAcc('leist','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── DREHMOMENT ── -->
-      <div class="accordion-item" id="acc-drehm">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-drehm" onclick="toggleAccordion('acc-drehm')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-drehm')">
-          <div class="accordion-text">
-            <div class="accordion-title">Drehmoment</div>
-            <div class="accordion-units">Nm · lb-ft · kgf·m · ozf·in · dyn·cm</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-drehm" role="region" aria-label="Drehmoment Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="drehm-from" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Von">
-                  <option value="nm_d" selected>Newtonmeter (Nm)</option>
-                  <option value="lbft_d">Pound-Foot (lb-ft)</option>
-                  <option value="kgfm">kgf·m</option>
-                  <option value="ozfin">ozf·in</option>
-                  <option value="dyncm">dyn·cm</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('drehm')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="drehm-to" onchange="calcAcc('drehm','from')" aria-label="Drehmoment Nach">
-                  <option value="nm_d">Newtonmeter (Nm)</option>
-                  <option value="lbft_d" selected>Pound-Foot (lb-ft)</option>
-                  <option value="kgfm">kgf·m</option>
-                  <option value="ozfin">ozf·in</option>
-                  <option value="dyncm">dyn·cm</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="drehm-from-val" type="number" placeholder="0" value="100" aria-label="Drehmoment Von Wert" oninput="calcAcc('drehm','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="drehm-to-val" type="number" placeholder="0" aria-label="Drehmoment Nach Wert" oninput="calcAcc('drehm','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ZEIT ── -->
-      <div class="accordion-item" id="acc-zeit">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-zeit" onclick="toggleAccordion('acc-zeit')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-zeit')">
-          <div class="accordion-text">
-            <div class="accordion-title">Zeit</div>
-            <div class="accordion-units">s · ms · µs · min · h · Tag · Woche · Monat · Jahr</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-zeit" role="region" aria-label="Zeit Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="zeit-from" onchange="calcAcc('zeit','from')" aria-label="Zeit Von">
-                  <option value="s">Sekunde (s)</option>
-                  <option value="ms_z">Millisekunde (ms)</option>
-                  <option value="us_z">Mikrosekunde (µs)</option>
-                  <option value="min_z">Minute (min)</option>
-                  <option value="h_z" selected>Stunde (h)</option>
-                  <option value="tag">Tag</option>
-                  <option value="woche">Woche</option>
-                  <option value="monat">Monat (30 T.)</option>
-                  <option value="jahr">Jahr (365 T.)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('zeit')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="zeit-to" onchange="calcAcc('zeit','from')" aria-label="Zeit Nach">
-                  <option value="s">Sekunde (s)</option>
-                  <option value="ms_z">Millisekunde (ms)</option>
-                  <option value="us_z">Mikrosekunde (µs)</option>
-                  <option value="min_z" selected>Minute (min)</option>
-                  <option value="h_z">Stunde (h)</option>
-                  <option value="tag">Tag</option>
-                  <option value="woche">Woche</option>
-                  <option value="monat">Monat (30 T.)</option>
-                  <option value="jahr">Jahr (365 T.)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="zeit-from-val" type="number" placeholder="0" value="1" aria-label="Zeit Von Wert" oninput="calcAcc('zeit','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="zeit-to-val" type="number" placeholder="0" aria-label="Zeit Nach Wert" oninput="calcAcc('zeit','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ENERGIE ── -->
-      <div class="accordion-item" id="acc-energ">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-energ" onclick="toggleAccordion('acc-energ')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-energ')">
-          <div class="accordion-text">
-            <div class="accordion-title">Energie</div>
-            <div class="accordion-units">Joule · kJ · kWh · kcal · cal · BTU · Wh</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-energ" role="region" aria-label="Energie Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="energ-from" onchange="calcAcc('energ','from')" aria-label="Energie Von">
-                  <option value="j">Joule (J)</option>
-                  <option value="kj">Kilojoule (kJ)</option>
-                  <option value="kwh_e" selected>Kilowattstunde (kWh)</option>
-                  <option value="kcal_e">Kilokalorie (kcal)</option>
-                  <option value="cal_e">Kalorie (cal)</option>
-                  <option value="btu_e">BTU</option>
-                  <option value="wh_e">Wattstunde (Wh)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('energ')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="energ-to" onchange="calcAcc('energ','from')" aria-label="Energie Nach">
-                  <option value="j">Joule (J)</option>
-                  <option value="kj" selected>Kilojoule (kJ)</option>
-                  <option value="kwh_e">Kilowattstunde (kWh)</option>
-                  <option value="kcal_e">Kilokalorie (kcal)</option>
-                  <option value="cal_e">Kalorie (cal)</option>
-                  <option value="btu_e">BTU</option>
-                  <option value="wh_e">Wattstunde (Wh)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="energ-from-val" type="number" placeholder="0" value="1" aria-label="Energie Von Wert" oninput="calcAcc('energ','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="energ-to-val" type="number" placeholder="0" aria-label="Energie Nach Wert" oninput="calcAcc('energ','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 1. KRAFTSTOFFVERBRAUCH ── -->
-      <div class="accordion-item" id="acc-laenge">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-laenge"
-             onclick="toggleAccordion('acc-laenge')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-laenge')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Länge</div>
-            <div class="accordion-units">m · cm · mm · km · Zoll · Fuß · Yard · Meile</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-laenge" role="region" aria-label="Länge Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="laenge-from" onchange="calcAcc('laenge','from')" aria-label="Länge Von Einheit">
-                  <option value="m">Meter (m)</option>
-                  <option value="cm">Zentimeter (cm)</option>
-                  <option value="mm">Millimeter (mm)</option>
-                  <option value="km">Kilometer (km)</option>
-                  <option value="in">Zoll (in)</option>
-                  <option value="ft">Fuß (ft)</option>
-                  <option value="yd">Yard (yd)</option>
-                  <option value="mi">Meile (mi)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('laenge')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="laenge-to" onchange="calcAcc('laenge','from')" aria-label="Länge Nach Einheit">
-                  <option value="m">Meter (m)</option>
-                  <option value="cm" selected>Zentimeter (cm)</option>
-                  <option value="mm">Millimeter (mm)</option>
-                  <option value="km">Kilometer (km)</option>
-                  <option value="in">Zoll (in)</option>
-                  <option value="ft">Fuß (ft)</option>
-                  <option value="yd">Yard (yd)</option>
-                  <option value="mi">Meile (mi)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="laenge-from-val" type="number" placeholder="0" value="1"
-                     aria-label="Länge Von Wert" oninput="calcAcc('laenge','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="laenge-to-val" type="number" placeholder="0"
-                     aria-label="Länge Nach Wert" oninput="calcAcc('laenge','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 2. GEWICHT ── -->
-      <div class="accordion-item" id="acc-gewicht">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-gewicht"
-             onclick="toggleAccordion('acc-gewicht')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-gewicht')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Gewicht &amp; Masse</div>
-            <div class="accordion-units">kg · g · Pfund · Unze · Tonne</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-gewicht" role="region" aria-label="Gewicht Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="gewicht-from" onchange="calcAcc('gewicht','from')" aria-label="Gewicht Von Einheit">
-                  <option value="kg" selected>Kilogramm (kg)</option>
-                  <option value="g">Gramm (g)</option>
-                  <option value="lb">Pfund (lb)</option>
-                  <option value="oz">Unze (oz)</option>
-                  <option value="t">Tonne (t)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('gewicht')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="gewicht-to" onchange="calcAcc('gewicht','from')" aria-label="Gewicht Nach Einheit">
-                  <option value="kg">Kilogramm (kg)</option>
-                  <option value="g">Gramm (g)</option>
-                  <option value="lb" selected>Pfund (lb)</option>
-                  <option value="oz">Unze (oz)</option>
-                  <option value="t">Tonne (t)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="gewicht-from-val" type="number" placeholder="0" value="1"
-                     aria-label="Gewicht Von Wert" oninput="calcAcc('gewicht','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="gewicht-to-val" type="number" placeholder="0"
-                     aria-label="Gewicht Nach Wert" oninput="calcAcc('gewicht','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /accordion-auto -->
   </div>
 
-  <div class="divider" aria-hidden="true"></div>
+  <div class="divider"></div>
 
-  <!-- ═══════════════════════════════════════
-       WEITERE EINHEITEN
-  ══════════════════════════════════════════ -->
-  <div role="region" aria-label="Weitere Einheiten">
-    <div class="section-heading">Weitere <span>Einheiten</span></div>
-    <p class="section-sub">Alle Kategorien — bidirektional &amp; präzise</p>
+  <!-- ══ BOX 1: FAHRZEUGSPEZIFISCH ══ -->
+  <div class="unit-selector-box">
+    <div class="selector-section-title">Fahrzeug<span>spezifisch</span></div>
+    <p class="section-sub" style="margin-bottom:20px">Wichtigste Umrechnungen f&uuml;r Kfz-Daten</p>
 
-    <div class="accordion" id="accordion-weitere">
-
-      <!-- ── WÄHRUNG ── -->
-      <div class="accordion-item" id="acc-waehr">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-waehr" onclick="toggleAccordion('acc-waehr')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-waehr')">
-          <div class="accordion-text">
-            <div class="accordion-title">Währung</div>
-            <div class="accordion-units">EUR · USD · GBP · CHF · JPY · CNY · TRY · INR · AUD · CAD</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
+    <!-- Category dropdown -->
+    <div class="gc-cat-row">
+      <div class="gc-cat-dd" id="fz-cat-dd">
+        <div class="gc-cat-trigger" onclick="toggleGcCat('fz')" tabindex="0">
+          <span id="fz-cat-label">Kraftstoffverbrauch</span>
+          <svg class="gc-cat-trigger-arrow" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-        <div class="accordion-body" id="body-waehr" role="region" aria-label="Währung Umrechner">
-          <div class="accordion-inner">
-            <div style="font-size:10px;color:rgba(240,240,240,0.35);margin-bottom:10px;letter-spacing:0.06em">⚠ Statische Richtwerte — keine Live-Kurse</div>
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="waehr-from" onchange="calcAcc('waehr','from')" aria-label="Währung Von">
-                  <option value="eur" selected>Euro (€)</option>
-                  <option value="usd">US-Dollar ($)</option>
-                  <option value="gbp">Britisches Pfund (£)</option>
-                  <option value="chf">Schweizer Franken (CHF)</option>
-                  <option value="jpy">Japanischer Yen (¥)</option>
-                  <option value="cny">Chin. Yuan (¥)</option>
-                  <option value="try_w">Türkische Lira (₺)</option>
-                  <option value="inr">Indische Rupie (₹)</option>
-                  <option value="aud">Austral. Dollar (A$)</option>
-                  <option value="cad">Kanad. Dollar (C$)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('waehr')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="waehr-to" onchange="calcAcc('waehr','from')" aria-label="Währung Nach">
-                  <option value="eur">Euro (€)</option>
-                  <option value="usd" selected>US-Dollar ($)</option>
-                  <option value="gbp">Britisches Pfund (£)</option>
-                  <option value="chf">Schweizer Franken (CHF)</option>
-                  <option value="jpy">Japanischer Yen (¥)</option>
-                  <option value="cny">Chin. Yuan (¥)</option>
-                  <option value="try_w">Türkische Lira (₺)</option>
-                  <option value="inr">Indische Rupie (₹)</option>
-                  <option value="aud">Austral. Dollar (A$)</option>
-                  <option value="cad">Kanad. Dollar (C$)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="waehr-from-val" type="number" placeholder="0" value="100" aria-label="Währung Von Wert" oninput="calcAcc('waehr','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="waehr-to-val" type="number" placeholder="0" aria-label="Währung Nach Wert" oninput="calcAcc('waehr','to')">
-            </div>
-          </div>
+        <div class="gc-cat-panel">
+          <div class="gc-cat-scroll" id="fz-cat-list"></div>
         </div>
       </div>
-
-      <!-- ── 3. TEMPERATUR ── -->
-      <div class="accordion-item" id="acc-temp">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-temp"
-             onclick="toggleAccordion('acc-temp')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-temp')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Temperatur</div>
-            <div class="accordion-units">Celsius · Fahrenheit · Kelvin</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-temp" role="region" aria-label="Temperatur Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="temp-from" onchange="calcAcc('temp','from')" aria-label="Temperatur Von Einheit">
-                  <option value="C" selected>Celsius (°C)</option>
-                  <option value="F">Fahrenheit (°F)</option>
-                  <option value="K">Kelvin (K)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('temp')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="temp-to" onchange="calcAcc('temp','from')" aria-label="Temperatur Nach Einheit">
-                  <option value="C">Celsius (°C)</option>
-                  <option value="F" selected>Fahrenheit (°F)</option>
-                  <option value="K">Kelvin (K)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="temp-from-val" type="number" placeholder="0" value="20"
-                     aria-label="Temperatur Von Wert" oninput="calcAcc('temp','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="temp-to-val" type="number" placeholder="0"
-                     aria-label="Temperatur Nach Wert" oninput="calcAcc('temp','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 4. VOLUMEN ── -->
-      <div class="accordion-item" id="acc-volumen">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-volumen"
-             onclick="toggleAccordion('acc-volumen')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-volumen')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Volumen</div>
-            <div class="accordion-units">Liter · mL · US-Gallone · fl oz · m³</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-volumen" role="region" aria-label="Volumen Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="volumen-from" onchange="calcAcc('volumen','from')" aria-label="Volumen Von Einheit">
-                  <option value="l" selected>Liter (L)</option>
-                  <option value="ml">Milliliter (mL)</option>
-                  <option value="gal">US-Gallone (gal)</option>
-                  <option value="floz">Fl. Unze (fl oz)</option>
-                  <option value="m3">Kubikmeter (m³)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('volumen')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="volumen-to" onchange="calcAcc('volumen','from')" aria-label="Volumen Nach Einheit">
-                  <option value="l">Liter (L)</option>
-                  <option value="ml">Milliliter (mL)</option>
-                  <option value="gal" selected>US-Gallone (gal)</option>
-                  <option value="floz">Fl. Unze (fl oz)</option>
-                  <option value="m3">Kubikmeter (m³)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="volumen-from-val" type="number" placeholder="0" value="1"
-                     aria-label="Volumen Von Wert" oninput="calcAcc('volumen','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="volumen-to-val" type="number" placeholder="0"
-                     aria-label="Volumen Nach Wert" oninput="calcAcc('volumen','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 5. DRUCK ── -->
-      <div class="accordion-item" id="acc-druck">
-        <div class="accordion-header" role="button" tabindex="0"
-             aria-expanded="false" aria-controls="body-druck"
-             onclick="toggleAccordion('acc-druck')"
-             onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-druck')">
-          
-          <div class="accordion-text">
-            <div class="accordion-title">Druck</div>
-            <div class="accordion-units">bar · PSI · Pascal · kPa · Atmosphäre</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-druck" role="region" aria-label="Druck Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="druck-from" onchange="calcAcc('druck','from')" aria-label="Druck Von Einheit">
-                  <option value="bar" selected>Bar</option>
-                  <option value="psi">PSI</option>
-                  <option value="pa">Pascal (Pa)</option>
-                  <option value="kpa">Kilopascal (kPa)</option>
-                  <option value="atm">Atmosphäre (atm)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('druck')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="druck-to" onchange="calcAcc('druck','from')" aria-label="Druck Nach Einheit">
-                  <option value="bar">Bar</option>
-                  <option value="psi" selected>PSI</option>
-                  <option value="pa">Pascal (Pa)</option>
-                  <option value="kpa">Kilopascal (kPa)</option>
-                  <option value="atm">Atmosphäre (atm)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="druck-from-val" type="number" placeholder="0" value="2.5"
-                     aria-label="Druck Von Wert" oninput="calcAcc('druck','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="druck-to-val" type="number" placeholder="0"
-                     aria-label="Druck Nach Wert" oninput="calcAcc('druck','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── FLÄCHE ── -->
-      <div class="accordion-item" id="acc-flaeche">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-flaeche" onclick="toggleAccordion('acc-flaeche')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-flaeche')">
-          <div class="accordion-text">
-            <div class="accordion-title">Fläche</div>
-            <div class="accordion-units">m² · cm² · km² · ha · Acre · ft² · in²</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-flaeche" role="region" aria-label="Fläche Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="flaeche-from" onchange="calcAcc('flaeche','from')" aria-label="Fläche Von">
-                  <option value="m2" selected>Quadratmeter (m²)</option>
-                  <option value="cm2">Quadratzentimeter (cm²)</option>
-                  <option value="mm2">Quadratmillimeter (mm²)</option>
-                  <option value="km2">Quadratkilometer (km²)</option>
-                  <option value="ha">Hektar (ha)</option>
-                  <option value="acre">Acre</option>
-                  <option value="ft2">Quadratfuß (ft²)</option>
-                  <option value="in2">Quadratzoll (in²)</option>
-                  <option value="yd2">Quadratyard (yd²)</option>
-                  <option value="mi2">Quadratmeile (mi²)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('flaeche')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="flaeche-to" onchange="calcAcc('flaeche','from')" aria-label="Fläche Nach">
-                  <option value="m2">Quadratmeter (m²)</option>
-                  <option value="cm2">Quadratzentimeter (cm²)</option>
-                  <option value="mm2">Quadratmillimeter (mm²)</option>
-                  <option value="km2">Quadratkilometer (km²)</option>
-                  <option value="ha">Hektar (ha)</option>
-                  <option value="acre" selected>Acre</option>
-                  <option value="ft2">Quadratfuß (ft²)</option>
-                  <option value="in2">Quadratzoll (in²)</option>
-                  <option value="yd2">Quadratyard (yd²)</option>
-                  <option value="mi2">Quadratmeile (mi²)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="flaeche-from-val" type="number" placeholder="0" value="1" aria-label="Fläche Von Wert" oninput="calcAcc('flaeche','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="flaeche-to-val" type="number" placeholder="0" aria-label="Fläche Nach Wert" oninput="calcAcc('flaeche','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── BESCHLEUNIGUNG WINKEL ── -->
-      <div class="accordion-item" id="acc-wbeschl">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wbeschl" onclick="toggleAccordion('acc-wbeschl')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wbeschl')">
-          <div class="accordion-text">
-            <div class="accordion-title">Beschleunigung — Winkel</div>
-            <div class="accordion-units">rad/s² · °/s² · rev/s²</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wbeschl" role="region" aria-label="Winkelbeschleunigung Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wbeschl-from" onchange="calcAcc('wbeschl','from')" aria-label="Winkelbeschleunigung Von">
-                  <option value="rads2" selected>rad/s²</option>
-                  <option value="degs2">°/s²</option>
-                  <option value="revs2">Umdrehung/s²</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wbeschl')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wbeschl-to" onchange="calcAcc('wbeschl','from')" aria-label="Winkelbeschleunigung Nach">
-                  <option value="rads2">rad/s²</option>
-                  <option value="degs2" selected>°/s²</option>
-                  <option value="revs2">Umdrehung/s²</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wbeschl-from-val" type="number" placeholder="0" value="1" aria-label="Winkelbeschleunigung Von Wert" oninput="calcAcc('wbeschl','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wbeschl-to-val" type="number" placeholder="0" aria-label="Winkelbeschleunigung Nach Wert" oninput="calcAcc('wbeschl','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WINKEL ── -->
-      <div class="accordion-item" id="acc-wink">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wink" onclick="toggleAccordion('acc-wink')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wink')">
-          <div class="accordion-text">
-            <div class="accordion-title">Winkel</div>
-            <div class="accordion-units">Grad · Radiant · Gon · Bogenminute · Bogensekunde · Umdrehung</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wink" role="region" aria-label="Winkel Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wink-from" onchange="calcAcc('wink','from')" aria-label="Winkel Von">
-                  <option value="deg" selected>Grad (°)</option>
-                  <option value="rad">Radiant (rad)</option>
-                  <option value="gon">Gon (gon)</option>
-                  <option value="arcmin">Bogenminute (′)</option>
-                  <option value="arcsec">Bogensekunde (″)</option>
-                  <option value="rev">Umdrehung</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wink')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wink-to" onchange="calcAcc('wink','from')" aria-label="Winkel Nach">
-                  <option value="deg">Grad (°)</option>
-                  <option value="rad" selected>Radiant (rad)</option>
-                  <option value="gon">Gon (gon)</option>
-                  <option value="arcmin">Bogenminute (′)</option>
-                  <option value="arcsec">Bogensekunde (″)</option>
-                  <option value="rev">Umdrehung</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wink-from-val" type="number" placeholder="0" value="180" aria-label="Winkel Von Wert" oninput="calcAcc('wink','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wink-to-val" type="number" placeholder="0" aria-label="Winkel Nach Wert" oninput="calcAcc('wink','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── DATENSPEICHER ── -->
-      <div class="accordion-item" id="acc-dspeicher">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-dspeicher" onclick="toggleAccordion('acc-dspeicher')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-dspeicher')">
-          <div class="accordion-text">
-            <div class="accordion-title">Datenspeicher</div>
-            <div class="accordion-units">Bit · Byte · KB · MB · GB · TB · PB</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-dspeicher" role="region" aria-label="Datenspeicher Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="dspeicher-from" onchange="calcAcc('dspeicher','from')" aria-label="Datenspeicher Von">
-                  <option value="bit">Bit</option>
-                  <option value="byte_d">Byte</option>
-                  <option value="kb">Kilobyte (KB)</option>
-                  <option value="mb">Megabyte (MB)</option>
-                  <option value="gb" selected>Gigabyte (GB)</option>
-                  <option value="tb">Terabyte (TB)</option>
-                  <option value="pb">Petabyte (PB)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('dspeicher')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="dspeicher-to" onchange="calcAcc('dspeicher','from')" aria-label="Datenspeicher Nach">
-                  <option value="bit">Bit</option>
-                  <option value="byte_d">Byte</option>
-                  <option value="kb">Kilobyte (KB)</option>
-                  <option value="mb" selected>Megabyte (MB)</option>
-                  <option value="gb">Gigabyte (GB)</option>
-                  <option value="tb">Terabyte (TB)</option>
-                  <option value="pb">Petabyte (PB)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="dspeicher-from-val" type="number" placeholder="0" value="1" aria-label="Datenspeicher Von Wert" oninput="calcAcc('dspeicher','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="dspeicher-to-val" type="number" placeholder="0" aria-label="Datenspeicher Nach Wert" oninput="calcAcc('dspeicher','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── DATENÜBERTRAGUNG ── -->
-      <div class="accordion-item" id="acc-dtransfer">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-dtransfer" onclick="toggleAccordion('acc-dtransfer')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-dtransfer')">
-          <div class="accordion-text">
-            <div class="accordion-title">Datenübertragung</div>
-            <div class="accordion-units">bit/s · Kbit/s · Mbit/s · Gbit/s · Byte/s · KB/s · MB/s</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-dtransfer" role="region" aria-label="Datenübertragung Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="dtransfer-from" onchange="calcAcc('dtransfer','from')" aria-label="Datenübertragung Von">
-                  <option value="bps">Bit/s</option>
-                  <option value="kbps">Kbit/s</option>
-                  <option value="mbps" selected>Mbit/s</option>
-                  <option value="gbps">Gbit/s</option>
-                  <option value="byps">Byte/s</option>
-                  <option value="kbyps">KB/s</option>
-                  <option value="mbyps">MB/s</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('dtransfer')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="dtransfer-to" onchange="calcAcc('dtransfer','from')" aria-label="Datenübertragung Nach">
-                  <option value="bps">Bit/s</option>
-                  <option value="kbps">Kbit/s</option>
-                  <option value="mbps">Mbit/s</option>
-                  <option value="gbps">Gbit/s</option>
-                  <option value="byps">Byte/s</option>
-                  <option value="kbyps">KB/s</option>
-                  <option value="mbyps" selected>MB/s</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="dtransfer-from-val" type="number" placeholder="0" value="100" aria-label="Datenübertragung Von Wert" oninput="calcAcc('dtransfer','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="dtransfer-to-val" type="number" placeholder="0" aria-label="Datenübertragung Nach Wert" oninput="calcAcc('dtransfer','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── DICHTE ── -->
-      <div class="accordion-item" id="acc-dicht">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-dicht" onclick="toggleAccordion('acc-dicht')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-dicht')">
-          <div class="accordion-text">
-            <div class="accordion-title">Dichte</div>
-            <div class="accordion-units">kg/m³ · g/cm³ · g/mL · kg/L · lb/ft³ · lb/in³</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-dicht" role="region" aria-label="Dichte Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="dicht-from" onchange="calcAcc('dicht','from')" aria-label="Dichte Von">
-                  <option value="kgm3" selected>kg/m³</option>
-                  <option value="gcm3">g/cm³</option>
-                  <option value="gml">g/mL</option>
-                  <option value="kgl">kg/L</option>
-                  <option value="lbft3">lb/ft³</option>
-                  <option value="lbin3">lb/in³</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('dicht')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="dicht-to" onchange="calcAcc('dicht','from')" aria-label="Dichte Nach">
-                  <option value="kgm3">kg/m³</option>
-                  <option value="gcm3" selected>g/cm³</option>
-                  <option value="gml">g/mL</option>
-                  <option value="kgl">kg/L</option>
-                  <option value="lbft3">lb/ft³</option>
-                  <option value="lbin3">lb/in³</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="dicht-from-val" type="number" placeholder="0" value="1000" aria-label="Dichte Von Wert" oninput="calcAcc('dicht','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="dicht-to-val" type="number" placeholder="0" aria-label="Dichte Nach Wert" oninput="calcAcc('dicht','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── TRÄGHEITSMOMENT ── -->
-      <div class="accordion-item" id="acc-traeg">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-traeg" onclick="toggleAccordion('acc-traeg')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-traeg')">
-          <div class="accordion-text">
-            <div class="accordion-title">Trägheitsmoment</div>
-            <div class="accordion-units">kg·m² · g·cm² · lb·ft² · lb·in²</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-traeg" role="region" aria-label="Trägheitsmoment Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="traeg-from" onchange="calcAcc('traeg','from')" aria-label="Trägheitsmoment Von">
-                  <option value="kgm2" selected>kg·m²</option>
-                  <option value="gcm2">g·cm²</option>
-                  <option value="lbft2">lb·ft²</option>
-                  <option value="lbin2">lb·in²</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('traeg')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="traeg-to" onchange="calcAcc('traeg','from')" aria-label="Trägheitsmoment Nach">
-                  <option value="kgm2">kg·m²</option>
-                  <option value="gcm2">g·cm²</option>
-                  <option value="lbft2" selected>lb·ft²</option>
-                  <option value="lbin2">lb·in²</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="traeg-from-val" type="number" placeholder="0" value="1" aria-label="Trägheitsmoment Von Wert" oninput="calcAcc('traeg','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="traeg-to-val" type="number" placeholder="0" aria-label="Trägheitsmoment Nach Wert" oninput="calcAcc('traeg','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── SPEZIFISCHES VOLUMEN ── -->
-      <div class="accordion-item" id="acc-spvol">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-spvol" onclick="toggleAccordion('acc-spvol')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-spvol')">
-          <div class="accordion-text">
-            <div class="accordion-title">Spezifisches Volumen</div>
-            <div class="accordion-units">m³/kg · L/kg · ft³/lb · gal/lb</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-spvol" role="region" aria-label="Spezifisches Volumen Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="spvol-from" onchange="calcAcc('spvol','from')" aria-label="Spez. Volumen Von">
-                  <option value="m3kg" selected>m³/kg</option>
-                  <option value="lkg">L/kg</option>
-                  <option value="ft3lb">ft³/lb</option>
-                  <option value="gallb">gal/lb</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('spvol')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="spvol-to" onchange="calcAcc('spvol','from')" aria-label="Spez. Volumen Nach">
-                  <option value="m3kg">m³/kg</option>
-                  <option value="lkg">L/kg</option>
-                  <option value="ft3lb" selected>ft³/lb</option>
-                  <option value="gallb">gal/lb</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="spvol-from-val" type="number" placeholder="0" value="1" aria-label="Spez. Volumen Von Wert" oninput="calcAcc('spvol','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="spvol-to-val" type="number" placeholder="0" aria-label="Spez. Volumen Nach Wert" oninput="calcAcc('spvol','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WINKELGESCHWINDIGKEIT ── -->
-      <div class="accordion-item" id="acc-wgeschw">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wgeschw" onclick="toggleAccordion('acc-wgeschw')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wgeschw')">
-          <div class="accordion-text">
-            <div class="accordion-title">Winkelgeschwindigkeit</div>
-            <div class="accordion-units">rad/s · °/s · rpm · Hz</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wgeschw" role="region" aria-label="Winkelgeschwindigkeit Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wgeschw-from" onchange="calcAcc('wgeschw','from')" aria-label="Winkelgeschwindigkeit Von">
-                  <option value="rads_w" selected>rad/s</option>
-                  <option value="degs_w">°/s</option>
-                  <option value="rpm_w">Umdrehung/min (rpm)</option>
-                  <option value="hz_w">Hertz (Hz)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wgeschw')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wgeschw-to" onchange="calcAcc('wgeschw','from')" aria-label="Winkelgeschwindigkeit Nach">
-                  <option value="rads_w">rad/s</option>
-                  <option value="degs_w">°/s</option>
-                  <option value="rpm_w" selected>Umdrehung/min (rpm)</option>
-                  <option value="hz_w">Hertz (Hz)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wgeschw-from-val" type="number" placeholder="0" value="1" aria-label="Winkelgeschwindigkeit Von Wert" oninput="calcAcc('wgeschw','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wgeschw-to-val" type="number" placeholder="0" aria-label="Winkelgeschwindigkeit Nach Wert" oninput="calcAcc('wgeschw','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WÄRMEKAPAZITÄT ── -->
-      <div class="accordion-item" id="acc-wkap">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wkap" onclick="toggleAccordion('acc-wkap')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wkap')">
-          <div class="accordion-text">
-            <div class="accordion-title">Wärmekapazität</div>
-            <div class="accordion-units">J/K · kJ/K · cal/K · BTU/°F</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wkap" role="region" aria-label="Wärmekapazität Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wkap-from" onchange="calcAcc('wkap','from')" aria-label="Wärmekapazität Von">
-                  <option value="jk" selected>J/K</option>
-                  <option value="kjk">kJ/K</option>
-                  <option value="calk">cal/K</option>
-                  <option value="btuf_w">BTU/°F</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wkap')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wkap-to" onchange="calcAcc('wkap','from')" aria-label="Wärmekapazität Nach">
-                  <option value="jk">J/K</option>
-                  <option value="kjk" selected>kJ/K</option>
-                  <option value="calk">cal/K</option>
-                  <option value="btuf_w">BTU/°F</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wkap-from-val" type="number" placeholder="0" value="1000" aria-label="Wärmekapazität Von Wert" oninput="calcAcc('wkap','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wkap-to-val" type="number" placeholder="0" aria-label="Wärmekapazität Nach Wert" oninput="calcAcc('wkap','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WÄRMESTROMDICHTE ── -->
-      <div class="accordion-item" id="acc-wstr">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wstr" onclick="toggleAccordion('acc-wstr')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wstr')">
-          <div class="accordion-text">
-            <div class="accordion-title">Wärmestromdichte</div>
-            <div class="accordion-units">W/m² · BTU/(h·ft²) · kcal/(h·m²)</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wstr" role="region" aria-label="Wärmestromdichte Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wstr-from" onchange="calcAcc('wstr','from')" aria-label="Wärmestromdichte Von">
-                  <option value="wm2_s" selected>W/m²</option>
-                  <option value="btuhft2_s">BTU/(h·ft²)</option>
-                  <option value="kcalhm2_s">kcal/(h·m²)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wstr')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wstr-to" onchange="calcAcc('wstr','from')" aria-label="Wärmestromdichte Nach">
-                  <option value="wm2_s">W/m²</option>
-                  <option value="btuhft2_s" selected>BTU/(h·ft²)</option>
-                  <option value="kcalhm2_s">kcal/(h·m²)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wstr-from-val" type="number" placeholder="0" value="1" aria-label="Wärmestromdichte Von Wert" oninput="calcAcc('wstr','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wstr-to-val" type="number" placeholder="0" aria-label="Wärmestromdichte Nach Wert" oninput="calcAcc('wstr','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WÄRMEÜBERGANGSKOEFFIZIENT ── -->
-      <div class="accordion-item" id="acc-wuebergang">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wuebergang" onclick="toggleAccordion('acc-wuebergang')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wuebergang')">
-          <div class="accordion-text">
-            <div class="accordion-title">Wärmeübergangskoeffizient</div>
-            <div class="accordion-units">W/(m²·K) · BTU/(h·ft²·°F) · kcal/(h·m²·°C)</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wuebergang" role="region" aria-label="Wärmeübergangskoeffizient Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wuebergang-from" onchange="calcAcc('wuebergang','from')" aria-label="Wärmeübergangskoeff. Von">
-                  <option value="wm2k" selected>W/(m²·K)</option>
-                  <option value="btuhft2f">BTU/(h·ft²·°F)</option>
-                  <option value="kcalhm2c">kcal/(h·m²·°C)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wuebergang')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wuebergang-to" onchange="calcAcc('wuebergang','from')" aria-label="Wärmeübergangskoeff. Nach">
-                  <option value="wm2k">W/(m²·K)</option>
-                  <option value="btuhft2f" selected>BTU/(h·ft²·°F)</option>
-                  <option value="kcalhm2c">kcal/(h·m²·°C)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wuebergang-from-val" type="number" placeholder="0" value="1" aria-label="Wärmeübergangskoeff. Von Wert" oninput="calcAcc('wuebergang','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wuebergang-to-val" type="number" placeholder="0" aria-label="Wärmeübergangskoeff. Nach Wert" oninput="calcAcc('wuebergang','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── SPEZIFISCHE WÄRME ── -->
-      <div class="accordion-item" id="acc-spw">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-spw" onclick="toggleAccordion('acc-spw')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-spw')">
-          <div class="accordion-text">
-            <div class="accordion-title">Spezifische Wärme</div>
-            <div class="accordion-units">J/(kg·K) · kJ/(kg·K) · cal/(g·°C) · BTU/(lb·°F)</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-spw" role="region" aria-label="Spezifische Wärme Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="spw-from" onchange="calcAcc('spw','from')" aria-label="Spez. Wärme Von">
-                  <option value="jkgk" selected>J/(kg·K)</option>
-                  <option value="kjkgk">kJ/(kg·K)</option>
-                  <option value="calgc">cal/(g·°C)</option>
-                  <option value="btulbf">BTU/(lb·°F)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('spw')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="spw-to" onchange="calcAcc('spw','from')" aria-label="Spez. Wärme Nach">
-                  <option value="jkgk">J/(kg·K)</option>
-                  <option value="kjkgk" selected>kJ/(kg·K)</option>
-                  <option value="calgc">cal/(g·°C)</option>
-                  <option value="btulbf">BTU/(lb·°F)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="spw-from-val" type="number" placeholder="0" value="4184" aria-label="Spez. Wärme Von Wert" oninput="calcAcc('spw','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="spw-to-val" type="number" placeholder="0" aria-label="Spez. Wärme Nach Wert" oninput="calcAcc('spw','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── TEMPERATURINTERVALL ── -->
-      <div class="accordion-item" id="acc-tempint">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-tempint" onclick="toggleAccordion('acc-tempint')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-tempint')">
-          <div class="accordion-text">
-            <div class="accordion-title">Temperaturintervall</div>
-            <div class="accordion-units">Kelvin · Celsius · Fahrenheit (Δ-linear)</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-tempint" role="region" aria-label="Temperaturintervall Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="tempint-from" onchange="calcAcc('tempint','from')" aria-label="Temperaturintervall Von">
-                  <option value="c_ti" selected>Δ °C</option>
-                  <option value="f_ti">Δ °F</option>
-                  <option value="k_ti">Δ K</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('tempint')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="tempint-to" onchange="calcAcc('tempint','from')" aria-label="Temperaturintervall Nach">
-                  <option value="c_ti">Δ °C</option>
-                  <option value="f_ti" selected>Δ °F</option>
-                  <option value="k_ti">Δ K</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="tempint-from-val" type="number" placeholder="0" value="100" aria-label="Temperaturintervall Von Wert" oninput="calcAcc('tempint','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="tempint-to-val" type="number" placeholder="0" aria-label="Temperaturintervall Nach Wert" oninput="calcAcc('tempint','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WÄRMELEITFÄHIGKEIT ── -->
-      <div class="accordion-item" id="acc-wleit">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wleit" onclick="toggleAccordion('acc-wleit')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wleit')">
-          <div class="accordion-text">
-            <div class="accordion-title">Wärmeleitfähigkeit</div>
-            <div class="accordion-units">W/(m·K) · BTU/(h·ft·°F) · kcal/(h·m·°C)</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wleit" role="region" aria-label="Wärmeleitfähigkeit Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wleit-from" onchange="calcAcc('wleit','from')" aria-label="Wärmeleitfähigkeit Von">
-                  <option value="wmk" selected>W/(m·K)</option>
-                  <option value="btuhftf">BTU/(h·ft·°F)</option>
-                  <option value="kcalhmc">kcal/(h·m·°C)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wleit')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wleit-to" onchange="calcAcc('wleit','from')" aria-label="Wärmeleitfähigkeit Nach">
-                  <option value="wmk">W/(m·K)</option>
-                  <option value="btuhftf" selected>BTU/(h·ft·°F)</option>
-                  <option value="kcalhmc">kcal/(h·m·°C)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wleit-from-val" type="number" placeholder="0" value="1" aria-label="Wärmeleitfähigkeit Von Wert" oninput="calcAcc('wleit','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wleit-to-val" type="number" placeholder="0" aria-label="Wärmeleitfähigkeit Nach Wert" oninput="calcAcc('wleit','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WÄRMEAUSDEHNUNG ── -->
-      <div class="accordion-item" id="acc-wdehn">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-wdehn" onclick="toggleAccordion('acc-wdehn')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-wdehn')">
-          <div class="accordion-text">
-            <div class="accordion-title">Wärmeausdehnung</div>
-            <div class="accordion-units">1/K · 1/°C · 1/°F · µm/(m·K)</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-wdehn" role="region" aria-label="Wärmeausdehnung Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="wdehn-from" onchange="calcAcc('wdehn','from')" aria-label="Wärmeausdehnung Von">
-                  <option value="pk" selected>1/K</option>
-                  <option value="pc_d">1/°C</option>
-                  <option value="pf_d">1/°F</option>
-                  <option value="ummk">µm/(m·K)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('wdehn')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="wdehn-to" onchange="calcAcc('wdehn','from')" aria-label="Wärmeausdehnung Nach">
-                  <option value="pk">1/K</option>
-                  <option value="pc_d">1/°C</option>
-                  <option value="pf_d" selected>1/°F</option>
-                  <option value="ummk">µm/(m·K)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="wdehn-from-val" type="number" placeholder="0" value="0.000012" aria-label="Wärmeausdehnung Von Wert" oninput="calcAcc('wdehn','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="wdehn-to-val" type="number" placeholder="0" aria-label="Wärmeausdehnung Nach Wert" oninput="calcAcc('wdehn','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── FREQUENZ ── -->
-      <div class="accordion-item" id="acc-freq">
-        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false" aria-controls="body-freq" onclick="toggleAccordion('acc-freq')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAccordion('acc-freq')">
-          <div class="accordion-text">
-            <div class="accordion-title">Frequenz &amp; Wellenlänge</div>
-            <div class="accordion-units">Hz · kHz · MHz · GHz · rpm</div>
-          </div>
-          <span class="accordion-chevron" aria-hidden="true">▾</span>
-        </div>
-        <div class="accordion-body" id="body-freq" role="region" aria-label="Frequenz Umrechner">
-          <div class="accordion-inner">
-            <div class="select-row">
-              <div class="select-wrap">
-                <span class="select-label-text">Von</span>
-                <select class="unit-select" id="freq-from" onchange="calcAcc('freq','from')" aria-label="Frequenz Von">
-                  <option value="hz_f" selected>Hertz (Hz)</option>
-                  <option value="khz_f">Kilohertz (kHz)</option>
-                  <option value="mhz_f">Megahertz (MHz)</option>
-                  <option value="ghz_f">Gigahertz (GHz)</option>
-                  <option value="rpm_f">Umdrehung/min (rpm)</option>
-                </select>
-              </div>
-              <button class="acc-swap" onclick="swapAcc('freq')" aria-label="Einheiten tauschen"><svg width="16" height="12" viewBox="0 0 24 12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg></button>
-              <div class="select-wrap">
-                <span class="select-label-text">Nach</span>
-                <select class="unit-select" id="freq-to" onchange="calcAcc('freq','from')" aria-label="Frequenz Nach">
-                  <option value="hz_f">Hertz (Hz)</option>
-                  <option value="khz_f" selected>Kilohertz (kHz)</option>
-                  <option value="mhz_f">Megahertz (MHz)</option>
-                  <option value="ghz_f">Gigahertz (GHz)</option>
-                  <option value="rpm_f">Umdrehung/min (rpm)</option>
-                </select>
-              </div>
-            </div>
-            <div class="acc-input-row">
-              <input class="acc-input" id="freq-from-val" type="number" placeholder="0" value="1000" aria-label="Frequenz Von Wert" oninput="calcAcc('freq','from')">
-              <div class="acc-swap" role="separator" aria-hidden="true" style="visibility:hidden"></div>
-              <input class="acc-input" id="freq-to-val" type="number" placeholder="0" aria-label="Frequenz Nach Wert" oninput="calcAcc('freq','to')">
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /accordion-weitere -->
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════════ -->
-  <footer>
-    <div class="footer-brand">AUTO<span>RECHNER</span></div>
-    <div class="footer-desc">ALLE UMRECHNUNGEN FÜR FAHRZEUGDATEN</div>
-    <div class="footer-units">
-      <span class="footer-tag">kW · PS</span>
-      <span class="footer-tag">Nm · lb-ft</span>
-      <span class="footer-tag">km/h · mph</span>
-      <span class="footer-tag">L/100km · MPG</span>
-      <span class="footer-tag">bar · PSI</span>
-      <span class="footer-tag">°C · °F · K</span>
-      <span class="footer-tag">Länge</span>
-      <span class="footer-tag">Gewicht</span>
-      <span class="footer-tag">Volumen</span>
-      <span class="footer-tag">Fläche</span>
-      <span class="footer-tag">Energie</span>
-      <span class="footer-tag">Kraft</span>
-      <span class="footer-tag">Leistung</span>
-      <span class="footer-tag">Drehmoment</span>
-      <span class="footer-tag">Zeit</span>
-      <span class="footer-tag">Winkel</span>
-      <span class="footer-tag">Daten</span>
-      <span class="footer-tag">Dichte</span>
-      <span class="footer-tag">Frequenz</span>
-      <span class="footer-tag">Währung</span>
-      <span class="footer-tag">+ 15 weitere</span>
     </div>
-    <p class="footer-copy">© 2026 Autorechner · Alle Angaben ohne Gewähr</p>
-  </footer>
 
-</div><!-- /wrapper -->
+    <!-- Converter row -->
+    <div class="gc-converter-row">
+      <!-- FROM side -->
+      <div class="gc-side">
+        <input class="gc-value-input" id="fz-from-val" type="number" placeholder="0" value="1" oninput="gcCalc('fz','from')">
+        <div class="gc-unit-dd" id="fz-from-dd">
+          <div class="gc-unit-trigger" onclick="toggleGcUnit('fz-from')" tabindex="0">
+            <span class="gc-unit-trigger-name" id="fz-from-unit-label">L/100km</span>
+            <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="gc-unit-panel">
+            <div class="gc-unit-scroll" id="fz-from-unit-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gc-equals">=</div>
+
+      <!-- TO side -->
+      <div class="gc-side">
+        <input class="gc-value-input" id="fz-to-val" type="number" placeholder="0" oninput="gcCalc('fz','to')">
+        <div class="gc-unit-dd" id="fz-to-dd">
+          <div class="gc-unit-trigger" onclick="toggleGcUnit('fz-to')" tabindex="0">
+            <span class="gc-unit-trigger-name" id="fz-to-unit-label">MPG (US)</span>
+            <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="gc-unit-panel">
+            <div class="gc-unit-scroll" id="fz-to-unit-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ BOX 2: WEITERE EINHEITEN ══ -->
+  <div class="unit-selector-box">
+    <div class="selector-section-title">Weitere <span>Einheiten</span></div>
+    <p class="section-sub" style="margin-bottom:20px">Alle Kategorien &mdash; bidirektional &amp; pr&auml;zise</p>
+
+    <!-- Category dropdown -->
+    <div class="gc-cat-row">
+      <div class="gc-cat-dd" id="we-cat-dd">
+        <div class="gc-cat-trigger" onclick="toggleGcCat('we')" tabindex="0">
+          <span id="we-cat-label">Temperatur</span>
+          <svg class="gc-cat-trigger-arrow" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="gc-cat-panel">
+          <div class="gc-cat-scroll" id="we-cat-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Converter row -->
+    <div class="gc-converter-row">
+      <!-- FROM side -->
+      <div class="gc-side">
+        <input class="gc-value-input" id="we-from-val" type="number" placeholder="0" value="1" oninput="gcCalc('we','from')">
+        <div class="gc-unit-dd" id="we-from-dd">
+          <div class="gc-unit-trigger" onclick="toggleGcUnit('we-from')" tabindex="0">
+            <span class="gc-unit-trigger-name" id="we-from-unit-label">Celsius (°C)</span>
+            <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="gc-unit-panel">
+            <div class="gc-unit-scroll" id="we-from-unit-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gc-equals">=</div>
+
+      <!-- TO side -->
+      <div class="gc-side">
+        <input class="gc-value-input" id="we-to-val" type="number" placeholder="0" oninput="gcCalc('we','to')">
+        <div class="gc-unit-dd" id="we-to-dd">
+          <div class="gc-unit-trigger" onclick="toggleGcUnit('we-to')" tabindex="0">
+            <span class="gc-unit-trigger-name" id="we-to-unit-label">Fahrenheit (°F)</span>
+            <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="gc-unit-panel">
+            <div class="gc-unit-scroll" id="we-to-unit-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <script>
 'use strict';
 
-/* ═══════════════════════════════════════════
-   UTILITY
-════════════════════════════════════════════ */
-function round4(n){
-  if(n===null||n===undefined||isNaN(n))return '';
-  const r=Math.round(n*10000)/10000;
-  return r;
-}
+/* ══════════════════════════════════════════
+   DATA
+══════════════════════════════════════════ */
+const FZ_GROUPS = [
+  { name: 'Kraftstoffverbrauch', units: ['L/100km','MPG (US)','km/L'] },
+  { name: 'Geschwindigkeit', units: ['m/s','km/h','mph','Knoten','ft/s'] },
+  { name: 'Beschleunigung – Linear', units: ['m/s²','g','ft/s²','Gal'] },
+  { name: 'Kraft', units: ['Newton (N)','Kilonewton (kN)','Kilopond (kgf)','Pound-force (lbf)','Dyn'] },
+  { name: 'Leistung', units: ['Watt (W)','Kilowatt (kW)','Pferdestärke (PS)','Horsepower (hp)','BTU/h','kcal/h','ft·lbf/s'] },
+  { name: 'Drehmoment', units: ['Newtonmeter (Nm)','Pound-Foot (lb-ft)','kgf·m','ozf·in','dyn·cm'] },
+  { name: 'Zeit', units: ['Sekunde (s)','Millisekunde (ms)','Mikrosekunde (µs)','Minute (min)','Stunde (h)','Tag','Woche','Monat','Jahr'] },
+  { name: 'Energie', units: ['Joule (J)','Kilojoule (kJ)','Kilowattstunde (kWh)','Kilokalorie (kcal)','Kalorie (cal)','BTU','Wattstunde (Wh)'] },
+  { name: 'Länge', units: ['Meter (m)','Zentimeter (cm)','Millimeter (mm)','Kilometer (km)','Zoll (in)','Fuß (ft)','Yard (yd)','Meile (mi)'] },
+  { name: 'Gewicht & Masse', units: ['Kilogramm (kg)','Gramm (g)','Pfund (lb)','Unze (oz)','Tonne (t)'] },
+];
+const WE_GROUPS = [
+  { name: 'Währung', units: ['Euro (€)','US-Dollar ($)','Brit. Pfund (£)','Schweizer Franken (CHF)','Japanischer Yen (¥)','Chin. Yuan (¥)','Türk. Lira (₺)','Ind. Rupie (₹)','Austral. Dollar (A$)','Kanad. Dollar (C$)'] },
+  { name: 'Temperatur', units: ['Celsius (°C)','Fahrenheit (°F)','Kelvin (K)'] },
+  { name: 'Volumen', units: ['Liter (L)','Milliliter (mL)','US-Gallone (gal)','Fl. Unze (fl oz)','Kubikmeter (m³)'] },
+  { name: 'Druck', units: ['Bar','PSI','Pascal (Pa)','Kilopascal (kPa)','Atmosphäre (atm)'] },
+  { name: 'Fläche', units: ['Quadratmeter (m²)','Quadratzentimeter (cm²)','Quadratkilometer (km²)','Hektar (ha)','Acre','Quadratfuß (ft²)','Quadratzoll (in²)'] },
+  { name: 'Beschleunigung – Winkel', units: ['rad/s²','°/s²','Umdrehung/s²'] },
+  { name: 'Winkel', units: ['Grad (°)','Radiant (rad)','Gon','Bogenminute (′)','Bogensekunde (″)','Umdrehung'] },
+  { name: 'Datenspeicher', units: ['Bit','Byte','Kilobyte (KB)','Megabyte (MB)','Gigabyte (GB)','Terabyte (TB)','Petabyte (PB)'] },
+  { name: 'Datenübertragung', units: ['Bit/s','Kbit/s','Mbit/s','Gbit/s','Byte/s','KB/s','MB/s'] },
+  { name: 'Dichte', units: ['kg/m³','g/cm³','g/mL','kg/L','lb/ft³','lb/in³'] },
+  { name: 'Trägheitsmoment', units: ['kg·m²','g·cm²','lb·ft²','lb·in²'] },
+  { name: 'Spezifisches Volumen', units: ['m³/kg','L/kg','ft³/lb','gal/lb'] },
+  { name: 'Winkelgeschwindigkeit', units: ['rad/s','°/s','rpm','Hz'] },
+  { name: 'Wärmekapazität', units: ['J/K','kJ/K','cal/K','BTU/°F'] },
+  { name: 'Wärmestromdichte', units: ['W/m²','BTU/(h·ft²)','kcal/(h·m²)'] },
+  { name: 'Wärmeübergangskoeffizient', units: ['W/(m²·K)','BTU/(h·ft²·°F)','kcal/(h·m²·°C)'] },
+  { name: 'Spezifische Wärme', units: ['J/(kg·K)','kJ/(kg·K)','cal/(g·°C)','BTU/(lb·°F)'] },
+  { name: 'Temperaturintervall', units: ['Δ °C','Δ °F','Δ K'] },
+  { name: 'Wärmeleitfähigkeit', units: ['W/(m·K)','BTU/(h·ft·°F)','kcal/(h·m·°C)'] },
+  { name: 'Wärmeausdehnung', units: ['1/K','1/°C','1/°F','µm/(m·K)'] },
+  { name: 'Frequenz & Wellenlänge', units: ['Hertz (Hz)','Kilohertz (kHz)','Megahertz (MHz)','Gigahertz (GHz)','rpm'] },
+];
 
-function pulse(el){
-  el.classList.remove('pulse');
-  void el.offsetWidth; // reflow
-  el.classList.add('pulse');
-  setTimeout(()=>el.classList.remove('pulse'),600);
-}
-
-/* ═══════════════════════════════════════════
-   ANIMATED COUNTER (number roll)
-════════════════════════════════════════════ */
-function animateValue(el, to, duration=280){
-  const from = parseFloat(el.value) || 0;
-  if(from===to){el.value=to;return;}
-  const start=performance.now();
-  function step(now){
-    const p=Math.min((now-start)/duration,1);
-    const ease=1-Math.pow(1-p,3);
-    const cur=from+(to-from)*ease;
-    el.value=round4(cur);
-    if(p<1)requestAnimationFrame(step);
-    else el.value=round4(to);
-  }
-  requestAnimationFrame(step);
-}
-
-/* ═══════════════════════════════════════════
-   PINNED CARD — kW ↔ PS
-════════════════════════════════════════════ */
-function convertKwPs(dir){
-  const kwEl=document.getElementById('kw-input');
-  const psEl=document.getElementById('ps-input');
-  if(dir==='kw'){
-    const v=parseFloat(kwEl.value);
-    psEl.value=isNaN(v)?'':round4(v*1.35962);
-  } else {
-    const v=parseFloat(psEl.value);
-    kwEl.value=isNaN(v)?'':round4(v/1.35962);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   PINNED CARD — Nm ↔ lb-ft
-════════════════════════════════════════════ */
-function convertNmLbft(dir){
-  const nmEl=document.getElementById('nm-input');
-  const lbftEl=document.getElementById('lbft-input');
-  if(dir==='nm'){
-    const v=parseFloat(nmEl.value);
-    lbftEl.value=isNaN(v)?'':round4(v*0.737562);
-  } else {
-    const v=parseFloat(lbftEl.value);
-    nmEl.value=isNaN(v)?'':round4(v/0.737562);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   PINNED CARD — km/h ↔ mph
-════════════════════════════════════════════ */
-function convertKmhMph(dir){
-  const kmhEl=document.getElementById('kmh-input');
-  const mphEl=document.getElementById('mph-input');
-  if(dir==='kmh'){
-    const v=parseFloat(kmhEl.value);
-    mphEl.value=isNaN(v)?'':round4(v*0.621371);
-  } else {
-    const v=parseFloat(mphEl.value);
-    kmhEl.value=isNaN(v)?'':round4(v/0.621371);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   QUICK PILL SET + ANIMATE
-════════════════════════════════════════════ */
-function setAndConvert(srcId, dstId, value, type){
-  const srcEl=document.getElementById(srcId);
-  const dstEl=document.getElementById(dstId);
-
-  // Animate counter on srcEl
-  const old=parseFloat(srcEl.value)||0;
-  const target=value;
-  const dur=300;
-  const start=performance.now();
-  function step(now){
-    const p=Math.min((now-start)/dur,1);
-    const ease=1-Math.pow(1-p,3);
-    srcEl.value=round4(old+(target-old)*ease);
-    if(p<1)requestAnimationFrame(step);
-    else{
-      srcEl.value=value;
-      // now compute dest
-      if(type==='kw'||type==='ps') convertKwPs(type);
-      else if(type==='nm'||type==='lbft') convertNmLbft(type);
-      else if(type==='kmh'||type==='mph') convertKmhMph(type);
-      pulse(dstEl);
-    }
-  }
-  requestAnimationFrame(step);
-  pulse(srcEl);
-}
-
-/* ═══════════════════════════════════════════
-   SWAP PINNED CARDS
-════════════════════════════════════════════ */
-function swapAndRecalc(aId, bId, type){
-  const aEl=document.getElementById(aId);
-  const bEl=document.getElementById(bId);
-  const tmp=aEl.value;
-  aEl.value=bEl.value;
-  bEl.value=tmp;
-  // recalculate from 'a' (which used to be b)
-  if(type==='kw') convertKwPs('ps'); // a is kw, swap means ps→kw
-  else if(type==='ps') convertKwPs('kw');
-  else if(type==='nm') convertNmLbft('lbft');
-  else if(type==='kmh') convertKmhMph('mph');
-}
-
-/* ═══════════════════════════════════════════
-   UNIT CONVERSION: to SI base, then to target
-════════════════════════════════════════════ */
-const CONV={
-  laenge:{m:1,cm:0.01,mm:0.001,km:1000,'in':0.0254,ft:0.3048,yd:0.9144,mi:1609.344},
-  gewicht:{kg:1,g:0.001,lb:0.453592,oz:0.0283495,t:1000},
-  volumen:{l:1,ml:0.001,gal:3.785411784,floz:0.0295735,m3:1000},
-  druck:{bar:100000,psi:6894.757,pa:1,kpa:1000,atm:101325},
-  flaeche:{m2:1,cm2:1e-4,mm2:1e-6,km2:1e6,ha:1e4,acre:4046.856,ft2:0.09290304,in2:6.4516e-4,yd2:0.836127,mi2:2589988.11},
-  geschw:{ms_s:1,kmh_s:1/3.6,mph_s:0.44704,kn_s:0.514444,fts_s:0.3048},
-  beschl:{ms2:1,g_acc:9.80665,fts2:0.3048,gal_a:0.01},
-  wbeschl:{rads2:1,degs2:Math.PI/180,revs2:2*Math.PI},
-  wink:{deg:Math.PI/180,rad:1,gon:Math.PI/200,arcmin:Math.PI/10800,arcsec:Math.PI/648000,rev:2*Math.PI},
-  dspeicher:{bit:1,byte_d:8,kb:8192,mb:8388608,gb:8589934592,tb:8796093022208,pb:9007199254740992},
-  dtransfer:{bps:1,kbps:1000,mbps:1e6,gbps:1e9,byps:8,kbyps:8000,mbyps:8e6},
-  dicht:{kgm3:1,gcm3:1000,gml:1000,kgl:1000,lbft3:16.0185,lbin3:27679.9},
-  energ:{j:1,kj:1000,kwh_e:3600000,kcal_e:4184,cal_e:4.184,btu_e:1055.06,wh_e:3600},
-  force:{n:1,kn_f:1000,kgf:9.80665,lbf:4.44822,dyn_f:1e-5},
-  traeg:{kgm2:1,gcm2:1e-7,lbft2:0.042140,lbin2:2.9264e-4},
-  leist:{w:1,kw_l:1000,ps_l:735.49875,hp_l:745.7,btuh:0.29307107,kcalh:1.163,ftlbfs:1.35582},
-  spvol:{m3kg:1,lkg:0.001,ft3lb:0.062428,gallb:0.008345},
-  zeit:{s:1,ms_z:0.001,us_z:1e-6,min_z:60,h_z:3600,tag:86400,woche:604800,monat:2592000,jahr:31536000},
-  drehm:{nm_d:1,lbft_d:1.35582,kgfm:9.80665,ozfin:0.007062,dyncm:1e-7},
-  wgeschw:{rads_w:1,degs_w:Math.PI/180,rpm_w:Math.PI/30,hz_w:2*Math.PI},
-  wkap:{jk:1,kjk:1000,calk:4.184,btuf_w:1899.1},
-  wstr:{wm2_s:1,btuhft2_s:3.15459,kcalhm2_s:1.163},
-  wuebergang:{wm2k:1,btuhft2f:5.67826,kcalhm2c:1.163},
-  spw:{jkgk:1,kjkgk:1000,calgc:4184,btulbf:4186.8},
-  tempint:{k_ti:1,c_ti:1,f_ti:5/9},
-  wleit:{wmk:1,btuhftf:1.73073,kcalhmc:1.163},
-  wdehn:{pk:1,pc_d:1,pf_d:5/9,ummk:1e-6},
-  freq:{hz_f:1,khz_f:1000,mhz_f:1e6,ghz_f:1e9,rpm_f:1/60},
-  waehr:{eur:1,usd:0.93,gbp:1.17,chf:1.05,jpy:0.00615,cny:0.128,try_w:0.027,inr:0.0109,aud:0.60,cad:0.68}
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+const STATE = {
+  fz: { catIdx:0, fromUnit:'L/100km', toUnit:'MPG (US)' },
+  we: { catIdx:1, fromUnit:'Celsius (°C)', toUnit:'Fahrenheit (°F)' },
 };
 
-function convertLinear(value,fromUnit,toUnit,cat){
-  const f=CONV[cat];
-  return value*f[fromUnit]/f[toUnit];
-}
+function getGroups(ns){ return ns==='fz' ? FZ_GROUPS : WE_GROUPS; }
 
-// Temperature via Kelvin
-function toKelvin(v, unit){
-  if(unit==='C') return v+273.15;
-  if(unit==='F') return (v-32)*(5/9)+273.15;
-  return v; // K
-}
-function fromKelvin(k, unit){
-  if(unit==='C') return k-273.15;
-  if(unit==='F') return (k-273.15)*(9/5)+32;
-  return k; // K
-}
-
-// Fuel consumption (inverse relationship via 235.215)
-function convertFuel(value, fromUnit, toUnit){
-  if(fromUnit===toUnit) return value;
-  // All convert via L/100km as the base
-  let l100;
-  if(fromUnit==='l100') l100=value;
-  else if(fromUnit==='mpg') l100=235.215/value;
-  else if(fromUnit==='kml') l100=100/value;
-
-  if(toUnit==='l100') return l100;
-  if(toUnit==='mpg') return 235.215/l100;
-  if(toUnit==='kml') return 100/l100;
-}
-
-/* ═══════════════════════════════════════════
-   ACCORDION CALC
-════════════════════════════════════════════ */
-function calcAcc(cat, dir){
-  const fromSel=document.getElementById(cat+'-from');
-  const toSel=document.getElementById(cat+'-to');
-  const fromVal=document.getElementById(cat+'-from-val');
-  const toVal=document.getElementById(cat+'-to-val');
-
-  const fromUnit=fromSel.value;
-  const toUnit=toSel.value;
-
-  if(dir==='from'){
-    const v=parseFloat(fromVal.value);
-    if(isNaN(v)){toVal.value='';return;}
-    let result;
-    if(cat==='temp') result=fromKelvin(toKelvin(v,fromUnit),toUnit);
-    else if(cat==='kraft') result=convertFuel(v,fromUnit,toUnit);
-    else result=convertLinear(v,fromUnit,toUnit,cat);
-    toVal.value=round4(result);
-  } else {
-    const v=parseFloat(toVal.value);
-    if(isNaN(v)){fromVal.value='';return;}
-    let result;
-    if(cat==='temp') result=fromKelvin(toKelvin(v,toUnit),fromUnit);
-    else if(cat==='kraft') result=convertFuel(v,toUnit,fromUnit);
-    else result=convertLinear(v,toUnit,fromUnit,cat);
-    fromVal.value=round4(result);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   ACCORDION SWAP
-════════════════════════════════════════════ */
-function swapAcc(cat){
-  const fromSel=document.getElementById(cat+'-from');
-  const toSel=document.getElementById(cat+'-to');
-  const fromVal=document.getElementById(cat+'-from-val');
-  const toVal=document.getElementById(cat+'-to-val');
-
-  const tmpUnit=fromSel.value;
-  fromSel.value=toSel.value;
-  toSel.value=tmpUnit;
-
-  const tmpVal=fromVal.value;
-  fromVal.value=toVal.value;
-  toVal.value=tmpVal;
-
-  calcAcc(cat,'from');
-}
-
-/* ═══════════════════════════════════════════
-   ACCORDION TOGGLE
-════════════════════════════════════════════ */
-function toggleAccordion(id){
-  const item=document.getElementById(id);
-  const header=item.querySelector('.accordion-header');
-  const isOpen=item.classList.contains('open');
-  // close all
-  document.querySelectorAll('.accordion-item').forEach(el=>{
-    el.classList.remove('open');
-    el.querySelector('.accordion-header').setAttribute('aria-expanded','false');
+/* ══════════════════════════════════════════
+   RENDER HELPERS
+══════════════════════════════════════════ */
+function renderCatList(ns){
+  const groups = getGroups(ns);
+  const el = document.getElementById(ns+'-cat-list');
+  el.innerHTML = '';
+  groups.forEach((g,i) => {
+    const opt = document.createElement('div');
+    opt.className = 'gc-cat-opt' + (i===STATE[ns].catIdx ? ' active' : '');
+    opt.textContent = g.name;
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+      STATE[ns].catIdx = i;
+      STATE[ns].fromUnit = g.units[0];
+      STATE[ns].toUnit = g.units[Math.min(1,g.units.length-1)];
+      document.getElementById(ns+'-cat-label').textContent = g.name;
+      closeAllGc();
+      renderAll(ns);
+      gcCalc(ns,'from');
+    });
+    el.appendChild(opt);
   });
-  if(!isOpen){
-    item.classList.add('open');
-    header.setAttribute('aria-expanded','true');
-    // auto-calculate on first open
-    const cat=id.replace('acc-','');
-    calcAcc(cat,'from');
+}
+
+function renderUnitList(ns, side){
+  const groups = getGroups(ns);
+  const curCat = groups[STATE[ns].catIdx];
+  const selUnit = side==='from' ? STATE[ns].fromUnit : STATE[ns].toUnit;
+  const el = document.getElementById(ns+'-'+side+'-unit-list');
+  el.innerHTML = '';
+  curCat.units.forEach(u => {
+    const opt = document.createElement('div');
+    opt.className = 'gc-unit-opt' + (u===selUnit ? ' active' : '');
+    opt.textContent = u;
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+      if(side==='from') STATE[ns].fromUnit = u;
+      else STATE[ns].toUnit = u;
+      document.getElementById(ns+'-'+side+'-unit-label').textContent = u;
+      closeAllGc();
+      renderUnitList(ns,'from');
+      renderUnitList(ns,'to');
+      gcCalc(ns,'from');
+    });
+    el.appendChild(opt);
+  });
+}
+
+function renderAll(ns){
+  const groups = getGroups(ns);
+  const curCat = groups[STATE[ns].catIdx];
+  document.getElementById(ns+'-cat-label').textContent = curCat.name;
+  document.getElementById(ns+'-from-unit-label').textContent = STATE[ns].fromUnit;
+  document.getElementById(ns+'-to-unit-label').textContent = STATE[ns].toUnit;
+  renderCatList(ns);
+  renderUnitList(ns,'from');
+  renderUnitList(ns,'to');
+}
+
+/* ══════════════════════════════════════════
+   DROPDOWN TOGGLES
+══════════════════════════════════════════ */
+function toggleGcCat(ns){
+  const dd = document.getElementById(ns+'-cat-dd');
+  const isOpen = dd.classList.contains('open');
+  closeAllGc();
+  if(!isOpen) dd.classList.add('open');
+}
+function toggleGcUnit(ddId){
+  const dd = document.getElementById(ddId+'-dd');
+  const isOpen = dd.classList.contains('open');
+  closeAllGc();
+  if(!isOpen) dd.classList.add('open');
+}
+function closeAllGc(){
+  document.querySelectorAll('.gc-cat-dd.open,.gc-unit-dd.open').forEach(d=>d.classList.remove('open'));
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.gc-cat-dd') && !e.target.closest('.gc-unit-dd')) closeAllGc();
+});
+
+/* ══════════════════════════════════════════
+   CONVERSION MATH (display-only approximations)
+══════════════════════════════════════════ */
+// Conversion factors to SI base per unit key
+const CONV_TABLE = {
+  // Length → meters
+  'Meter (m)':1,'Zentimeter (cm)':0.01,'Millimeter (mm)':0.001,'Kilometer (km)':1000,
+  'Zoll (in)':0.0254,'Fuß (ft)':0.3048,'Yard (yd)':0.9144,'Meile (mi)':1609.344,
+  // Weight → kg
+  'Kilogramm (kg)':1,'Gramm (g)':0.001,'Pfund (lb)':0.453592,'Unze (oz)':0.0283495,'Tonne (t)':1000,
+  // Volume → liters
+  'Liter (L)':1,'Milliliter (mL)':0.001,'US-Gallone (gal)':3.78541,'Fl. Unze (fl oz)':0.0295735,'Kubikmeter (m³)':1000,
+  // Pressure → bar
+  'Bar':1,'PSI':0.0689476,'Pascal (Pa)':1e-5,'Kilopascal (kPa)':0.01,'Atmosphäre (atm)':1.01325,
+  // Speed → m/s
+  'm/s':1,'km/h':0.277778,'mph':0.44704,'Knoten':0.514444,'ft/s':0.3048,
+  // Power → watt
+  'Watt (W)':1,'Kilowatt (kW)':1000,'Pferdestärke (PS)':735.499,'Horsepower (hp)':745.7,'BTU/h':0.293071,'kcal/h':1.163,'ft·lbf/s':1.35582,
+  // Torque → Nm
+  'Newtonmeter (Nm)':1,'Pound-Foot (lb-ft)':1.35582,'kgf·m':9.80665,'ozf·in':0.007062,'dyn·cm':1e-7,
+  // Force → Newton
+  'Newton (N)':1,'Kilonewton (kN)':1000,'Kilopond (kgf)':9.80665,'Pound-force (lbf)':4.44822,'Dyn':1e-5,
+  // Energy → Joule
+  'Joule (J)':1,'Kilojoule (kJ)':1000,'Kilowattstunde (kWh)':3600000,'Kilokalorie (kcal)':4184,'Kalorie (cal)':4.184,'BTU':1055.06,'Wattstunde (Wh)':3600,
+  // Time → seconds
+  'Sekunde (s)':1,'Millisekunde (ms)':0.001,'Mikrosekunde (µs)':1e-6,'Minute (min)':60,'Stunde (h)':3600,'Tag':86400,'Woche':604800,'Monat':2592000,'Jahr':31536000,
+  // Acceleration → m/s²
+  'm/s²':1,'g':9.80665,'ft/s²':0.3048,'Gal':0.01,
+  // Angle → radians
+  'Grad (°)':Math.PI/180,'Radiant (rad)':1,'Gon':Math.PI/200,'Bogenminute (′)':Math.PI/10800,'Bogensekunde (″)':Math.PI/648000,'Umdrehung':2*Math.PI,
+  // Data storage → bits
+  'Bit':1,'Byte':8,'Kilobyte (KB)':8192,'Megabyte (MB)':8388608,'Gigabyte (GB)':8589934592,'Terabyte (TB)':8796093022208,'Petabyte (PB)':9007199254740992,
+  // Data rate → bit/s
+  'Bit/s':1,'Kbit/s':1000,'Mbit/s':1e6,'Gbit/s':1e9,'Byte/s':8,'KB/s':8000,'MB/s':8e6,
+  // Density → kg/m³
+  'kg/m³':1,'g/cm³':1000,'g/mL':1000,'kg/L':1000,'lb/ft³':16.0185,'lb/in³':27679.9,
+  // Area → m²
+  'Quadratmeter (m²)':1,'Quadratzentimeter (cm²)':1e-4,'Quadratkilometer (km²)':1e6,'Hektar (ha)':10000,'Acre':4046.86,'Quadratfuß (ft²)':0.0929,'Quadratzoll (in²)':0.000645,
+  // Angular accel → rad/s²
+  'rad/s²':1,'°/s²':Math.PI/180,'Umdrehung/s²':2*Math.PI,
+  // Angular velocity → rad/s
+  'rad/s':1,'°/s':Math.PI/180,'rpm':Math.PI/30,'Hz':2*Math.PI,
+  // Angle velocity already done above as winkelgeschw
+  // Moment of inertia → kg·m²
+  'kg·m²':1,'g·cm²':1e-7,'lb·ft²':0.04214,'lb·in²':2.926e-4,
+  // Spec volume → m³/kg
+  'm³/kg':1,'L/kg':0.001,'ft³/lb':0.06243,'gal/lb':0.008345,
+  // Heat capacity → J/K
+  'J/K':1,'kJ/K':1000,'cal/K':4.184,'BTU/°F':1899.1,
+  // Heat flux → W/m²
+  'W/m²':1,'BTU/(h·ft²)':3.15459,'kcal/(h·m²)':1.163,
+  // Heat transfer → W/(m²K)
+  'W/(m²·K)':1,'BTU/(h·ft²·°F)':5.67826,'kcal/(h·m²·°C)':1.163,
+  // Spec heat → J/(kg·K)
+  'J/(kg·K)':1,'kJ/(kg·K)':1000,'cal/(g·°C)':4184,'BTU/(lb·°F)':4186.8,
+  // Temp interval
+  'Δ °C':1,'Δ K':1,'Δ °F':5/9,
+  // Thermal conductivity → W/(mK)
+  'W/(m·K)':1,'BTU/(h·ft·°F)':1.73073,'kcal/(h·m·°C)':1.163,
+  // Thermal expansion → 1/K
+  '1/K':1,'1/°C':1,'1/°F':1.8,'µm/(m·K)':1e-6,
+  // Frequency → Hz
+  'Hertz (Hz)':1,'Kilohertz (kHz)':1000,'Megahertz (MHz)':1e6,'Gigahertz (GHz)':1e9,
+  // Currency (static approx from EUR)
+  'Euro (€)':1,'US-Dollar ($)':1.08,'Brit. Pfund (£)':0.86,'Schweizer Franken (CHF)':0.95,
+  'Japanischer Yen (¥)':162,'Chin. Yuan (¥)':7.8,'Türk. Lira (₺)':37,
+  'Ind. Rupie (₹)':92,'Austral. Dollar (A$)':1.67,'Kanad. Dollar (C$)':1.48,
+  // Fuel consumption — handled specially
+};
+
+function tempToC(val, unit){
+  if(unit==='Celsius (°C)') return val;
+  if(unit==='Fahrenheit (°F)') return (val-32)*5/9;
+  if(unit==='Kelvin (K)') return val-273.15;
+  return val;
+}
+function cToUnit(c, unit){
+  if(unit==='Celsius (°C)') return c;
+  if(unit==='Fahrenheit (°F)') return c*9/5+32;
+  if(unit==='Kelvin (K)') return c+273.15;
+  return c;
+}
+function fuelToL100(val, unit){
+  if(unit==='L/100km') return val;
+  if(unit==='MPG (US)') return val>0 ? 235.215/val : 0;
+  if(unit==='km/L') return val>0 ? 100/val : 0;
+  return val;
+}
+function l100ToUnit(l100, unit){
+  if(unit==='L/100km') return l100;
+  if(unit==='MPG (US)') return l100>0 ? 235.215/l100 : 0;
+  if(unit==='km/L') return l100>0 ? 100/l100 : 0;
+  return l100;
+}
+
+function convert(val, fromUnit, toUnit){
+  if(fromUnit===toUnit) return val;
+  // Temperature
+  const tempUnits = ['Celsius (°C)','Fahrenheit (°F)','Kelvin (K)'];
+  if(tempUnits.includes(fromUnit) && tempUnits.includes(toUnit))
+    return cToUnit(tempToC(val,fromUnit),toUnit);
+  // Fuel
+  const fuelUnits = ['L/100km','MPG (US)','km/L'];
+  if(fuelUnits.includes(fromUnit) && fuelUnits.includes(toUnit))
+    return l100ToUnit(fuelToL100(val,fromUnit),toUnit);
+  // Linear
+  const f = CONV_TABLE[fromUnit], t = CONV_TABLE[toUnit];
+  if(f!==undefined && t!==undefined) return val * f / t;
+  return val;
+}
+
+function r6(n){ if(isNaN(n)||!isFinite(n)) return ''; const s=parseFloat(n.toPrecision(6)); return s; }
+
+function gcCalc(ns, dir){
+  const fromVal = document.getElementById(ns+'-from-val');
+  const toVal   = document.getElementById(ns+'-to-val');
+  if(dir==='from'){
+    const v = parseFloat(fromVal.value);
+    if(isNaN(v)){toVal.value='';return;}
+    toVal.value = r6(convert(v, STATE[ns].fromUnit, STATE[ns].toUnit));
+  } else {
+    const v = parseFloat(toVal.value);
+    if(isNaN(v)){fromVal.value='';return;}
+    fromVal.value = r6(convert(v, STATE[ns].toUnit, STATE[ns].fromUnit));
   }
 }
 
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
+   PINNED CARD LOGIC (unchanged)
+══════════════════════════════════════════ */
+function round4(n){if(n===null||n===undefined||isNaN(n))return '';return Math.round(n*10000)/10000;}
+function convertKwPs(dir){const kwEl=document.getElementById('kw-input');const psEl=document.getElementById('ps-input');if(dir==='kw'){const v=parseFloat(kwEl.value);psEl.value=isNaN(v)?'':round4(v*1.35962);}else{const v=parseFloat(psEl.value);kwEl.value=isNaN(v)?'':round4(v/1.35962);}}
+function convertNmLbft(dir){const nmEl=document.getElementById('nm-input');const lbftEl=document.getElementById('lbft-input');if(dir==='nm'){const v=parseFloat(nmEl.value);lbftEl.value=isNaN(v)?'':round4(v*0.737562);}else{const v=parseFloat(lbftEl.value);nmEl.value=isNaN(v)?'':round4(v/0.737562);}}
+function convertKmhMph(dir){const kmhEl=document.getElementById('kmh-input');const mphEl=document.getElementById('mph-input');if(dir==='kmh'){const v=parseFloat(kmhEl.value);mphEl.value=isNaN(v)?'':round4(v*0.621371);}else{const v=parseFloat(mphEl.value);kmhEl.value=isNaN(v)?'':round4(v/0.621371);}}
+function setAndConvert(srcId,dstId,value,type){const srcEl=document.getElementById(srcId);const dstEl=document.getElementById(dstId);const old=parseFloat(srcEl.value)||0;const dur=300;const start=performance.now();function step(now){const p=Math.min((now-start)/dur,1);const ease=1-Math.pow(1-p,3);srcEl.value=round4(old+(value-old)*ease);if(p<1)requestAnimationFrame(step);else{srcEl.value=value;if(type==='kw'||type==='ps')convertKwPs(type);else if(type==='nm'||type==='lbft')convertNmLbft(type);else if(type==='kmh'||type==='mph')convertKmhMph(type);}}requestAnimationFrame(step);}
+function swapAndRecalc(aId,bId,type){const aEl=document.getElementById(aId);const bEl=document.getElementById(bId);const tmp=aEl.value;aEl.value=bEl.value;bEl.value=tmp;if(type==='kw')convertKwPs('ps');else if(type==='nm')convertNmLbft('lbft');else if(type==='kmh')convertKmhMph('mph');}
+
+/* ══════════════════════════════════════════
    INIT
-════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded',()=>{
-  // Initial calculations for pinned cards
+══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
   convertKwPs('kw');
   convertNmLbft('nm');
   convertKmhMph('kmh');
 
-  // Staggered card entrance
-  const cards=document.querySelectorAll('.card');
-  cards.forEach((card,i)=>{
-    setTimeout(()=>card.classList.add('visible'), i*120);
+  document.querySelectorAll('.card').forEach((card, i) => {
+    setTimeout(() => card.classList.add('visible'), i * 120);
   });
 
-  // Build custom dropdowns from all <select class="unit-select">
-  buildCustomDropdowns();
+  renderAll('fz');
+  renderAll('we');
+  gcCalc('fz','from');
+  gcCalc('we','from');
 });
-
-/* ═══════════════════════════════════════════
-   CUSTOM DROPDOWN BUILDER
-════════════════════════════════════════════ */
-function buildCustomDropdowns(){
-  document.querySelectorAll('select.unit-select').forEach(sel=>{
-    const wrap=sel.parentElement;
-    const cdd=document.createElement('div');
-    cdd.className='cdd';
-
-    // Trigger
-    const trigger=document.createElement('div');
-    trigger.className='cdd-trigger';
-    trigger.setAttribute('tabindex','0');
-    trigger.setAttribute('role','listbox');
-
-    const txt=document.createElement('span');
-    txt.className='cdd-txt';
-    const selOpt=sel.options[sel.selectedIndex];
-    txt.textContent=selOpt?selOpt.textContent:'—';
-
-    const arrow=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    arrow.setAttribute('class','cdd-arrow');
-    arrow.setAttribute('viewBox','0 0 10 6');
-    arrow.innerHTML="<path d='M1 1l4 4 4-4' stroke='#e8ff00' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/>";
-
-    trigger.appendChild(txt);
-    trigger.appendChild(arrow);
-
-    // Panel
-    const panel=document.createElement('div');
-    panel.className='cdd-panel';
-    const list=document.createElement('div');
-    list.className='cdd-list';
-
-    Array.from(sel.options).forEach(opt=>{
-      const item=document.createElement('div');
-      item.className='cdd-opt'+(opt.selected?' active':'');
-      item.textContent=opt.textContent;
-      item.dataset.val=opt.value;
-      item.setAttribute('role','option');
-      item.addEventListener('click',()=>{
-        sel.value=opt.value;
-        sel.dispatchEvent(new Event('change'));
-        txt.textContent=opt.textContent;
-        list.querySelectorAll('.cdd-opt').forEach(o=>o.classList.remove('active'));
-        item.classList.add('active');
-        closeCDD(cdd);
-      });
-      list.appendChild(item);
-    });
-    panel.appendChild(list);
-
-    cdd.appendChild(trigger);
-    cdd.appendChild(panel);
-    wrap.appendChild(cdd);
-
-    // Toggle
-    trigger.addEventListener('click',e=>{
-      e.stopPropagation();
-      const isOpen=cdd.classList.contains('open');
-      closeAllCDD();
-      if(!isOpen) cdd.classList.add('open');
-    });
-    trigger.addEventListener('keydown',e=>{
-      if(e.key==='Enter'||e.key===' '){
-        e.preventDefault();
-        trigger.click();
-      }
-    });
-
-    // Keep custom UI in sync if <select> changes programmatically (swap)
-    const observer=new MutationObserver(()=>{syncCDD(sel,cdd)});
-    observer.observe(sel,{attributes:true,childList:true});
-    sel._cdd=cdd;
-  });
-
-  document.addEventListener('click',()=>closeAllCDD());
-}
-
-function syncCDD(sel,cdd){
-  const opt=sel.options[sel.selectedIndex];
-  if(!opt)return;
-  cdd.querySelector('.cdd-txt').textContent=opt.textContent;
-  cdd.querySelectorAll('.cdd-opt').forEach(o=>{
-    o.classList.toggle('active',o.dataset.val===opt.value);
-  });
-}
-
-function closeAllCDD(){
-  document.querySelectorAll('.cdd.open').forEach(d=>d.classList.remove('open'));
-}
-function closeCDD(cdd){cdd.classList.remove('open');}
-
-/* Keep CDD in sync after swapAcc */
-const _origSwapAcc=swapAcc;
-swapAcc=function(cat){
-  _origSwapAcc(cat);
-  const fromSel=document.getElementById(cat+'-from');
-  const toSel=document.getElementById(cat+'-to');
-  if(fromSel._cdd)syncCDD(fromSel,fromSel._cdd);
-  if(toSel._cdd)syncCDD(toSel,toSel._cdd);
-};
 </script>
 </body>
 </html>
