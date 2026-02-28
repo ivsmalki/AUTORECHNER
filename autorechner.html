@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUTORECHNER — Fahrzeug Einheitenumrechner</title>
+<title>AUTORECHNER â€” Fahrzeug Einheitenumrechner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@ body{
   font-family:'Barlow',sans-serif;
   font-weight:400;
   color:#f0f0f0;
-  background:#0a0a0d;
+  background:#14161d;
   min-height:100vh;
   overflow-x:hidden;
   width:100%;
@@ -26,9 +26,9 @@ body::before{
   top:0;left:0;right:0;bottom:0;
   z-index:0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,255,0,0.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(255,107,0,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(20,20,40,0.8) 0%, transparent 100%);
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(52,226,228,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0,101,164,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(12,20,38,0.8) 0%, transparent 100%);
   animation:meshMove 12s ease-in-out infinite alternate;
   pointer-events:none;
 }
@@ -46,11 +46,11 @@ body::after{
 }
 .progress-bar{
   position:fixed;top:0;left:0;width:100%;height:3px;z-index:999;
-  background:rgba(232,255,0,0.12);overflow:hidden;
+  background:rgba(52,226,228,0.12);overflow:hidden;
 }
 .progress-bar::after{
   content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;
-  background:linear-gradient(90deg,transparent,#e8ff00,#ff6b00,transparent);
+  background:linear-gradient(90deg,transparent,#34e2e4,#0065a4,transparent);
   animation:progressSweep 2.4s ease-in-out infinite;
 }
 @keyframes progressSweep{0%{left:-40%}100%{left:140%}}
@@ -68,15 +68,15 @@ header{
 .header-glow{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:600px;height:300px;
-  background:radial-gradient(ellipse,rgba(232,255,0,0.08) 0%,transparent 70%);
+  background:radial-gradient(ellipse,rgba(52,226,228,0.08) 0%,transparent 70%);
   pointer-events:none;z-index:0;
 }
 .badge{
   display:inline-block;font-family:'Barlow',sans-serif;
   font-size:clamp(10px,1.2vw,13px);font-weight:600;letter-spacing:0.3em;
-  color:#e8ff00;text-transform:uppercase;border:1px solid rgba(232,255,0,0.25);
+  color:#34e2e4;text-transform:uppercase;border:1px solid rgba(52,226,228,0.25);
   padding:5px 18px;border-radius:100px;margin-bottom:22px;position:relative;z-index:1;
-  backdrop-filter:blur(8px);background:rgba(232,255,0,0.04);
+  backdrop-filter:blur(8px);background:rgba(52,226,228,0.04);
 }
 .headline{
   font-family:'Barlow Condensed',sans-serif;font-weight:900;
@@ -84,7 +84,7 @@ header{
   position:relative;z-index:1;margin-bottom:20px;
 }
 .headline .white{color:#f0f0f0}
-.headline .yellow{color:#e8ff00}
+.headline .yellow{color:#34e2e4}
 .subtitle{
   font-family:'Barlow',sans-serif;font-weight:300;
   font-size:clamp(13px,1.5vw,16px);color:rgba(240,240,240,0.5);
@@ -95,14 +95,14 @@ header{
 .pinned-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px;}
 @media(max-width:900px){.pinned-grid{grid-template-columns:1fr}}
 .card{
-  background:rgba(17,17,22,0.85);border:1px solid rgba(255,255,255,0.06);
+  background:rgba(15,22,35,0.85);border:1px solid rgba(255,255,255,0.06);
   border-radius:20px;padding:28px 24px 22px;backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);position:relative;overflow:hidden;
   opacity:0;transform:translateY(28px);
   transition:opacity 0.6s cubic-bezier(0.22,1,0.36,1),transform 0.6s cubic-bezier(0.22,1,0.36,1),border-color 0.3s,box-shadow 0.3s;
 }
 .card.visible{opacity:1;transform:translateY(0)}
-.card:hover{border-color:rgba(232,255,0,0.18);box-shadow:0 8px 40px rgba(232,255,0,0.06),0 2px 12px rgba(0,0,0,0.4)}
+.card:hover{border-color:rgba(52,226,228,0.18);box-shadow:0 8px 40px rgba(52,226,228,0.06),0 2px 12px rgba(0,0,0,0.4)}
 .card::after{
   content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,0.03) 50%,transparent 100%);
@@ -111,7 +111,7 @@ header{
 .card:hover::after{left:160%}
 .card::before{
   content:'';position:absolute;top:0;left:24px;right:24px;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(232,255,0,0.5),transparent);
+  background:linear-gradient(90deg,transparent,rgba(52,226,228,0.5),transparent);
   border-radius:0 0 2px 2px;opacity:0;transition:opacity 0.3s;
 }
 .card:hover::before{opacity:1}
@@ -121,7 +121,7 @@ header{
   line-height:1;margin-bottom:4px;
 }
 .card-title .swap-icon{display:inline-block;width:26px;height:12px;vertical-align:middle;margin:0 5px;}
-.card-title .swap-icon line,.card-title .swap-icon polyline{stroke:#e8ff00;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.card-title .swap-icon line,.card-title .swap-icon polyline{stroke:#34e2e4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;fill:none;}
 .card-subtitle{
   font-family:'Barlow Condensed',sans-serif;font-size:clamp(18px,2.2vw,22px);font-weight:700;
   letter-spacing:0.06em;text-transform:uppercase;color:rgba(240,240,240,0.55);margin-bottom:22px;
@@ -131,12 +131,12 @@ header{
   margin-top:14px;text-align:center;display:flex;align-items:center;justify-content:center;
 }
 .swap-icon{display:inline-block;width:20px;height:10px;vertical-align:middle;margin:0 4px;}
-.swap-icon line,.swap-icon polyline{stroke:rgba(232,255,0,0.3);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.swap-icon line,.swap-icon polyline{stroke:rgba(52,226,228,0.3);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;fill:none;}
 .input-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
 .input-wrap{flex:1;position:relative;}
 .unit-label{
   position:absolute;bottom:8px;left:12px;font-size:10px;font-weight:600;
-  letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,255,0,0.55);
+  letter-spacing:0.12em;text-transform:uppercase;color:rgba(52,226,228,0.55);
   pointer-events:none;z-index:2;transition:color 0.2s;
 }
 .converter-input{
@@ -148,11 +148,11 @@ header{
 }
 .converter-input::-webkit-outer-spin-button,.converter-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .converter-input:focus{
-  border-color:rgba(232,255,0,0.6);
-  box-shadow:0 0 0 3px rgba(232,255,0,0.1),0 0 20px rgba(232,255,0,0.12);
-  background:rgba(232,255,0,0.03);
+  border-color:rgba(52,226,228,0.6);
+  box-shadow:0 0 0 3px rgba(52,226,228,0.1),0 0 20px rgba(52,226,228,0.12);
+  background:rgba(52,226,228,0.03);
 }
-.converter-input:focus + .unit-label{color:rgba(232,255,0,0.9)}
+.converter-input:focus + .unit-label{color:rgba(52,226,228,0.9)}
 .swap-btn{
   width:38px;height:38px;flex-shrink:0;border-radius:50%;
   border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);
@@ -162,11 +162,11 @@ header{
   user-select:none;-webkit-tap-highlight-color:transparent;outline:none;
 }
 .swap-btn:hover{
-  background:rgba(232,255,0,0.12);border-color:rgba(232,255,0,0.5);color:#e8ff00;
-  transform:rotate(180deg);box-shadow:0 0 16px rgba(232,255,0,0.2);
+  background:rgba(52,226,228,0.12);border-color:rgba(52,226,228,0.5);color:#34e2e4;
+  transform:rotate(180deg);box-shadow:0 0 16px rgba(52,226,228,0.2);
 }
 .swap-btn:active{transform:rotate(180deg) scale(0.9)}
-.swap-btn svg{width:18px;height:12px;stroke:#e8ff00;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:0.6;transition:opacity 0.25s;}
+.swap-btn svg{width:18px;height:12px;stroke:#34e2e4;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:0.6;transition:opacity 0.25s;}
 .swap-btn:hover svg{opacity:1}
 .quick-pills{display:flex;flex-wrap:wrap;gap:7px;}
 .pill{
@@ -178,9 +178,9 @@ header{
 }
 .pill::after{
   content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:0;height:2px;background:#e8ff00;border-radius:2px;transition:width 0.25s ease;
+  width:0;height:2px;background:#34e2e4;border-radius:2px;transition:width 0.25s ease;
 }
-.pill:hover{color:#e8ff00;border-color:rgba(232,255,0,0.35);background:rgba(232,255,0,0.07);box-shadow:0 2px 12px rgba(232,255,0,0.1);}
+.pill:hover{color:#34e2e4;border-color:rgba(52,226,228,0.35);background:rgba(52,226,228,0.07);box-shadow:0 2px 12px rgba(52,226,228,0.1);}
 .pill:hover::after{width:60%}
 .pill:active{transform:scale(0.95)}
 
@@ -190,19 +190,19 @@ header{
   font-size:clamp(28px,4vw,42px);letter-spacing:0.04em;text-transform:uppercase;
   color:#f0f0f0;margin-bottom:6px;
 }
-.section-heading span{color:#e8ff00}
+.section-heading span{color:#34e2e4}
 .section-sub{font-size:13px;font-weight:400;color:rgba(240,240,240,0.4);margin-bottom:28px;letter-spacing:0.04em;}
 
 /* DIVIDER */
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(232,255,0,0.15),transparent);margin:48px 0 36px;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(52,226,228,0.15),transparent);margin:48px 0 36px;}
 
-/* ─────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    GOOGLE-STYLE UNIT CONVERTER
-───────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 /* Outer card */
 .unit-selector-box{
-  background:rgba(17,17,22,0.85);
+  background:rgba(15,22,35,0.85);
   border:1px solid rgba(255,255,255,0.08);
   border-radius:20px;
   padding:32px 28px 28px;
@@ -211,18 +211,18 @@ header{
 }
 .unit-selector-box::before{
   content:'';position:absolute;top:0;left:28px;right:28px;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(232,255,0,0.4),transparent);
+  background:linear-gradient(90deg,transparent,rgba(52,226,228,0.4),transparent);
   border-radius:0 0 2px 2px;pointer-events:none;
 }
 
-/* ── ROW 1: Category dropdown (full-width) ── */
+/* â”€â”€ ROW 1: Category dropdown (full-width) â”€â”€ */
 .gc-cat-row{
   position:relative;
   z-index:20;
   margin-bottom:16px;
 }
 
-/* ── ROW 2: [value] [unit▾] ⟷ [value] [unit▾] ── */
+/* â”€â”€ ROW 2: [value] [unitâ–¾] âŸ· [value] [unitâ–¾] â”€â”€ */
 .gc-converter-row{
   display:flex;
   align-items:center;
@@ -278,14 +278,14 @@ header{
   width:100%;padding:8px 18px 14px;
   background:transparent;border:none;cursor:pointer;
   font-family:'Barlow',sans-serif;font-size:14px;font-weight:500;
-  color:rgba(232,255,0,0.8);
+  color:rgba(52,226,228,0.8);
   user-select:none;outline:none;
   -webkit-tap-highlight-color:transparent;
   transition:color 0.2s;
   text-align:left;
 }
-.gc-unit-trigger:hover{color:#e8ff00;}
-.gc-unit-dd.open .gc-unit-trigger{color:#e8ff00;}
+.gc-unit-trigger:hover{color:#34e2e4;}
+.gc-unit-dd.open .gc-unit-trigger{color:#34e2e4;}
 .gc-unit-trigger-name{flex:1;}
 .gc-unit-trigger-arrow{
   width:14px;height:14px;flex-shrink:0;margin-left:6px;
@@ -297,14 +297,14 @@ header{
 .gc-unit-panel{
   position:absolute;top:calc(100% + 4px);left:0;
   min-width:220px;width:max-content;
-  background:rgba(13,13,18,0.99);
-  border:1px solid rgba(232,255,0,0.18);
+  background:rgba(10,16,28,0.99);
+  border:1px solid rgba(52,226,228,0.18);
   border-radius:12px;
   z-index:9999;
   overflow:hidden;
   opacity:0;visibility:hidden;transform:translateY(-6px);
   transition:opacity 0.2s ease,transform 0.2s ease,visibility 0s 0.2s;
-  box-shadow:0 16px 48px rgba(0,0,0,0.85),0 0 20px rgba(232,255,0,0.04);
+  box-shadow:0 16px 48px rgba(0,0,0,0.85),0 0 20px rgba(52,226,228,0.04);
 }
 .gc-unit-dd.open .gc-unit-panel{
   opacity:1;visibility:visible;transform:translateY(0);
@@ -312,7 +312,7 @@ header{
 }
 .gc-unit-scroll{overflow-y:auto;max-height:320px;padding:4px;}
 .gc-unit-scroll::-webkit-scrollbar{width:3px}
-.gc-unit-scroll::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
+.gc-unit-scroll::-webkit-scrollbar-thumb{background:rgba(52,226,228,0.2);border-radius:3px}
 
 /* Unit option */
 .gc-unit-opt{
@@ -323,14 +323,14 @@ header{
   transition:background 0.12s,color 0.12s;
   position:relative;white-space:nowrap;
 }
-.gc-unit-opt:hover{background:rgba(232,255,0,0.08);color:#f0f0f0;}
+.gc-unit-opt:hover{background:rgba(52,226,228,0.08);color:#f0f0f0;}
 .gc-unit-opt.active{
-  background:rgba(232,255,0,0.14);color:#e8ff00;font-weight:600;
+  background:rgba(52,226,228,0.14);color:#34e2e4;font-weight:600;
   padding-left:28px;
 }
 .gc-unit-opt.active::before{
   content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);
-  width:3px;height:13px;background:#e8ff00;border-radius:3px;
+  width:3px;height:13px;background:#34e2e4;border-radius:3px;
 }
 
 /* SWAP BUTTON between the two sides */
@@ -339,8 +339,8 @@ header{
   width:40px;height:40px;
   min-width:40px;
   border-radius:50%;
-  background:rgba(232,255,0,0.06);
-  border:1px solid rgba(232,255,0,0.15);
+  background:rgba(52,226,228,0.06);
+  border:1px solid rgba(52,226,228,0.15);
   flex-shrink:0;
   cursor:pointer;
   transition:background 0.3s, border-color 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
@@ -349,13 +349,13 @@ header{
   align-self:center;
 }
 .gc-equals:hover{
-  background:rgba(232,255,0,0.13);
-  border-color:rgba(232,255,0,0.35);
+  background:rgba(52,226,228,0.13);
+  border-color:rgba(52,226,228,0.35);
 }
 .gc-equals:active{transform:rotate(180deg) scale(0.9)}
 .gc-equals svg{
   width:18px;height:12px;
-  stroke:#e8ff00;stroke-width:1.8;
+  stroke:#34e2e4;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round;
   fill:none;opacity:0.6;
   transition:opacity 0.25s;
@@ -378,11 +378,11 @@ header{
   -webkit-tap-highlight-color:transparent;
   transition:border-color 0.2s,background 0.2s;
 }
-.gc-cat-trigger:hover{border-color:rgba(232,255,0,0.3);background:rgba(232,255,0,0.03);}
+.gc-cat-trigger:hover{border-color:rgba(52,226,228,0.3);background:rgba(52,226,228,0.03);}
 .gc-cat-dd.open .gc-cat-trigger{
-  border-color:rgba(232,255,0,0.5);
-  background:rgba(232,255,0,0.04);
-  box-shadow:0 0 0 3px rgba(232,255,0,0.07);
+  border-color:rgba(52,226,228,0.5);
+  background:rgba(52,226,228,0.04);
+  box-shadow:0 0 0 3px rgba(52,226,228,0.07);
 }
 .gc-cat-trigger-arrow{
   width:16px;height:16px;flex-shrink:0;margin-left:10px;
@@ -392,8 +392,8 @@ header{
 
 .gc-cat-panel{
   position:absolute;top:calc(100% + 6px);left:0;right:0;
-  background:rgba(13,13,18,0.99);
-  border:1px solid rgba(232,255,0,0.15);
+  background:rgba(10,16,28,0.99);
+  border:1px solid rgba(52,226,228,0.15);
   border-radius:12px;
   z-index:9999;overflow:hidden;
   opacity:0;visibility:hidden;transform:translateY(-6px);
@@ -406,7 +406,7 @@ header{
 }
 .gc-cat-scroll{overflow-y:auto;max-height:280px;padding:4px;}
 .gc-cat-scroll::-webkit-scrollbar{width:3px}
-.gc-cat-scroll::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
+.gc-cat-scroll::-webkit-scrollbar-thumb{background:rgba(52,226,228,0.2);border-radius:3px}
 
 .gc-cat-opt{
   padding:10px 16px;border-radius:7px;cursor:pointer;
@@ -414,14 +414,14 @@ header{
   color:rgba(240,240,240,0.7);
   transition:background 0.12s,color 0.12s;position:relative;
 }
-.gc-cat-opt:hover{background:rgba(232,255,0,0.08);color:#f0f0f0;}
+.gc-cat-opt:hover{background:rgba(52,226,228,0.08);color:#f0f0f0;}
 .gc-cat-opt.active{
-  background:rgba(232,255,0,0.12);color:#e8ff00;font-weight:600;
+  background:rgba(52,226,228,0.12);color:#34e2e4;font-weight:600;
   padding-left:26px;
 }
 .gc-cat-opt.active::before{
   content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);
-  width:3px;height:13px;background:#e8ff00;border-radius:3px;
+  width:3px;height:13px;background:#34e2e4;border-radius:3px;
 }
 
 @media(max-width:600px){
@@ -443,7 +443,7 @@ header{
   color:rgba(240,240,240,0.5);margin-bottom:16px;margin-top:28px;
   padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);
 }
-.selector-section-title span{color:#e8ff00}
+.selector-section-title span{color:#34e2e4}
 
 /* FOOTER */
 footer{
@@ -452,21 +452,21 @@ footer{
   text-align:center;position:relative;z-index:2;
 }
 .footer-brand{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(20px,3vw,28px);letter-spacing:0.1em;margin-bottom:8px;}
-.footer-brand span{color:#e8ff00}
+.footer-brand span{color:#34e2e4}
 .footer-desc{font-size:12px;font-weight:400;color:rgba(240,240,240,0.3);margin-bottom:20px;letter-spacing:0.08em;}
 .footer-units{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
 .footer-tag{font-size:11px;font-weight:500;letter-spacing:0.06em;color:rgba(240,240,240,0.25);border:1px solid rgba(255,255,255,0.07);border-radius:100px;padding:4px 12px;}
 .footer-copy{margin-top:28px;font-size:11px;color:rgba(240,240,240,0.18);letter-spacing:0.1em;text-transform:uppercase;}
 
 /* ANIMATIONS */
-@keyframes inputPulse{0%{box-shadow:0 0 0 0 rgba(232,255,0,0.4)}70%{box-shadow:0 0 0 10px rgba(232,255,0,0)}100%{box-shadow:0 0 0 0 rgba(232,255,0,0)}}
+@keyframes inputPulse{0%{box-shadow:0 0 0 0 rgba(52,226,228,0.4)}70%{box-shadow:0 0 0 10px rgba(52,226,228,0)}100%{box-shadow:0 0 0 0 rgba(52,226,228,0)}}
 .pulse{animation:inputPulse 0.5s ease-out}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:#0a0a0d}
-::-webkit-scrollbar-thumb{background:rgba(232,255,0,0.2);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:rgba(232,255,0,0.4)}
+::-webkit-scrollbar-track{background:#14161d}
+::-webkit-scrollbar-thumb{background:rgba(52,226,228,0.2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(52,226,228,0.4)}
 
 @media(max-width:600px){
   .wrapper{padding:0 16px 60px}
@@ -497,12 +497,12 @@ footer{
   <!-- HEADER -->
   <header>
     <div class="header-glow" aria-hidden="true"></div>
-    <div class="badge">FAHRZEUG · UMRECHNER</div>
+    <div class="badge">FAHRZEUG Â· UMRECHNER</div>
     <h1 class="headline">
       <span class="white">AUTO</span><span class="yellow">RECHNER</span>
     </h1>
     <p class="subtitle">
-      Professioneller Einheitenumrechner für Motorenleistung,<br>
+      Professioneller Einheitenumrechner fÃ¼r Motorenleistung,<br>
       Drehmoment &amp; Geschwindigkeit
     </p>
   </header>
@@ -510,7 +510,7 @@ footer{
   <!-- PINNED CARDS -->
   <div class="pinned-grid" role="region" aria-label="Haupt-Umrechner">
 
-    <!-- CARD A — kW ↔ PS -->
+    <!-- CARD A â€” kW â†” PS -->
     <div class="card" data-index="1">
       <div class="card-title">kW <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> PS</div>
       <div class="card-subtitle">Motorenleistung</div>
@@ -533,10 +533,10 @@ footer{
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',300,'ps')">300 PS</button>
         <button class="pill" onclick="setAndConvert('ps-input','kw-input',500,'ps')">500 PS</button>
       </div>
-      <div class="card-footnote">Kilowatt <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Pferdestärke</div>
+      <div class="card-footnote">Kilowatt <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> PferdestÃ¤rke</div>
     </div>
 
-    <!-- CARD B — km/h ↔ mph -->
+    <!-- CARD B â€” km/h â†” mph -->
     <div class="card" data-index="2">
       <div class="card-title">km/h <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> mph</div>
       <div class="card-subtitle">Geschwindigkeit</div>
@@ -562,7 +562,7 @@ footer{
       <div class="card-footnote">Kilometer pro Stunde <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> Miles per hour</div>
     </div>
 
-    <!-- CARD C — Nm ↔ lb-ft -->
+    <!-- CARD C â€” Nm â†” lb-ft -->
     <div class="card" data-index="3">
       <div class="card-title">Nm <svg class="swap-icon" viewBox="0 0 24 12"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="18,3 21,6 18,9"/><polyline points="6,3 3,6 6,9"/></svg> lb-ft</div>
       <div class="card-subtitle">Drehmoment</div>
@@ -592,7 +592,7 @@ footer{
 
   <div class="divider"></div>
 
-  <!-- ══ BOX 1: FAHRZEUGSPEZIFISCH ══ -->
+  <!-- â•â• BOX 1: FAHRZEUGSPEZIFISCH â•â• -->
   <div class="unit-selector-box">
     <div class="selector-section-title">Fahrzeug<span>spezifisch</span></div>
     <p class="section-sub" style="margin-bottom:20px">Wichtigste Umrechnungen f&uuml;r Kfz-Daten</p>
@@ -603,7 +603,7 @@ footer{
         <div class="gc-cat-trigger" onclick="toggleGcCat('fz')" tabindex="0">
           <span id="fz-cat-label">Kraftstoffverbrauch</span>
           <svg class="gc-cat-trigger-arrow" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1l4 4 4-4" stroke="#34e2e4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="gc-cat-panel">
@@ -621,7 +621,7 @@ footer{
           <div class="gc-unit-trigger" onclick="toggleGcUnit('fz-from')" tabindex="0">
             <span class="gc-unit-trigger-name" id="fz-from-unit-label">L/100km</span>
             <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
-              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1 1l4 4 4-4" stroke="#34e2e4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="gc-unit-panel">
@@ -639,7 +639,7 @@ footer{
           <div class="gc-unit-trigger" onclick="toggleGcUnit('fz-to')" tabindex="0">
             <span class="gc-unit-trigger-name" id="fz-to-unit-label">MPG (US)</span>
             <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
-              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1 1l4 4 4-4" stroke="#34e2e4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="gc-unit-panel">
@@ -652,7 +652,7 @@ footer{
 
   <div class="divider"></div>
 
-  <!-- ══ BOX 2: WEITERE EINHEITEN ══ -->
+  <!-- â•â• BOX 2: WEITERE EINHEITEN â•â• -->
   <div class="unit-selector-box">
     <div class="selector-section-title">Weitere <span>Einheiten</span></div>
     <p class="section-sub" style="margin-bottom:20px">Alle Kategorien &mdash; bidirektional &amp; pr&auml;zise</p>
@@ -663,7 +663,7 @@ footer{
         <div class="gc-cat-trigger" onclick="toggleGcCat('we')" tabindex="0">
           <span id="we-cat-label">Temperatur</span>
           <svg class="gc-cat-trigger-arrow" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1l4 4 4-4" stroke="#34e2e4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="gc-cat-panel">
@@ -679,9 +679,9 @@ footer{
         <input class="gc-value-input" id="we-from-val" type="number" placeholder="0" value="1" oninput="gcCalc('we','from')">
         <div class="gc-unit-dd" id="we-from-dd">
           <div class="gc-unit-trigger" onclick="toggleGcUnit('we-from')" tabindex="0">
-            <span class="gc-unit-trigger-name" id="we-from-unit-label">Celsius (°C)</span>
+            <span class="gc-unit-trigger-name" id="we-from-unit-label">Celsius (Â°C)</span>
             <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
-              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1 1l4 4 4-4" stroke="#34e2e4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="gc-unit-panel">
@@ -697,9 +697,9 @@ footer{
         <input class="gc-value-input" id="we-to-val" type="number" placeholder="0" oninput="gcCalc('we','to')">
         <div class="gc-unit-dd" id="we-to-dd">
           <div class="gc-unit-trigger" onclick="toggleGcUnit('we-to')" tabindex="0">
-            <span class="gc-unit-trigger-name" id="we-to-unit-label">Fahrenheit (°F)</span>
+            <span class="gc-unit-trigger-name" id="we-to-unit-label">Fahrenheit (Â°F)</span>
             <svg class="gc-unit-trigger-arrow" viewBox="0 0 10 6" fill="none">
-              <path d="M1 1l4 4 4-4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1 1l4 4 4-4" stroke="#34e2e4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="gc-unit-panel">
@@ -713,18 +713,18 @@ footer{
   <!-- FOOTER -->
   <footer>
     <div class="footer-brand">AUTO<span>RECHNER</span></div>
-    <div class="footer-desc">ALLE UMRECHNUNGEN FÜR FAHRZEUGDATEN</div>
+    <div class="footer-desc">ALLE UMRECHNUNGEN FÃœR FAHRZEUGDATEN</div>
     <div class="footer-units">
-      <span class="footer-tag">kW · PS</span>
-      <span class="footer-tag">Nm · lb-ft</span>
-      <span class="footer-tag">km/h · mph</span>
-      <span class="footer-tag">L/100km · MPG</span>
-      <span class="footer-tag">bar · PSI</span>
-      <span class="footer-tag">°C · °F · K</span>
-      <span class="footer-tag">Länge</span>
+      <span class="footer-tag">kW Â· PS</span>
+      <span class="footer-tag">Nm Â· lb-ft</span>
+      <span class="footer-tag">km/h Â· mph</span>
+      <span class="footer-tag">L/100km Â· MPG</span>
+      <span class="footer-tag">bar Â· PSI</span>
+      <span class="footer-tag">Â°C Â· Â°F Â· K</span>
+      <span class="footer-tag">LÃ¤nge</span>
       <span class="footer-tag">Gewicht</span>
       <span class="footer-tag">Volumen</span>
-      <span class="footer-tag">Fläche</span>
+      <span class="footer-tag">FlÃ¤che</span>
       <span class="footer-tag">Energie</span>
       <span class="footer-tag">Kraft</span>
       <span class="footer-tag">Leistung</span>
@@ -734,9 +734,9 @@ footer{
       <span class="footer-tag">Daten</span>
       <span class="footer-tag">Dichte</span>
       <span class="footer-tag">Frequenz</span>
-      <span class="footer-tag">Währung</span>
+      <span class="footer-tag">WÃ¤hrung</span>
     </div>
-    <p class="footer-copy">© 2026 Autorechner · Alle Angaben ohne Gewähr</p>
+    <p class="footer-copy">Â© 2026 Autorechner Â· Alle Angaben ohne GewÃ¤hr</p>
   </footer>
 
 </div>
@@ -744,58 +744,58 @@ footer{
 <script>
 'use strict';
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    DATA
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const FZ_GROUPS = [
   { name: 'Kraftstoffverbrauch', units: ['L/100km','MPG (US)','km/L'] },
   { name: 'Geschwindigkeit', units: ['m/s','km/h','mph','Knoten','ft/s'] },
-  { name: 'Beschleunigung – Linear', units: ['m/s²','g','ft/s²','Gal'] },
+  { name: 'Beschleunigung â€“ Linear', units: ['m/sÂ²','g','ft/sÂ²','Gal'] },
   { name: 'Kraft', units: ['Newton (N)','Kilonewton (kN)','Kilopond (kgf)','Pound-force (lbf)','Dyn'] },
-  { name: 'Leistung', units: ['Watt (W)','Kilowatt (kW)','Pferdestärke (PS)','Horsepower (hp)','BTU/h','kcal/h','ft·lbf/s'] },
-  { name: 'Drehmoment', units: ['Newtonmeter (Nm)','Pound-Foot (lb-ft)','kgf·m','ozf·in','dyn·cm'] },
-  { name: 'Zeit', units: ['Sekunde (s)','Millisekunde (ms)','Mikrosekunde (µs)','Minute (min)','Stunde (h)','Tag','Woche','Monat','Jahr'] },
+  { name: 'Leistung', units: ['Watt (W)','Kilowatt (kW)','PferdestÃ¤rke (PS)','Horsepower (hp)','BTU/h','kcal/h','ftÂ·lbf/s'] },
+  { name: 'Drehmoment', units: ['Newtonmeter (Nm)','Pound-Foot (lb-ft)','kgfÂ·m','ozfÂ·in','dynÂ·cm'] },
+  { name: 'Zeit', units: ['Sekunde (s)','Millisekunde (ms)','Mikrosekunde (Âµs)','Minute (min)','Stunde (h)','Tag','Woche','Monat','Jahr'] },
   { name: 'Energie', units: ['Joule (J)','Kilojoule (kJ)','Kilowattstunde (kWh)','Kilokalorie (kcal)','Kalorie (cal)','BTU','Wattstunde (Wh)'] },
-  { name: 'Länge', units: ['Meter (m)','Zentimeter (cm)','Millimeter (mm)','Kilometer (km)','Zoll (in)','Fuß (ft)','Yard (yd)','Meile (mi)'] },
+  { name: 'LÃ¤nge', units: ['Meter (m)','Zentimeter (cm)','Millimeter (mm)','Kilometer (km)','Zoll (in)','FuÃŸ (ft)','Yard (yd)','Meile (mi)'] },
   { name: 'Gewicht & Masse', units: ['Kilogramm (kg)','Gramm (g)','Pfund (lb)','Unze (oz)','Tonne (t)'] },
 ];
 const WE_GROUPS = [
-  { name: 'Währung', units: ['Euro (€)','US-Dollar ($)','Brit. Pfund (£)','Schweizer Franken (CHF)','Japanischer Yen (¥)','Chin. Yuan (¥)','Türk. Lira (₺)','Ind. Rupie (₹)','Austral. Dollar (A$)','Kanad. Dollar (C$)'] },
-  { name: 'Temperatur', units: ['Celsius (°C)','Fahrenheit (°F)','Kelvin (K)'] },
-  { name: 'Volumen', units: ['Liter (L)','Milliliter (mL)','US-Gallone (gal)','Fl. Unze (fl oz)','Kubikmeter (m³)'] },
-  { name: 'Druck', units: ['Bar','PSI','Pascal (Pa)','Kilopascal (kPa)','Atmosphäre (atm)'] },
-  { name: 'Fläche', units: ['Quadratmeter (m²)','Quadratzentimeter (cm²)','Quadratkilometer (km²)','Hektar (ha)','Acre','Quadratfuß (ft²)','Quadratzoll (in²)'] },
-  { name: 'Beschleunigung – Winkel', units: ['rad/s²','°/s²','Umdrehung/s²'] },
-  { name: 'Winkel', units: ['Grad (°)','Radiant (rad)','Gon','Bogenminute (′)','Bogensekunde (″)','Umdrehung'] },
+  { name: 'WÃ¤hrung', units: ['Euro (â‚¬)','US-Dollar ($)','Brit. Pfund (Â£)','Schweizer Franken (CHF)','Japanischer Yen (Â¥)','Chin. Yuan (Â¥)','TÃ¼rk. Lira (â‚º)','Ind. Rupie (â‚¹)','Austral. Dollar (A$)','Kanad. Dollar (C$)'] },
+  { name: 'Temperatur', units: ['Celsius (Â°C)','Fahrenheit (Â°F)','Kelvin (K)'] },
+  { name: 'Volumen', units: ['Liter (L)','Milliliter (mL)','US-Gallone (gal)','Fl. Unze (fl oz)','Kubikmeter (mÂ³)'] },
+  { name: 'Druck', units: ['Bar','PSI','Pascal (Pa)','Kilopascal (kPa)','AtmosphÃ¤re (atm)'] },
+  { name: 'FlÃ¤che', units: ['Quadratmeter (mÂ²)','Quadratzentimeter (cmÂ²)','Quadratkilometer (kmÂ²)','Hektar (ha)','Acre','QuadratfuÃŸ (ftÂ²)','Quadratzoll (inÂ²)'] },
+  { name: 'Beschleunigung â€“ Winkel', units: ['rad/sÂ²','Â°/sÂ²','Umdrehung/sÂ²'] },
+  { name: 'Winkel', units: ['Grad (Â°)','Radiant (rad)','Gon','Bogenminute (â€²)','Bogensekunde (â€³)','Umdrehung'] },
   { name: 'Datenspeicher', units: ['Bit','Byte','Kilobyte (KB)','Megabyte (MB)','Gigabyte (GB)','Terabyte (TB)','Petabyte (PB)'] },
-  { name: 'Datenübertragung', units: ['Bit/s','Kbit/s','Mbit/s','Gbit/s','Byte/s','KB/s','MB/s'] },
-  { name: 'Dichte', units: ['kg/m³','g/cm³','g/mL','kg/L','lb/ft³','lb/in³'] },
-  { name: 'Trägheitsmoment', units: ['kg·m²','g·cm²','lb·ft²','lb·in²'] },
-  { name: 'Spezifisches Volumen', units: ['m³/kg','L/kg','ft³/lb','gal/lb'] },
-  { name: 'Winkelgeschwindigkeit', units: ['rad/s','°/s','rpm','Hz'] },
-  { name: 'Wärmekapazität', units: ['J/K','kJ/K','cal/K','BTU/°F'] },
-  { name: 'Wärmestromdichte', units: ['W/m²','BTU/(h·ft²)','kcal/(h·m²)'] },
-  { name: 'Wärmeübergangskoeffizient', units: ['W/(m²·K)','BTU/(h·ft²·°F)','kcal/(h·m²·°C)'] },
-  { name: 'Spezifische Wärme', units: ['J/(kg·K)','kJ/(kg·K)','cal/(g·°C)','BTU/(lb·°F)'] },
-  { name: 'Temperaturintervall', units: ['Δ °C','Δ °F','Δ K'] },
-  { name: 'Wärmeleitfähigkeit', units: ['W/(m·K)','BTU/(h·ft·°F)','kcal/(h·m·°C)'] },
-  { name: 'Wärmeausdehnung', units: ['1/K','1/°C','1/°F','µm/(m·K)'] },
-  { name: 'Frequenz & Wellenlänge', units: ['Hertz (Hz)','Kilohertz (kHz)','Megahertz (MHz)','Gigahertz (GHz)','rpm'] },
+  { name: 'DatenÃ¼bertragung', units: ['Bit/s','Kbit/s','Mbit/s','Gbit/s','Byte/s','KB/s','MB/s'] },
+  { name: 'Dichte', units: ['kg/mÂ³','g/cmÂ³','g/mL','kg/L','lb/ftÂ³','lb/inÂ³'] },
+  { name: 'TrÃ¤gheitsmoment', units: ['kgÂ·mÂ²','gÂ·cmÂ²','lbÂ·ftÂ²','lbÂ·inÂ²'] },
+  { name: 'Spezifisches Volumen', units: ['mÂ³/kg','L/kg','ftÂ³/lb','gal/lb'] },
+  { name: 'Winkelgeschwindigkeit', units: ['rad/s','Â°/s','rpm','Hz'] },
+  { name: 'WÃ¤rmekapazitÃ¤t', units: ['J/K','kJ/K','cal/K','BTU/Â°F'] },
+  { name: 'WÃ¤rmestromdichte', units: ['W/mÂ²','BTU/(hÂ·ftÂ²)','kcal/(hÂ·mÂ²)'] },
+  { name: 'WÃ¤rmeÃ¼bergangskoeffizient', units: ['W/(mÂ²Â·K)','BTU/(hÂ·ftÂ²Â·Â°F)','kcal/(hÂ·mÂ²Â·Â°C)'] },
+  { name: 'Spezifische WÃ¤rme', units: ['J/(kgÂ·K)','kJ/(kgÂ·K)','cal/(gÂ·Â°C)','BTU/(lbÂ·Â°F)'] },
+  { name: 'Temperaturintervall', units: ['Î” Â°C','Î” Â°F','Î” K'] },
+  { name: 'WÃ¤rmeleitfÃ¤higkeit', units: ['W/(mÂ·K)','BTU/(hÂ·ftÂ·Â°F)','kcal/(hÂ·mÂ·Â°C)'] },
+  { name: 'WÃ¤rmeausdehnung', units: ['1/K','1/Â°C','1/Â°F','Âµm/(mÂ·K)'] },
+  { name: 'Frequenz & WellenlÃ¤nge', units: ['Hertz (Hz)','Kilohertz (kHz)','Megahertz (MHz)','Gigahertz (GHz)','rpm'] },
 ];
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    STATE
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const STATE = {
   fz: { catIdx:0, fromUnit:'L/100km', toUnit:'MPG (US)' },
-  we: { catIdx:1, fromUnit:'Celsius (°C)', toUnit:'Fahrenheit (°F)' },
+  we: { catIdx:1, fromUnit:'Celsius (Â°C)', toUnit:'Fahrenheit (Â°F)' },
 };
 
 function getGroups(ns){ return ns==='fz' ? FZ_GROUPS : WE_GROUPS; }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    RENDER HELPERS
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function renderCatList(ns){
   const groups = getGroups(ns);
   const el = document.getElementById(ns+'-cat-list');
@@ -853,9 +853,9 @@ function renderAll(ns){
   renderUnitList(ns,'to');
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    DROPDOWN TOGGLES
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleGcCat(ns){
   const dd = document.getElementById(ns+'-cat-dd');
   const isOpen = dd.classList.contains('open');
@@ -875,85 +875,85 @@ document.addEventListener('click', e=>{
   if(!e.target.closest('.gc-cat-dd') && !e.target.closest('.gc-unit-dd')) closeAllGc();
 });
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CONVERSION MATH (display-only approximations)
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 // Conversion factors to SI base per unit key
 const CONV_TABLE = {
-  // Length → meters
+  // Length â†’ meters
   'Meter (m)':1,'Zentimeter (cm)':0.01,'Millimeter (mm)':0.001,'Kilometer (km)':1000,
-  'Zoll (in)':0.0254,'Fuß (ft)':0.3048,'Yard (yd)':0.9144,'Meile (mi)':1609.344,
-  // Weight → kg
+  'Zoll (in)':0.0254,'FuÃŸ (ft)':0.3048,'Yard (yd)':0.9144,'Meile (mi)':1609.344,
+  // Weight â†’ kg
   'Kilogramm (kg)':1,'Gramm (g)':0.001,'Pfund (lb)':0.453592,'Unze (oz)':0.0283495,'Tonne (t)':1000,
-  // Volume → liters
-  'Liter (L)':1,'Milliliter (mL)':0.001,'US-Gallone (gal)':3.78541,'Fl. Unze (fl oz)':0.0295735,'Kubikmeter (m³)':1000,
-  // Pressure → bar
-  'Bar':1,'PSI':0.0689476,'Pascal (Pa)':1e-5,'Kilopascal (kPa)':0.01,'Atmosphäre (atm)':1.01325,
-  // Speed → m/s
+  // Volume â†’ liters
+  'Liter (L)':1,'Milliliter (mL)':0.001,'US-Gallone (gal)':3.78541,'Fl. Unze (fl oz)':0.0295735,'Kubikmeter (mÂ³)':1000,
+  // Pressure â†’ bar
+  'Bar':1,'PSI':0.0689476,'Pascal (Pa)':1e-5,'Kilopascal (kPa)':0.01,'AtmosphÃ¤re (atm)':1.01325,
+  // Speed â†’ m/s
   'm/s':1,'km/h':0.277778,'mph':0.44704,'Knoten':0.514444,'ft/s':0.3048,
-  // Power → watt
-  'Watt (W)':1,'Kilowatt (kW)':1000,'Pferdestärke (PS)':735.499,'Horsepower (hp)':745.7,'BTU/h':0.293071,'kcal/h':1.163,'ft·lbf/s':1.35582,
-  // Torque → Nm
-  'Newtonmeter (Nm)':1,'Pound-Foot (lb-ft)':1.35582,'kgf·m':9.80665,'ozf·in':0.007062,'dyn·cm':1e-7,
-  // Force → Newton
+  // Power â†’ watt
+  'Watt (W)':1,'Kilowatt (kW)':1000,'PferdestÃ¤rke (PS)':735.499,'Horsepower (hp)':745.7,'BTU/h':0.293071,'kcal/h':1.163,'ftÂ·lbf/s':1.35582,
+  // Torque â†’ Nm
+  'Newtonmeter (Nm)':1,'Pound-Foot (lb-ft)':1.35582,'kgfÂ·m':9.80665,'ozfÂ·in':0.007062,'dynÂ·cm':1e-7,
+  // Force â†’ Newton
   'Newton (N)':1,'Kilonewton (kN)':1000,'Kilopond (kgf)':9.80665,'Pound-force (lbf)':4.44822,'Dyn':1e-5,
-  // Energy → Joule
+  // Energy â†’ Joule
   'Joule (J)':1,'Kilojoule (kJ)':1000,'Kilowattstunde (kWh)':3600000,'Kilokalorie (kcal)':4184,'Kalorie (cal)':4.184,'BTU':1055.06,'Wattstunde (Wh)':3600,
-  // Time → seconds
-  'Sekunde (s)':1,'Millisekunde (ms)':0.001,'Mikrosekunde (µs)':1e-6,'Minute (min)':60,'Stunde (h)':3600,'Tag':86400,'Woche':604800,'Monat':2592000,'Jahr':31536000,
-  // Acceleration → m/s²
-  'm/s²':1,'g':9.80665,'ft/s²':0.3048,'Gal':0.01,
-  // Angle → radians
-  'Grad (°)':Math.PI/180,'Radiant (rad)':1,'Gon':Math.PI/200,'Bogenminute (′)':Math.PI/10800,'Bogensekunde (″)':Math.PI/648000,'Umdrehung':2*Math.PI,
-  // Data storage → bits
+  // Time â†’ seconds
+  'Sekunde (s)':1,'Millisekunde (ms)':0.001,'Mikrosekunde (Âµs)':1e-6,'Minute (min)':60,'Stunde (h)':3600,'Tag':86400,'Woche':604800,'Monat':2592000,'Jahr':31536000,
+  // Acceleration â†’ m/sÂ²
+  'm/sÂ²':1,'g':9.80665,'ft/sÂ²':0.3048,'Gal':0.01,
+  // Angle â†’ radians
+  'Grad (Â°)':Math.PI/180,'Radiant (rad)':1,'Gon':Math.PI/200,'Bogenminute (â€²)':Math.PI/10800,'Bogensekunde (â€³)':Math.PI/648000,'Umdrehung':2*Math.PI,
+  // Data storage â†’ bits
   'Bit':1,'Byte':8,'Kilobyte (KB)':8192,'Megabyte (MB)':8388608,'Gigabyte (GB)':8589934592,'Terabyte (TB)':8796093022208,'Petabyte (PB)':9007199254740992,
-  // Data rate → bit/s
+  // Data rate â†’ bit/s
   'Bit/s':1,'Kbit/s':1000,'Mbit/s':1e6,'Gbit/s':1e9,'Byte/s':8,'KB/s':8000,'MB/s':8e6,
-  // Density → kg/m³
-  'kg/m³':1,'g/cm³':1000,'g/mL':1000,'kg/L':1000,'lb/ft³':16.0185,'lb/in³':27679.9,
-  // Area → m²
-  'Quadratmeter (m²)':1,'Quadratzentimeter (cm²)':1e-4,'Quadratkilometer (km²)':1e6,'Hektar (ha)':10000,'Acre':4046.86,'Quadratfuß (ft²)':0.0929,'Quadratzoll (in²)':0.000645,
-  // Angular accel → rad/s²
-  'rad/s²':1,'°/s²':Math.PI/180,'Umdrehung/s²':2*Math.PI,
-  // Angular velocity → rad/s
-  'rad/s':1,'°/s':Math.PI/180,'rpm':Math.PI/30,'Hz':2*Math.PI,
+  // Density â†’ kg/mÂ³
+  'kg/mÂ³':1,'g/cmÂ³':1000,'g/mL':1000,'kg/L':1000,'lb/ftÂ³':16.0185,'lb/inÂ³':27679.9,
+  // Area â†’ mÂ²
+  'Quadratmeter (mÂ²)':1,'Quadratzentimeter (cmÂ²)':1e-4,'Quadratkilometer (kmÂ²)':1e6,'Hektar (ha)':10000,'Acre':4046.86,'QuadratfuÃŸ (ftÂ²)':0.0929,'Quadratzoll (inÂ²)':0.000645,
+  // Angular accel â†’ rad/sÂ²
+  'rad/sÂ²':1,'Â°/sÂ²':Math.PI/180,'Umdrehung/sÂ²':2*Math.PI,
+  // Angular velocity â†’ rad/s
+  'rad/s':1,'Â°/s':Math.PI/180,'rpm':Math.PI/30,'Hz':2*Math.PI,
   // Angle velocity already done above as winkelgeschw
-  // Moment of inertia → kg·m²
-  'kg·m²':1,'g·cm²':1e-7,'lb·ft²':0.04214,'lb·in²':2.926e-4,
-  // Spec volume → m³/kg
-  'm³/kg':1,'L/kg':0.001,'ft³/lb':0.06243,'gal/lb':0.008345,
-  // Heat capacity → J/K
-  'J/K':1,'kJ/K':1000,'cal/K':4.184,'BTU/°F':1899.1,
-  // Heat flux → W/m²
-  'W/m²':1,'BTU/(h·ft²)':3.15459,'kcal/(h·m²)':1.163,
-  // Heat transfer → W/(m²K)
-  'W/(m²·K)':1,'BTU/(h·ft²·°F)':5.67826,'kcal/(h·m²·°C)':1.163,
-  // Spec heat → J/(kg·K)
-  'J/(kg·K)':1,'kJ/(kg·K)':1000,'cal/(g·°C)':4184,'BTU/(lb·°F)':4186.8,
+  // Moment of inertia â†’ kgÂ·mÂ²
+  'kgÂ·mÂ²':1,'gÂ·cmÂ²':1e-7,'lbÂ·ftÂ²':0.04214,'lbÂ·inÂ²':2.926e-4,
+  // Spec volume â†’ mÂ³/kg
+  'mÂ³/kg':1,'L/kg':0.001,'ftÂ³/lb':0.06243,'gal/lb':0.008345,
+  // Heat capacity â†’ J/K
+  'J/K':1,'kJ/K':1000,'cal/K':4.184,'BTU/Â°F':1899.1,
+  // Heat flux â†’ W/mÂ²
+  'W/mÂ²':1,'BTU/(hÂ·ftÂ²)':3.15459,'kcal/(hÂ·mÂ²)':1.163,
+  // Heat transfer â†’ W/(mÂ²K)
+  'W/(mÂ²Â·K)':1,'BTU/(hÂ·ftÂ²Â·Â°F)':5.67826,'kcal/(hÂ·mÂ²Â·Â°C)':1.163,
+  // Spec heat â†’ J/(kgÂ·K)
+  'J/(kgÂ·K)':1,'kJ/(kgÂ·K)':1000,'cal/(gÂ·Â°C)':4184,'BTU/(lbÂ·Â°F)':4186.8,
   // Temp interval
-  'Δ °C':1,'Δ K':1,'Δ °F':5/9,
-  // Thermal conductivity → W/(mK)
-  'W/(m·K)':1,'BTU/(h·ft·°F)':1.73073,'kcal/(h·m·°C)':1.163,
-  // Thermal expansion → 1/K
-  '1/K':1,'1/°C':1,'1/°F':1.8,'µm/(m·K)':1e-6,
-  // Frequency → Hz
+  'Î” Â°C':1,'Î” K':1,'Î” Â°F':5/9,
+  // Thermal conductivity â†’ W/(mK)
+  'W/(mÂ·K)':1,'BTU/(hÂ·ftÂ·Â°F)':1.73073,'kcal/(hÂ·mÂ·Â°C)':1.163,
+  // Thermal expansion â†’ 1/K
+  '1/K':1,'1/Â°C':1,'1/Â°F':1.8,'Âµm/(mÂ·K)':1e-6,
+  // Frequency â†’ Hz
   'Hertz (Hz)':1,'Kilohertz (kHz)':1000,'Megahertz (MHz)':1e6,'Gigahertz (GHz)':1e9,
   // Currency (static approx from EUR)
-  'Euro (€)':1,'US-Dollar ($)':1.08,'Brit. Pfund (£)':0.86,'Schweizer Franken (CHF)':0.95,
-  'Japanischer Yen (¥)':162,'Chin. Yuan (¥)':7.8,'Türk. Lira (₺)':37,
-  'Ind. Rupie (₹)':92,'Austral. Dollar (A$)':1.67,'Kanad. Dollar (C$)':1.48,
-  // Fuel consumption — handled specially
+  'Euro (â‚¬)':1,'US-Dollar ($)':1.08,'Brit. Pfund (Â£)':0.86,'Schweizer Franken (CHF)':0.95,
+  'Japanischer Yen (Â¥)':162,'Chin. Yuan (Â¥)':7.8,'TÃ¼rk. Lira (â‚º)':37,
+  'Ind. Rupie (â‚¹)':92,'Austral. Dollar (A$)':1.67,'Kanad. Dollar (C$)':1.48,
+  // Fuel consumption â€” handled specially
 };
 
 function tempToC(val, unit){
-  if(unit==='Celsius (°C)') return val;
-  if(unit==='Fahrenheit (°F)') return (val-32)*5/9;
+  if(unit==='Celsius (Â°C)') return val;
+  if(unit==='Fahrenheit (Â°F)') return (val-32)*5/9;
   if(unit==='Kelvin (K)') return val-273.15;
   return val;
 }
 function cToUnit(c, unit){
-  if(unit==='Celsius (°C)') return c;
-  if(unit==='Fahrenheit (°F)') return c*9/5+32;
+  if(unit==='Celsius (Â°C)') return c;
+  if(unit==='Fahrenheit (Â°F)') return c*9/5+32;
   if(unit==='Kelvin (K)') return c+273.15;
   return c;
 }
@@ -973,7 +973,7 @@ function l100ToUnit(l100, unit){
 function convert(val, fromUnit, toUnit){
   if(fromUnit===toUnit) return val;
   // Temperature
-  const tempUnits = ['Celsius (°C)','Fahrenheit (°F)','Kelvin (K)'];
+  const tempUnits = ['Celsius (Â°C)','Fahrenheit (Â°F)','Kelvin (K)'];
   if(tempUnits.includes(fromUnit) && tempUnits.includes(toUnit))
     return cToUnit(tempToC(val,fromUnit),toUnit);
   // Fuel
@@ -1017,9 +1017,9 @@ function gcCalc(ns, dir){
   }
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PINNED CARD LOGIC (unchanged)
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function round4(n){if(n===null||n===undefined||isNaN(n))return '';return Math.round(n*10000)/10000;}
 function convertKwPs(dir){const kwEl=document.getElementById('kw-input');const psEl=document.getElementById('ps-input');if(dir==='kw'){const v=parseFloat(kwEl.value);psEl.value=isNaN(v)?'':round4(v*1.35962);}else{const v=parseFloat(psEl.value);kwEl.value=isNaN(v)?'':round4(v/1.35962);}}
 function convertNmLbft(dir){const nmEl=document.getElementById('nm-input');const lbftEl=document.getElementById('lbft-input');if(dir==='nm'){const v=parseFloat(nmEl.value);lbftEl.value=isNaN(v)?'':round4(v*0.737562);}else{const v=parseFloat(lbftEl.value);nmEl.value=isNaN(v)?'':round4(v/0.737562);}}
@@ -1027,9 +1027,9 @@ function convertKmhMph(dir){const kmhEl=document.getElementById('kmh-input');con
 function setAndConvert(srcId,dstId,value,type){const srcEl=document.getElementById(srcId);const dstEl=document.getElementById(dstId);const old=parseFloat(srcEl.value)||0;const dur=300;const start=performance.now();function step(now){const p=Math.min((now-start)/dur,1);const ease=1-Math.pow(1-p,3);srcEl.value=round4(old+(value-old)*ease);if(p<1)requestAnimationFrame(step);else{srcEl.value=value;if(type==='kw'||type==='ps')convertKwPs(type);else if(type==='nm'||type==='lbft')convertNmLbft(type);else if(type==='kmh'||type==='mph')convertKmhMph(type);}}requestAnimationFrame(step);}
 function swapAndRecalc(aId,bId,type){const aEl=document.getElementById(aId);const bEl=document.getElementById(bId);const tmp=aEl.value;aEl.value=bEl.value;bEl.value=tmp;}
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    INIT
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 document.addEventListener('DOMContentLoaded', () => {
   convertKwPs('kw');
   convertNmLbft('nm');
@@ -1047,3 +1047,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
